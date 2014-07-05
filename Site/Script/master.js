@@ -8,6 +8,10 @@ $(document).ready(function(){
         login();
     });
     
+     $("#btnSubmitMail").click(function () {
+        forgot();
+    });
+    
     $("#btnFP").click(function () {
         $("#loginContainer").css("display","none");
         $("#fpContainer").css("display","block");
@@ -119,4 +123,4 @@ function identicPswd(pswd, confPswd) {
         return false;
     else
         return true;
-}
+} 
