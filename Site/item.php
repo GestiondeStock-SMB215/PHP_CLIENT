@@ -7,13 +7,13 @@ error_reporting(7);
         isset($_POST['']) && ($_POST['user_email']!="")){
         
     
- mysqli_query($dbconn,"INSERT INTO product(prod_name, prod_desc, prod_color)VALUES('".
+ $query=mysqli_query($dbconn,"INSERT INTO product(prod_name, prod_desc, prod_color)VALUES('".
             mysqli_real_escape_string($prod_name)."', '"
             . mysqli_real_escape_string($prod_desc)."', '"
             . mysqli_real_escape_string($prod_color)."')");
 
     
-    mysqli_close($link);
+    mysqli_close($query);
         
         }
         ?>
