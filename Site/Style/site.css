@@ -34,6 +34,21 @@ ul{margin:0;padding:0;list-style:none;}
 /*Main*/
 .main{width:960px;height:auto;margin:auto;min-height:300px;}
 
+.registerContainer{height:auto;padding:10px;}
+.registerContainer .lbl{width:80%;overflow:hidden;position:relative; padding-left:10%;margin-bottom:15px;}
+.registerContainer .lbl{width:80%;overflow:hidden;position:relative; padding-left:10%;margin-bottom:15px;}
+.registerContainer .lblTxt{width:44%;float:left;}
+.registerContainer .lbl label{width:5%;color:#e01b22;}
+.registerContainer .input{width:50%;height:17px;border:1px solid #cbcbcb;float:right;}
+.registerContainer select{width:50%;height:21px;border:1px solid #cbcbcb;float:right;}
+.registerContainer select option{width:100%;}
+.registerContainer .btnRegister{width:96%;text-align:center;color:#fff;background-color:#5c5c5c;padding:1% 2%;font-size:24px;cursor:pointer;}
+.registerContainer .captcha{width: 356px;float: left;padding: 10px;margin-left: 15px;}
+.registerContainer #txtCapt{width: 170px;height: 17px;border: 1px solid #cbcbcb;float: right;outline: none;}
+.registerContainer .lblMsg{padding-left:10%;color:#e01b22;padding-bottom:10px;margin-top:15px;}
+.registerContainer .loader{width: 50px;height: 50px;background-image: url(../img/loader.gif);background-repeat: no-repeat;background-size: 40%;position: absolute;background-position: center;display:none;top:86%;left:89%;}
+
+
 /* FOOTER */
 .footer{height:50px;background-color: #3c3c3c;color:#fff;}
 .footer .footerInfo{width: 960px;margin: auto;}
