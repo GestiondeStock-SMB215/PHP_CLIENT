@@ -1,13 +1,14 @@
 <?php
 session_start();
 
-if ($_SESSION['loggedIn'] == true) {
+if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
     die("password accepted");
 }
-
-$user_username = $_POST[user_username];
-$user_password = $_POST[user_password];
 $array=[];
+if (isset($_POST['user_username']) && isset($_POST['user_password'])) {
+$user_username = $_POST['user_username'];
+$user_password = $_POST['user_password'];
+
 if(isset($user_username) && $user_username != null ||
      isset($user_password) && $user_password != null){
     $sql="SELECT user_username, user_status, user_password, user_role_id from user WHERE ".
@@ -15,19 +16,20 @@ if(isset($user_username) && $user_username != null ||
     $result = mysql_query($sql);
     $array=mysql_fetch_array($result);
      }
+	 }
 if(count($array)==0){
-    die("Error");
+    die(json_encode(array("d"=>"Nom utilisateur/Mot de Passe Invalide.")));
 }
 if (md5($user_password) == $array["user_password"]) {
     if($array["user_status"]==1){
         $_SESSION['role'] = $array['user_role_id'];
         $_SESSION['loggedIn'] = true ;
-        die("You are logged in");
+        die(json_encode(array("d"=>"signedIn")));
     }else{
-        die("expired");
+        die(json_encode(array("d"=>"Votre nom utilisateur et mot de passe sont correctes mais votre compte est expiré.")));
     }
 }else{
-    die("Error");
+    die(json_encode(array("d"=>"Nom utilisateur/Mot de Passe Invalide.")));
 }
      
 ?> 
