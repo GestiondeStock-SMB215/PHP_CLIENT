@@ -101,41 +101,36 @@ function login() {
     var user_password = $("#txtPswd").val();
 
     if (user_username !== "" && user_username !== " ") {
-        if (isValidEmailAddress(user_username) === true) {
-            if (user_password !== "" && user_password !== " ") {
-                var wantedData = "{'user_username':'" + user_username + "', " + "'user_password':'" + user_password + "'}";
-                $.ajax({
-                    type: "post",
-                    url: "login.php",
-                    data: wantedData,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    beforeSend: function () {
-                        $('#lblMsgLogin').html("");
-                        $('#loginLoader').show();
-                    },
-                    complete: function () {
-                        $('#loginLoader').hide();
-                    },
-                    success: function (data) {
-                        if (data.d === "signedIn") {
-                            location.reload();
-                        }
-                        else
-                            $('#lblMsgLogin').html(data.d);
+        if (user_password !== "" && user_password !== " ") {
+            var wantedData = "{'user_username':'" + user_username + "', " + "'user_password':'" + user_password + "'}";
+            $.ajax({
+                type: "post",
+                url: "login.php",
+                data: wantedData,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                beforeSend: function () {
+                    $('#lblMsgLogin').html("");
+                    $('#loginLoader').show();
+                },
+                complete: function () {
+                    $('#loginLoader').hide();
+                },
+                success: function (data) {
+                    if (data.d === "signedIn") {
+                        location.reload();
                     }
-                });
-            }
-            else {
-                $('#lblMsgLogin').html("Please enter your password.");
-            }
+                    else
+                        $('#lblMsgLogin').html(data.d);
+                }
+            });
         }
         else {
-            $('#lblMsgLogin').html("Please enter a valid email address.");
+            $('#lblMsgLogin').html("Please enter your password.");
         }
     }
     else {
-        $('#lblMsgLogin').html("Please enter your email address.");
+        $('#lblMsgLogin').html("Please enter your username.");
     }
 }
 
@@ -147,7 +142,7 @@ function forgot() {
                 var wantedData = "{'user_username':'" + user_username + "'}";
                 $.ajax({
                     type: "post",
-                    url: "default.aspx/forgotPassword",
+                    url: "forgotPassword.php",
                     data: wantedData,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
