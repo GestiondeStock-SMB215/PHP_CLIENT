@@ -122,7 +122,7 @@ function login() {
                             location.reload();
                         }
                         else
-                            $('#lblMsgLogin').html("Invalid email or password");
+                            $('#lblMsgLogin').html(data.d);
                     }
                 });
             }
