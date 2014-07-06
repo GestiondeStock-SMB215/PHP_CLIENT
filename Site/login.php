@@ -16,18 +16,18 @@ if(isset($user_username) && $user_username != null ||
     $array=mysql_fetch_array($result);
      }
 if(count($array)==0){
-    die("fa2a3");
+    die("Error");
 }
 if (md5($user_password) == $array["user_password"]) {
     if($array["user_status"]==1){
         $_SESSION['role'] = $array['user_role_id'];
         $_SESSION['loggedIn'] = true ;
-        die("zabatit");
+        die("You are logged in");
     }else{
         die("expired");
     }
 }else{
-    die("fa2a3");
+    die("Error");
 }
      
 ?> 
