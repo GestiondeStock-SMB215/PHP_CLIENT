@@ -2,7 +2,7 @@
     date_default_timezone_set("Asia/Beirut");
     
     function dbconnect(){
-        $link = mysqli_connect("localhost","henryko_gss","[password]","gss", "3306") or die("Error " . mysqli_error($link));
+        $link = mysqli_connect("localhost","root","root","gss", "3306") or die("Error " . mysqli_error($link));
         $sSQL= 'SET CHARACTER SET utf8'; 
         mysqli_query($link,$sSQL);
         return $link;
