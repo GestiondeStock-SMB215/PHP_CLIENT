@@ -1,6 +1,7 @@
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
-    //login("wadih", "wadih");
+    $res = login("henryko", "2317Hk");
+    echo $res;
 ?>
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/footer.inc.php";

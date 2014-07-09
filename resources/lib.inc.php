@@ -35,32 +35,42 @@
         $user_username = mysql_escape_mimic($username);
         $user_password = MD5(mysql_escape_mimic($password));
         
+        //Result array to be encodd into json
+        $res = null;
+       
         global $wsdl;
         set_time_limit(0);
         $response = $wsdl->getUserByUsername(array("user_username"=>$user_username, "user_password"=>$user_password));
-        
         foreach ($response as $item){
-            if($item->userId == null){
-                return "Nom d'usager ou mot de passe sont incorrectes";
+            if($item->userId == ''){
+                $res["err"] = "1";
+                $res["msg"] = "Nom d'usager ou mot de passe sont incorrectes";
             }
             else{
                 //Inactive
                 if($item->userStatus == 2){
-                    echo "Votre compte est bloqué.";
+                    $res["err"] = "2";
+                    $res["msg"] = "Votre compte est bloqué.";
                 }
                 else{
-                    echo "ID: ".$item->userId."<br>";
-                    echo "Name: ".$item->userName."<br>";
-                    echo "Username: ".$item->userUsername."<br>";
-                    echo "Password: ".$item->userPassword."<br>";
-                    echo "Email: ".$item->userEmail."<br>";
-                    echo "Last Login: ".$item->userLastLogin."<br>";
-                    echo "Role: ".$item->userRoleId."<br>";
-                    echo "Status: ".$item->userStatus."<br>";
-                    echo "Time Stamp: ".$item->userTimeStamp."<br>";
+                    $res["err"] = "0";
+                    $res["msg"] = "Login successfull";
+                    $user = null;
+                    $user["userId"] = $item->userId;
+                    $user["userName"] = $item->userName;
+                    $user["userUsername"] = $item->userUsername;
+                    //$user["userPassword"] = $item->userPassword;
+                    $user["userEmail"] = $item->userEmail;
+                    $user["userLastLogin"] = $item->userLastLogin;
+                    $user["userRoleId"] = $item->userRoleId;
+                    $user["userStatus"] = $item->userStatus;
+                    $user["userTimeStamp"] = $item->userTimeStamp;
+                    $res["user"] = $user;
+                    $res = json_encode($res);
                 }
             }
         }
+        return $res;
     }    
     
     function checkTrackingIdValidation($trans_id){
