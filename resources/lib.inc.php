@@ -61,10 +61,10 @@
                     $user["userUsername"] = $item->userUsername;
                     //$user["userPassword"] = $item->userPassword;
                     $user["userEmail"] = $item->userEmail;
-                    $user["userLastLogin"] = $item->userLastLogin;
+                    $user["userLastLogin"] = date('r', strtotime($item->userLastLogin));
                     $user["userRoleId"] = $item->userRoleId;
                     $user["userStatus"] = $item->userStatus;
-                    $user["userTimeStamp"] = $item->userTimeStamp;
+                    $user["userTimeStamp"] = date('r', strtotime($item->userTimeStamp));
                     $res["user"] = $user;
                     $res = json_encode($res);
                 }
@@ -74,6 +74,6 @@
     }    
     
     function checkTrackingIdValidation($trans_id){
-        return true;
+        return $trans_id;
     }
 ?>
