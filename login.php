@@ -12,13 +12,11 @@
                 <div class="clear"></div>
                 <input type="button" id="btnLogin" class="btnLogin" value="LOGIN" />
                 <div class="clear"></div>
-                <img id="loginLoader" alt="" src="Img/loading.gif" style="display: none;width:20px;margin-top: 4px;" />
+                <img id="loginLoader" alt="" src="/resources/img/loading.gif" style="display: none;width:20px;margin-top: 4px;" />
                 <div id="lblMsgLogin" class="lblMsg"></div>
             </div>
         </div>
     </div>
-
-    <script type="text/javascript" src="Script/index.js"></script>
 </form>
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/footer.inc.php";

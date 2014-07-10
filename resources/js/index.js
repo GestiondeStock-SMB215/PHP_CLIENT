@@ -15,12 +15,11 @@ function login() {
 
     if (user_username !== "" && user_username !== " ") {
         if (user_password !== "" && user_password !== " ") {
-            var wantedData = "{'user_username':'" + user_username + "', " + "'user_password':'" + user_password + "'}";
+            var wantedData = {user_username: user_username ,user_password: user_password };
             $.ajax({
-                type: "post",
-                url: "login.php",
+                type: "POST",
+                url: "/resources/ajax.php?action=login",
                 data: wantedData,
-                contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 beforeSend: function () {
                     $('#lblMsgLogin').html("");
@@ -30,8 +29,9 @@ function login() {
                     $('#loginLoader').hide();
                 },
                 success: function (data) {
+                    console.log(data.d);
                     if (data.d === "signedIn") {
-                        window.location.href = "dashboard.html";
+                        window.location.href = "index.php";
                     }
                     else
                         $('#lblMsgLogin').html(data.d);

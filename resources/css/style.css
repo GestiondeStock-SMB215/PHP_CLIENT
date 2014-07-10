@@ -16,7 +16,7 @@ ul{margin:0;padding:0;list-style:none;}
 .main{min-width:960px;width:auto; font-family:Calibri, Sans-Serif;margin: 0 auto;}
 
 /* INDEX */
-.index{width:500px;height:400px;background-color:#3c3c3c;color:#fff;margin:auto;}
+.index{width:500px;height:400px;background-color:#aaa;color:#fff;margin:auto;}
 .index .indexInfo{margin: auto;}
 .index .indexInfo .logo{width:490px;font-size:115px;float: left;text-align:center;margin-top:50px;margin-bottom:50px;}
 .index .indexInfo .loginContainer{margin-left:95px;}
@@ -50,7 +50,7 @@ ul{margin:0;padding:0;list-style:none;}
 
 
 /* FOOTER */
-.footer{height:50px;background-color: #3c3c3c;color:#fff;}
+.footer{height:50px;background-color: #aaa;color:#fff;}
 .footer .footerInfo{width: 960px;margin: auto;}
 .footer .footerInfo .left{}
 .footer .footerInfo .right{}

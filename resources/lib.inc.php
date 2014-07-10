@@ -3,6 +3,20 @@
     session_start();
     error_reporting(7);
     
+    if(!isset($_SESSION["user"])){
+        if($_SERVER['PHP_SELF'] != "/login.php"){
+                header("location:/login.php");
+        }
+    }
+    else{
+        if($_SERVER['PHP_SELF'] == "/login.php"){
+                header("location:/index.php");
+        }
+        if($_SESSION["user"]["user_role_id"] > $acl){
+           header("location:/error.php");
+        }
+    }
+ 
     //Security for webservices
     $configFile = json_decode(file_get_contents('C:\\config\\config.json'),true);
     $jaxwsSecAppId = $configFile["jaxwsSec"]["appId"];
@@ -30,50 +44,14 @@
 
         return $inp; 
     }   
-    
-    function login($username, $password){
-        $user_username = mysql_escape_mimic($username);
-        $user_password = MD5(mysql_escape_mimic($password));
         
-        //Result array to be encodd into json
-        $res = null;
-       
-        global $wsdl;
-        set_time_limit(0);
-        $response = $wsdl->getUserByUsername(array("user_username"=>$user_username, "user_password"=>$user_password));
-        foreach ($response as $item){
-            if($item->userId == ''){
-                $res["err"] = "1";
-                $res["msg"] = "Nom d'usager ou mot de passe sont incorrectes";
-            }
-            else{
-                //Inactive
-                if($item->userStatus == 2){
-                    $res["err"] = "2";
-                    $res["msg"] = "Votre compte est bloqué.";
-                }
-                else{
-                    $res["err"] = "0";
-                    $res["msg"] = "Login successfull";
-                    $user = null;
-                    $user["userId"] = $item->userId;
-                    $user["userName"] = $item->userName;
-                    $user["userUsername"] = $item->userUsername;
-                    //$user["userPassword"] = $item->userPassword;
-                    $user["userEmail"] = $item->userEmail;
-                    $user["userLastLogin"] = date('r', strtotime($item->userLastLogin));
-                    $user["userRoleId"] = $item->userRoleId;
-                    $user["userStatus"] = $item->userStatus;
-                    $user["userTimeStamp"] = date('r', strtotime($item->userTimeStamp));
-                    $res["user"] = $user;
-                    $res = json_encode($res);
-                }
-            }
-        }
-        return $res;
-    }    
-    
     function checkTrackingIdValidation($trans_id){
         return $trans_id;
+    }
+    
+    function log_toFile($array){
+        $fp=fopen("log.txt", "a+");
+        fwrite($fp, json_encode($array));
+        fclose($fp);
     }
 ?>
