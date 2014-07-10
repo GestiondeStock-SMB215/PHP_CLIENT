@@ -1,5 +1,5 @@
 <?php
-    require_once $_SERVER["DOCUMENT_ROOT"]."/resources/lib.inc.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/gss/GSS_PHP_CLIENT/resources/lib.inc.php";
     
     $time = getDT();
 
