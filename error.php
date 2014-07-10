@@ -9,14 +9,12 @@
     );
 ?>
 
-<form>
     <div class="imgError">
-        <img src="" alt="" />
+        <img src="resources/img/error.jpg" alt="" style="margin: 8% auto auto 38%;"/>
     </div>
     <div class="errorMsg">
         <?= $errorMsg[$_GET["err"]] ?>
     </div>
-</form>
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/footer.inc.php";
 ?>

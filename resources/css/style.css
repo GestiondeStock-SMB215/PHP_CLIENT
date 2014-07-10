@@ -29,6 +29,8 @@ ul{margin:0;padding:0;list-style:none;}
 .index .indexInfo .loginContainer .btnForgetPswd{text-align:center;font-size:20px;color:#e01b22; margin-top: 10px;cursor:pointer;}
 .index .indexInfo .loginContainer .lblMsg{color:#fff;font-size:16px;}
 
+.errorMsg{text-align:center;font-size:30px;color:#333;}
+
 /*Dashboard*/
 .dashboardContainer{width:960px;height:auto;margin:auto;min-height:300px;}
 
