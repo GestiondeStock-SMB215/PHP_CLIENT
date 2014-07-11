@@ -1,6 +1,8 @@
 <?php
+    $acl = 4;
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 ?>
+<script src="/resources/js/index.js"></script>
 <form>
     <div class="index">
         <div class="indexInfo">

@@ -16,12 +16,6 @@
            header("location:/error.php");
         }
     }
- 
-    //Security for webservices
-    $configFile = json_decode(file_get_contents('C:\\config\\config.json'),true);
-    $jaxwsSecAppId = $configFile["jaxwsSec"]["appId"];
-    $jaxwsSecUsername = $configFile["jaxwsSec"]["username"];
-    $jaxwsSecPassword = $configFile["jaxwsSec"]["password"];
     
     //WSDL FILE
     $wsdl =  new SoapClient('http://localhost:8080/JAX_WS/JAX_WS?WSDL');
@@ -51,7 +45,7 @@
     
     function log_toFile($array){
         $fp=fopen("log.txt", "a+");
-        fwrite($fp, json_encode($array));
+        fwrite($fp, json_encode($array)."\n");
         fclose($fp);
     }
 ?>

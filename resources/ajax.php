@@ -39,18 +39,17 @@ function login(){
                     $user["user_name"] = $item->user_name;
                     $user["user_username"] = $item->user_username;
                     $user["user_email"] = $item->user_email;
-                    $user["user_last_login"] = date('r', strtotime($item->user_last_login));
+                    $user["user_last_login"] = $item->user_last_login;
                     $user["user_role_id"] = $item->user_role_id;
                     $user["user_status"] = $item->user_status;
-                    $user["user_time_stamp"] = date('r', strtotime($item->user_time_stamp));
+                    $user["user_time_stamp"] = $item->user_time_stamp;
                     
                     $_SESSION["user"] = $user;
                     
-//                    $res = $res);
+                    
                 }
             }
         }
         die(json_encode(array("d"=>$res)));
-        //return $res;
     }
 }
