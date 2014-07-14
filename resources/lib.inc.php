@@ -4,7 +4,7 @@
     error_reporting(7);
     
     if(!isset($_SESSION["user"])){
-        if($_SERVER['PHP_SELF'] != "/login.php"){
+        if(($_SERVER['PHP_SELF'] != "/login.php")&&((!stripos($_SERVER['PHP_SELF'], "resources/ajax")))){
                 header("location:/login.php");
         }
     }
