@@ -44,9 +44,8 @@
     }
     
     function logToFile($array){
-        $date = date('Y-m-d H:i:s');
         $fp=fopen("log.txt", "a+");
-        fwrite($fp, $date." - ".json_encode($array)."\n");
+        fwrite($fp, getDT()." - ".json_encode($array)."\n");
         fclose($fp);
     }
 ?>
