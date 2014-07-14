@@ -8,8 +8,7 @@ if(isset($_GET['action'])){
 }
 
 function login(){
-    log_toFile($_POST);
-    if (isset($_POST['user_username']) && isset($_POST['user_password'])) {
+    if (isset($_POST['user_username']) && isset($_POST['user_password'])) {      
         $user_username = mysql_escape_mimic($_POST['user_username']);
         $user_password = MD5(mysql_escape_mimic($_POST['user_password']));
 

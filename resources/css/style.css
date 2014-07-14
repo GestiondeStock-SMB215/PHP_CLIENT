@@ -21,7 +21,7 @@ ul{margin:0;padding:0;list-style:none;}
 .index .indexInfo .logo{width:490px;font-size:115px;float: left;text-align:center;margin-top:50px;margin-bottom:50px;}
 .index .indexInfo .loginContainer{margin-left:95px;}
 .index .indexInfo .loginContainer{height:auto;padding:20px;}
-.index .indexInfo .loginContainer .input{width:260px; height:25px;background-color:#e6e6e6;border:0;margin-bottom:10px;padding-left:20px;color:#9b9b9b;}
+.index .indexInfo .loginContainer .input{width:260px; height:25px;background-color:#e6e6e6;border:0;margin-bottom:10px;padding-left:20px;color:#000;}
 .index .indexInfo .loginContainer .check{margin-bottom:10px;}
 .index .indexInfo .loginContainer label{color:#9b9b9b;}
 .index .indexInfo .loginContainer .lblMsg{font-size:15px;color:#e01b22;margin-bottom:6px;}
