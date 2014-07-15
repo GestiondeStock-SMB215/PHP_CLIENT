@@ -9,7 +9,7 @@
         $result = array();
         global $wsdl;
         set_time_limit(0);
-        $response = $wsdl->login(array("user_username"=>$user_username, "user_password"=>$user_password));            
+        $response = $wsdl->getUserByUsername(array("user_username"=>$user_username, "user_password"=>$user_password));            
         logToFile(json_encode($response));
         foreach ($response as $item){
             if($item->user_id == 0){
