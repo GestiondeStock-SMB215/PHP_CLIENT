@@ -14,6 +14,7 @@
         foreach ($response as $item){
             if($item->user_id == 0){
                 $result["msg"] = "Nom d'usager ou mot de passe sont incorrectes";
+                //tet
                 session_destroy();
             }
             else{
