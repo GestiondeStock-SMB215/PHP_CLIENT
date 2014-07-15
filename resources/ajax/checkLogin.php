@@ -23,7 +23,7 @@
                 }
                 else{
                     $result["msg"] = "signedIn";
-                    $uull = $wsdl->UpdateUserLastLogin(array("user_id" => $item->user_id));
+                    //$uull = $wsdl->UpdateUserLastLogin(array("user_id" => $item->user_id));
                     $user = null;
                     $user["user_id"] = $item->user_id;
                     $user["user_name"] = $item->user_name;
