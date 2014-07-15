@@ -31,10 +31,15 @@ ul{margin:0;padding:0;list-style:none;}
 
 .errorMsg{text-align:center;font-size:30px;color:#333;}
 
-/*Dashboard*/
-.dashboardContainer{width:960px;height:auto;margin:auto;min-height:300px;}
-
-
+/*Header*/
+.header{height:50px;background-color:#cbcbcb;color:#333;}
+.header .logo{width:125px;height:105px;background-image:url('../img/logo.png');background-repeat:no-repeat;float: left;}
+.header .leftHeader{float: right;}
+.header .leftHeader .welcome{}
+.header .leftHeader .logout{}
+                  
+/*Main*/
+.main{width:960px;height:auto;margin:auto;min-height:300px;}
 
 .registerContainer{height:auto;padding:10px;}
 .registerContainer .lbl{width:80%;overflow:hidden;position:relative; padding-left:10%;margin-bottom:15px;}
@@ -49,7 +54,6 @@ ul{margin:0;padding:0;list-style:none;}
 .registerContainer #txtCapt{width: 170px;height: 17px;border: 1px solid #cbcbcb;float: right;outline: none;}
 .registerContainer .lblMsg{padding-left:10%;color:#e01b22;padding-bottom:10px;margin-top:15px;}
 .registerContainer .loader{width: 50px;height: 50px;background-image: url(../img/loader.gif);background-repeat: no-repeat;background-size: 40%;position: absolute;background-position: center;display:none;top:86%;left:89%;}
-
 
 /* FOOTER */
 .footer{height:50px;background-color: #aaa;color:#fff;}
