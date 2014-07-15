@@ -1,12 +1,14 @@
 <?php
+    $acl = 4;
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 ?>
-<form>
+<script src="/resources/js/login.js"></script>
+<form id="loginform">
     <div class="index">
         <div class="indexInfo">
             <div class="logo">GSS</div>                 
             <div id="loginContainer" class="loginContainer">
-                <input type="text" id="txtEmail" name="user_username" class="input" placeholder="Username" />
+                <input type="text" id="txtUsername" name="user_username" class="input" placeholder="Username" />
                 <div class="clear"></div>
                 <input type="password" id="txtPswd" name="user_password" class="input" placeholder="Password"  />
                 <div class="clear"></div>

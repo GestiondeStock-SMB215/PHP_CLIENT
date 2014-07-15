@@ -1,5 +1,5 @@
 <?php
-    require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/gss/GSS_PHP_CLIENT/resources/header.inc.php";
 ?>
 <script>
     var interval;
@@ -88,5 +88,5 @@
 <div id="result"></div>
 
 <?php
-    require_once $_SERVER["DOCUMENT_ROOT"]."/resources/footer.inc.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/gss/GSS_PHP_CLIENT/resources/footer.inc.php";
 ?>

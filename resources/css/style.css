@@ -16,12 +16,12 @@ ul{margin:0;padding:0;list-style:none;}
 .main{min-width:960px;width:auto; font-family:Calibri, Sans-Serif;margin: 0 auto;}
 
 /* INDEX */
-.index{width:500px;height:400px;background-color:#3c3c3c;color:#fff;margin:auto;}
+.index{width:500px;height:400px;background-color:#aaa;color:#fff;margin:auto;}
 .index .indexInfo{margin: auto;}
 .index .indexInfo .logo{width:490px;font-size:115px;float: left;text-align:center;margin-top:50px;margin-bottom:50px;}
 .index .indexInfo .loginContainer{margin-left:95px;}
 .index .indexInfo .loginContainer{height:auto;padding:20px;}
-.index .indexInfo .loginContainer .input{width:260px; height:25px;background-color:#e6e6e6;border:0;margin-bottom:10px;padding-left:20px;color:#9b9b9b;}
+.index .indexInfo .loginContainer .input{width:260px; height:25px;background-color:#e6e6e6;border:0;margin-bottom:10px;padding-left:20px;color:#000;}
 .index .indexInfo .loginContainer .check{margin-bottom:10px;}
 .index .indexInfo .loginContainer label{color:#9b9b9b;}
 .index .indexInfo .loginContainer .lblMsg{font-size:15px;color:#e01b22;margin-bottom:6px;}
@@ -29,10 +29,17 @@ ul{margin:0;padding:0;list-style:none;}
 .index .indexInfo .loginContainer .btnForgetPswd{text-align:center;font-size:20px;color:#e01b22; margin-top: 10px;cursor:pointer;}
 .index .indexInfo .loginContainer .lblMsg{color:#fff;font-size:16px;}
 
-/*Dashboard*/
-.dashboardContainer{width:960px;height:auto;margin:auto;min-height:300px;}
+.errorMsg{text-align:center;font-size:30px;color:#333;}
 
-
+/*Header*/
+.header{height:50px;background-color:#cbcbcb;color:#333;}
+.header .logo{width:125px;height:105px;background-image:url('../img/logo.png');background-repeat:no-repeat;float: left;}
+.header .leftHeader{float: right;}
+.header .leftHeader .welcome{}
+.header .leftHeader .logout{}
+                  
+/*Main*/
+.main{width:960px;height:auto;margin:auto;min-height:300px;}
 
 .registerContainer{height:auto;padding:10px;}
 .registerContainer .lbl{width:80%;overflow:hidden;position:relative; padding-left:10%;margin-bottom:15px;}
@@ -48,9 +55,8 @@ ul{margin:0;padding:0;list-style:none;}
 .registerContainer .lblMsg{padding-left:10%;color:#e01b22;padding-bottom:10px;margin-top:15px;}
 .registerContainer .loader{width: 50px;height: 50px;background-image: url(../img/loader.gif);background-repeat: no-repeat;background-size: 40%;position: absolute;background-position: center;display:none;top:86%;left:89%;}
 
-
 /* FOOTER */
-.footer{height:50px;background-color: #3c3c3c;color:#fff;}
+.footer{height:50px;background-color: #aaa;color:#fff;}
 .footer .footerInfo{width: 960px;margin: auto;}
 .footer .footerInfo .left{}
 .footer .footerInfo .right{}
