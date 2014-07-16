@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $("body").css('background-color','#aaa');
+    $("body").css('background-color','#aaaaaa');
     $("#txtUsername").focus();
     $("#btnLogin").click(function () {
         login();
