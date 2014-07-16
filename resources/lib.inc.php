@@ -3,17 +3,16 @@
     session_start();
     error_reporting(7);
     
-    if(!isset($_SESSION["user"])){
-        if(($_SERVER['PHP_SELF'] != "/login.php")&&((!stripos($_SERVER['PHP_SELF'], "resources/ajax")))){
-                header("location:/login.php");
+    if(!isset($_SESSION["user"])){ //IF LOGOUT
+        if($_SERVER["PHP_SELF"] != "/login.php"){ //IF NOT IN LOGIN PAGE
+            if(!stripos($_SERVER['PHP_SELF'], "resources/ajax")){ //IF NOT IN AJAX DIR                
+                header("location:/login.php");                
+            }
         }
     }
     else{
         if($_SERVER['PHP_SELF'] == "/login.php"){
-                header("location:/index.php");
-        }
-        if($_SESSION["user"]["user_role_id"] > $acl){
-           header("location:/error.php");
+            header("location:/index.php");
         }
     }
     
