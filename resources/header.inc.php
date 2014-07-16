@@ -5,10 +5,8 @@
 <html>
     <head>
         <title>GSS - Cnam Liban</title>
-        <link rel="icon" type="image/png" href="/favicon.png" />
-        
-        <script src="/resources/js/jquery-1.11.0.js"></script>
-       
+        <link rel="icon" type="image/png" href="/favicon.png" />        
+        <script src="/resources/js/jquery-1.11.0.js"></script>       
         <link type="text/css" rel="stylesheet" href="/resources/css/style.css" />
         <meta content="utf-8" http-equiv="encoding" />
     </head>
@@ -16,8 +14,12 @@
         <?php
             if($_SERVER['PHP_SELF'] != "/login.php"){
         ?>
-        <div id="menu">
-            <a href="/logout.php">LOGOUT</a>
+        <div class="header">
+            <div class="logo"></div>
+            <div class="leftHeader">
+                <div class="welcome">Welcome  <?= $_SESSION["user"]["user_name"] ?></div>
+                <div class="logout"><a href="/logout.php">LOGOUT</a></div>
+            </div>
         </div>
         <?php
             }
