@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    $("body").css('background-color','#aaa');
     $("#txtUsername").focus();
     $("#btnLogin").click(function () {
         login();
@@ -8,6 +9,7 @@ $(document).ready(function(){
             login();
         }
     });
+    
 });
 
 function login() {
