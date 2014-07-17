@@ -1,25 +1,23 @@
 $(document).ready(function(){
-    $("body").css('background-color','#aaaaaa');
     $("#txtUsername").focus();
     $("#btnLogin").click(function () {
-        login();
+        getUserByUsername();
     });
     $("#loginform").keypress(function (event) {
         if(event.which === 13){
-            login();
+            getUserByUsername();
         }
     });
-    
 });
 
-function login() {
+function getUserByUsername() {
     user_username = $("#txtUsername").val();
     user_password = $("#txtPswd").val();
     if (user_password !== "" && user_password !== "") {
         wantedData = {user_username: user_username ,user_password: user_password };
         $.ajax({
             type         : "POST",
-            url          : "/resources/ajax/checkLogin.php",
+            url          : "/resources/ajax/getUserByUsername.php",
             data         : wantedData,
             cache        : false,
             dataType     : "json",

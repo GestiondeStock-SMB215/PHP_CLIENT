@@ -3,17 +3,16 @@
     session_start();
     error_reporting(7);
     
-    if(!isset($_SESSION["user"])){
-        if(($_SERVER['PHP_SELF'] != "/login.php")&&((!stripos($_SERVER['PHP_SELF'], "resources/ajax")))){
-                header("location:/login.php");
+    if(!isset($_SESSION["user"])){ //IF LOGOUT
+        if($_SERVER["PHP_SELF"] != "/login.php"){ //IF NOT IN LOGIN PAGE
+            if(!stripos($_SERVER['PHP_SELF'], "resources/ajax")){ //IF NOT IN AJAX DIR                
+                header("location:/login.php");                
+            }
         }
     }
     else{
         if($_SERVER['PHP_SELF'] == "/login.php"){
-                header("location:/index.php");
-        }
-        if($_SESSION["user"]["user_role_id"] > $acl){
-           header("location:/error.php");
+            header("location:/index.php");
         }
     }
     
@@ -47,5 +46,56 @@
         $fp=fopen("log.txt", "a+");
         fwrite($fp, getDT()." - ".json_encode($array)."\n");
         fclose($fp);
+    }
+    
+    
+    /* GET FROM DB */
+    
+    function getRoles(){
+        global $wsdl;
+        set_time_limit(0);
+        $response = $wsdl->getRoles();
+        print_r($response);
+        foreach($response as $return){
+            foreach ($return as $item){
+                echo "<option value=\"".$item->role_id."\">".$item->role_name."</option>";
+           }
+       }
+    }
+    
+    function checkUserNameValidity($user_username){
+        $user_username = mysql_escape_mimic($user_username);
+        $result = array();
+        global $wsdl;
+        set_time_limit(0);
+        $response = $wsdl->checkUserNameValidity(array("user_username"=>$user_username));            
+        
+        if($response->return == true){
+            $result["err"] = "0";
+            $result["msg"] = "Username accepted";
+        }
+        else{
+            $result["err"] = "1";
+            $result["msg"] = "Username already exists";
+        }
+        return(json_encode($result));
+    }
+        
+    function checkUserEmailValidity($user_email){
+        $user_email = mysql_escape_mimic($user_email);
+        $result = array();
+        global $wsdl;
+        set_time_limit(0);
+        $response = $wsdl->checkUserEmailValidity(array("user_email"=>$user_email));            
+        logToFile($response);
+        if($response->return == true){
+            $result["err"] = "0";
+            $result["msg"] = "Email accepted";
+        }
+        else{
+            $result["err"] = "1";
+            $result["msg"] = "Email already exists";
+        }
+        return(json_encode($result));
     }
 ?>

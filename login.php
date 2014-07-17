@@ -2,7 +2,7 @@
     $acl = 4;
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 ?>
-<script src="/resources/js/login.js"></script>
+<script src="/resources/js/getUserByUsername.js"></script>
 <form id="loginform">
     <div class="index">
         <div class="indexInfo">
