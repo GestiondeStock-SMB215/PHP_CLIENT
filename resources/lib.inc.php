@@ -48,6 +48,29 @@
         fclose($fp);
     }
     
+    function getUsers(){
+        global $wsdl;
+        set_time_limit(0);
+        $response = $wsdl->getUsers();
+        print_r($response);
+        foreach($response as $return){
+            foreach ($return as $item){
+                echo "<option value=\"".$item->user_id."\">".$item->user_name."</option>";
+            }
+        }
+    }
+    
+    function getCountries(){
+        global $wsdl;
+        set_time_limit(0);
+        $response = $wsdl->getCountries();
+        print_r($response);
+        foreach($response as $return){
+            foreach ($return as $item){
+                echo "<option value=\"".$item->bra_id."\">".$item->bra_name."</option>";
+            }
+        }
+    }
     
     /* GET FROM DB */
     

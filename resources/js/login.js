@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    $("body").css('background-color','#aaaaaa');
     $("#txtUsername").focus();
     $("#btnLogin").click(function () {
         login();
@@ -8,8 +7,7 @@ $(document).ready(function(){
         if(event.which === 13){
             login();
         }
-    });
-    
+    });    
 });
 
 function login() {

@@ -1,11 +1,11 @@
 $(document).ready(function(){
     //getRoles();
-    $("#btnRegister").click(function () {
-        addUser();
+    $("#btnUpdate").click(function () {
+        editUser();
     });
-    $("#registerForm").keypress(function (event) {
+    $("#updateForm").keypress(function (event) {
         if(event.which === 13){
-            addUser();
+            editUser();
         }
     });
     $("#user_username").blur(function () {
@@ -60,19 +60,15 @@ function checkUserEmailValidity() {
     }
 }
 
-function addUser() {
-    user_role_id = $("#user_role_id").val();
+function editUser() {
     user_name = $("#user_name").val();
     user_username = $("#user_username").val();
     user_password = $("#user_password").val();
     user_password_conf = $("#user_password_conf").val();
     user_email = $("#user_email").val();
-    user_status = $("#user_status").val();
-    wantedData = {user_role_id: user_role_id, user_name: user_name,
-            user_username: user_username ,user_password: user_password, 
-            user_email: user_email , user_status: user_status};
+    wantedData = {user_name: user_name,user_username: user_username ,user_password: user_password, 
+            user_email: user_email };
         
-    if (user_role_id != "" && user_role_id != " ") {
         if (user_name != "" && user_name != " ") {
             if (user_username != "" && user_username != " ") {
                 if (user_email != "" && user_email != " ") {
@@ -80,33 +76,30 @@ function addUser() {
                         if (user_password != "" && user_password != " ") {
                             if (user_password_conf != "" && user_password_conf != " ") {
                                 if (identicPswd(user_password, user_password_conf) == true) {
-                                    if (user_status != "" && user_status != " ") {
-                                        $.ajax({
-                                            type         : "POST",
-                                            url          : "/resources/ajax/addUser.php",
-                                            data         : wantedData,
-                                            cache        : false,
-                                            dataType     : "json",
-                                            beforeSend   : function () {
-                                                $('#lblMsg').html("");
-                                                $('#loader').show();
-                                            },
-                                            complete: function () {
-                                                $('#loader').hide();
-                                            },
-                                            success      : function(result){
-                                                console.log(result.msg);
-                                                if(result.msg == "1"){
-                                                    $('#lblMsg').html("User has been added successfuly");
-                                                }
-                                                else{
-                                                    $('#lblMsg').html("User has not been added. Please try again");
-                                                }
+                                    $.ajax({
+                                        type         : "POST",
+                                        url          : "/resources/ajax/editUser.php",
+                                        data         : wantedData,
+                                        cache        : false,
+                                        dataType     : "json",
+                                        beforeSend   : function () {
+                                            $('#lblMsg').html("");
+                                            $('#loader').show();
+                                        },
+                                        complete: function () {
+                                            $('#loader').hide();
+                                        },
+                                        success      : function(result){
+                                            console.log(result.msg);
+                                            if(result.msg == "1"){
+                                                $('#lblMsg').html("User has been updated successfuly");
                                             }
-                                        });
-                                    } else {
-                                        $('#lblMsg').html("Please select your status");
-                                    }
+                                            else{
+                                                $('#lblMsg').html("User has not been updated. Please try again");
+                                            }
+                                        }
+                                    });
+                                    
                                 } else {
                                     $('#lblMsg').html("Please confirm your password correctly");
                                 }
@@ -128,9 +121,7 @@ function addUser() {
         } else {
             $('#lblMsg').html("Please enter your name");
         }
-    } else {
-        $('#lblMsg').html("Please select your role");
-    }
+    
 }
 
 function identicPswd(pswd, confPswd) {
