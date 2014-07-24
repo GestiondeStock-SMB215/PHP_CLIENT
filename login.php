@@ -3,7 +3,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 ?>
 <script src="/resources/js/getUserByUsername.js"></script>
-<form id="loginform">
+<form id="loginform" style="background-color:#aaa;">
     <div class="index">
         <div class="indexInfo">
             <div class="logo">GSS</div>                 
@@ -14,7 +14,7 @@
                 <div class="clear"></div>
                 <input type="button" id="btnLogin" class="btnLogin" value="LOGIN" />
                 <div class="clear"></div>
-                <img id="loginLoader" alt="" src="/resources/img/loading.gif" style="display: none;width:20px;margin-top: 4px;" />
+                <img id="loginLoader" alt="" src="/resources/img/loading.gif" style="display:none;width:20px;margin-top:4px;" />
                 <div id="lblMsgLogin" class="lblMsg"></div>
             </div>
         </div>

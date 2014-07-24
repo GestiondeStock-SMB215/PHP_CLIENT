@@ -96,7 +96,7 @@ function addUser() {
                                             },
                                             success      : function(result){
                                                 console.log(result.msg);
-                                                if(result.msg == "true"){
+                                                if(result.msg == "1"){
                                                     $('#lblMsg').html("User has been added successfuly");
                                                 }
                                                 else{
