@@ -3,9 +3,14 @@ $(document).ready(function(){
         $('.pnlLogin').slideToggle("slide");
     });
     
-    $('.title').click(function(){
+    $(".title").hover(function () {
         var id = $(this).html();
-        $('.sub').slideUp(); 
-        $('#' + id).slideToggle();        
+        $('.sub').slideUp();
+        $('#' + id).slideDown();
+    }, function () {
+        $('.sub').slideUp();
     });
+    
+    
+
 });
