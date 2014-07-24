@@ -32,8 +32,8 @@
                     <div class="topMenu">
                         <div class="title">Category</div>
                         <div id="Category" class="sub">
-                            <div class="ttlSub">New</div>
-                            <div class="ttlSub">Show All</div>
+                            <div class="ttlSub"><a href="../cat/addCategory.php">New</a></div>
+                            <div class="ttlSub"><a href="../cat/showAllCategories.php">Show All</a></div>
                         </div>
                     </div>
                     <div class="topMenu">
