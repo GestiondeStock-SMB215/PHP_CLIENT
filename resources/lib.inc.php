@@ -52,7 +52,7 @@
         global $wsdl;
         set_time_limit(0);
         $response = $wsdl->getUsers();
-        print_r($response);
+        
         foreach($response as $return){
             foreach ($return as $item){
                 echo "<option value=\"".$item->user_id."\">".$item->user_name."</option>";
@@ -63,10 +63,10 @@
         global $wsdl;
         set_time_limit(0);
         $response = $wsdl->getCountries();
-        print_r($response);
+        
         foreach($response as $return){
             foreach ($return as $item){
-                echo "<option value=\"".$item->bra_id."\">".$item->bra_name."</option>";
+                echo "<option value=\"".$item->cnt_id."\">".$item->cnt_nicename."</option>";
             }
         }
     }
@@ -77,7 +77,7 @@
         global $wsdl;
         set_time_limit(0);
         $response = $wsdl->getRoles();
-        print_r($response);
+        
         foreach($response as $return){
             foreach ($return as $item){
                 echo "<option value=\"".$item->role_id."\">".$item->role_name."</option>";

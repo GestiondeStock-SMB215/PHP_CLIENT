@@ -8,7 +8,7 @@
     Branch Country: 
     <select name="bra_id">
         <option value="">Please choose</option>
-        <?= getUsers(); ?>
+        <?= getCountries(); ?>
     </select>
 </form>
 <?php

@@ -1,7 +1,7 @@
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/lib.inc.php";
 ?>
-<!DOCTYPE html>
+
 <html>
     <head>
         <title>GSS - Cnam Liban</title>

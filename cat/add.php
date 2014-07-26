@@ -4,7 +4,7 @@
 ?>
 
 <div id="cat">
-    <form name="category" method="POST" action="showAllCategories.php">
+    <form name="category" method="POST" action="add.php">
         <div class="name" style="font-weight:bold; font-size:25px;">CATEGORY</div>
         <div id="cat_details" style="margin-left:250px;margin-top:20px;border: 2px solid #cbcbcb;width:806px;">
         <div id="cat_id" >
