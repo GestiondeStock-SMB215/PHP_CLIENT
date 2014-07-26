@@ -30,7 +30,7 @@ ul{margin:0;padding:0;list-style:none;}
 .header .innerHead .leftHeader .welcome{cursor:pointer;padding-top:20px;font-size:18px;}
 .header .innerHead .menu{width:830px;float:left;margin-top:50px;}
 .header .innerHead .menu .topMenu{float:left;}
-.header .innerHead .menu .topMenu .title{width:80px;float: left;cursor: pointer;text-align: center;}
+.header .innerHead .menu .topMenu .title{width:80px;cursor: pointer;text-align: center;}
 .header .innerHead .menu .topMenu .title:hover{background-color:#eee;}
 .header .innerHead .menu .topMenu .sub{width:80px;height:auto;background-color:#bbb;display:none;text-align: center;}
 .header .innerHead .menu .topMenu .sub .ttlSub{cursor: pointer;}
