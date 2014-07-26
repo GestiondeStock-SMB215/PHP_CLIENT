@@ -2,6 +2,7 @@
     $acl = 1;
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 ?>
+
 <div id="cat">
     <form name="category" method="POST" action="showAllCategories.php">
         <div class="name" style="font-weight:bold; font-size:25px;">CATEGORY</div>
@@ -11,11 +12,21 @@
         </div>
         <div id="cat_name">
         Name: <input type="text" id="cat_name"/>
-        Description: <input type="text" id="cat_desc" size="80px;"/>
+        Description: <input type="text" id="description"size="80px;"/>
         </div>
-            <div id="short_name">Short Name: <input type="text" readonly/></div>
-            <div id="cancel"><input type="RESET" value="CANCEL"><input type="Submit" value="SAVE"></div>
+            <div id="short_name">
+                Short Name: <input type="text" id="shortname" readonly/>
+            </div>
+            <div id="cancel">
+                <input type="RESET" value="CANCEL">
+                <input type="Submit" value="SAVE">
+            </div>
         </div>
             
     </form>
 </div>    
+<script langage="javascript">
+        $("#description").keyup(function(){
+    $("#shortname").val($(this).val().substring(0,10));
+});
+</script>

@@ -2,7 +2,19 @@
     $acl = 4;
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 ?>
-<script src="/resources/js/getUserByUsername.js"></script>
+<script>
+$(document).ready(function(){
+    $("#txtUsername").focus();
+    $("#btnLogin").click(function () {
+        getUserByUsername();
+    });
+    $("#loginform").keypress(function (event) {
+        if(event.which === 13){
+            getUserByUsername();
+        }
+    });
+});
+</script>
 <form id="loginform" style="background-color:#aaa;">
     <div class="index">
         <div class="indexInfo">

@@ -2,7 +2,25 @@
     $acl = 1;
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 ?>
-<script src="/resources/js/profile.js"></script>
+<script>
+$(document).ready(function(){
+    //getRoles();
+    $("#btnUpdate").click(function () {
+        editUser();
+    });
+    $("#updateForm").keypress(function (event) {
+        if(event.which === 13){
+            editUser();
+        }
+    });
+    $("#user_username").blur(function () {
+        checkUserNameValidity();
+    });
+    $("#user_email").blur(function () {
+        checkUserEmailValidity();
+    });
+});
+</script>
 <form id="updateForm" >
     <div class="registerContainer">
         <div class="lbl">Name:

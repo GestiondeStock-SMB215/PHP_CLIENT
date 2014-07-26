@@ -6,10 +6,13 @@
     <head>
         <title>GSS - Cnam Liban</title>
         <link rel="icon" type="image/png" href="img/btn/favicon.png" />        
-        <script src="/resources/js/jquery-1.11.0.js"></script>   
-        <script src="/resources/js/jquery.min.js"></script>   
-        <link type="text/css" rel="stylesheet" href="/resources/css/style.css" />
         <meta content="utf-8" http-equiv="encoding" />
+        
+        <script src="/resources/js/jquery-1.11.0.js"></script>   
+        <script src="/resources/js/main.js"></script>   
+        
+        <link type="text/css" rel="stylesheet" href="/resources/css/style.css" />
+        
     </head>
     <body>
         <?php
@@ -17,7 +20,7 @@
         ?>
         <div class="header">
             <div class="innerHead">
-                <div class="logo"></div>
+                <a href="/index.php"><div class="logo"></div></a>
                 <div class="leftHeader">
                     <div class="welcome">Welcome  <?= $_SESSION["user"]["user_name"] ?></div>
                 </div>
@@ -32,8 +35,8 @@
                     <div class="topMenu">
                         <div class="title">Category</div>
                         <div id="Category" class="sub">
-                            <div class="ttlSub"><a href="../cat/addCategory.php">New</a></div>
-                            <div class="ttlSub"><a href="../cat/showAllCategories.php">Show All</a></div>
+                            <div class="ttlSub">New</div>
+                            <div class="ttlSub">Show All</div>
                         </div>
                     </div>
                     <div class="topMenu">

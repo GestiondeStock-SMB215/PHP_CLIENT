@@ -2,7 +2,25 @@
     $acl = 1;
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 ?>
-<script src="/resources/js/addUser.js"></script>
+<script>
+$(document).ready(function(){
+    //getRoles();
+    $("#btnRegister").click(function () {
+        addUser();
+    });
+    $("#registerForm").keypress(function (event) {
+        if(event.which === 13){
+            addUser();
+        }
+    });
+    $("#user_username").blur(function () {
+        checkUserNameValidity();
+    });
+    $("#user_email").blur(function () {
+        checkUserEmailValidity();
+    });
+});
+</script>
 <form id="registerForm" >
     <div class="registerContainer">
         <div class="lbl">Role:
