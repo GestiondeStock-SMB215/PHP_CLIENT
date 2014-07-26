@@ -47,25 +47,17 @@
         fwrite($fp, getDT()." - ".json_encode($array)."\n");
         fclose($fp);
     }
+    
     function getUsers(){
         global $wsdl;
         set_time_limit(0);
         $response = $wsdl->getUsers();
         print_r($response);
         foreach($response as $return){
-            foreach($return as $item){
-            echo "<option value=\"".$item->user_id."\>".$item->user_name."</option>";
+            foreach ($return as $item){
+                echo "<option value=\"".$item->user_id."\">".$item->user_name."</option>";
+            }
         }
-      }
-    }
-    function addProduct($prod_id,$prod_cat_id,$prod_sku,$prod_upc,$prod_name,$prod_desc,
-                        $prod_qty,$prod_qty_per_unit,$prod_color,$prod_size,$prod_weight,
-                        $prod_sup_id,$prod_status,$prod_pic,$prod_vend_id){
-        global $wsdl;
-        set_time_limit(0);
-        $query=  addProduct($prod_id, $prod_cat_id, $prod_sku, $prod_upc, $prod_name, $prod_desc,
-                $prod_qty, $prod_qty_per_unit, $prod_color, $prod_size, $prod_weight, $prod_sup_id,
-                $prod_status, $prod_pic, $prod_vend_id);
     }
     function getCountries(){
         global $wsdl;
@@ -73,10 +65,10 @@
         $response = $wsdl->getCountries();
         print_r($response);
         foreach($response as $return){
-            foreach($return as $item){
-            echo "<option value=\"".$item->bra_id."\>".$item->bra_name."</option>";
+            foreach ($return as $item){
+                echo "<option value=\"".$item->bra_id."\">".$item->bra_name."</option>";
+            }
         }
-      }
     }
     
     /* GET FROM DB */
