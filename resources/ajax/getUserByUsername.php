@@ -10,7 +10,7 @@
         global $wsdl;
         set_time_limit(0);
         $response = $wsdl->getUserByUsername(array("user_username"=>$user_username, "user_password"=>$user_password));            
-        logToFile(json_encode($response));
+        
         foreach ($response as $item){
             if($item->user_id == 0){
                 $result["msg"] = "Nom d'usager ou mot de passe sont incorrectes";
@@ -33,8 +33,10 @@
                     $user["user_role_id"] = $item->user_role_id;
                     $user["user_status"] = $item->user_status;
                     $user["user_time_stamp"] = $item->user_time_stamp;
-
+                    
                     $_SESSION["user"] = $user;
+                    
+                    getPage();
                 }                
             }
         }

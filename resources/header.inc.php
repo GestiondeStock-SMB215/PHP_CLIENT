@@ -23,7 +23,8 @@
                     <div class="welcome">Welcome  <?= $_SESSION["user"]["user_name"] ?></div>
                 </div>
                 <div class="menu">
-                    <div class="topMenu">
+                    <?= getMenu($_SESSION["user"]["user_role_id"]) ?>
+<!--                    <div class="topMenu">
                         <div class="title">Product</div>
                         <div id="Product" class="sub">
                             <div class="ttlSub">New</div>
@@ -87,7 +88,7 @@
                             <div class="ttlSub">New</div>
                             <div class="ttlSub">Show All</div>
                         </div>
-                    </div> 
+                    </div> -->
                 </div>
                 
                 <div class="pnlLogin">

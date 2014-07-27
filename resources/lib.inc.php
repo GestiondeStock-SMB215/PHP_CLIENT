@@ -85,39 +85,55 @@
        }
     }
     
-    function checkUserNameValidity($user_username){
-        $user_username = mysql_escape_mimic($user_username);
-        $result = array();
+    function getMenu($user_role_id){
         global $wsdl;
         set_time_limit(0);
-        $response = $wsdl->checkUserNameValidity(array("user_username"=>$user_username));            
-        
-        if($response->return == true){
-            $result["err"] = "0";
-            $result["msg"] = "Username accepted";
-        }
-        else{
-            $result["err"] = "1";
-            $result["msg"] = "Username already exists";
-        }
-        return(json_encode($result));
+        $pages = array();
+        $response = $wsdl->getPages();
+        print_r($response);
+//        foreach($response as $return){
+//            foreach ($return as $item){
+//                echo $item->page_name;
+//                array_push($pages, array($item->page_id, $item->page_parent_id, $item->page_name));
+//            }
+//        }
+//        echo $pages[0][2];
     }
+    
+//    function checkUserNameValidity($user_username){
+//        $user_username = mysql_escape_mimic($user_username);
+//        $result = array();
+//        global $wsdl;
+//        set_time_limit(0);
+//        $response = $wsdl->checkUserNameValidity(array("user_username"=>$user_username));            
+//        
+//        if($response->return == true){
+//            $result["err"] = "0";
+//            $result["msg"] = "Username accepted";
+//        }
+//        else{
+//            $result["err"] = "1";
+//            $result["msg"] = "Username already exists";
+//        }
+//        return(json_encode($result));
+//    }
         
-    function checkUserEmailValidity($user_email){
-        $user_email = mysql_escape_mimic($user_email);
-        $result = array();
-        global $wsdl;
-        set_time_limit(0);
-        $response = $wsdl->checkUserEmailValidity(array("user_email"=>$user_email));            
-        logToFile($response);
-        if($response->return == true){
-            $result["err"] = "0";
-            $result["msg"] = "Email accepted";
-        }
-        else{
-            $result["err"] = "1";
-            $result["msg"] = "Email already exists";
-        }
-        return(json_encode($result));
-    }
+//    function checkUserEmailValidity($user_email){
+//        $user_email = mysql_escape_mimic($user_email);
+//        $result = array();
+//        global $wsdl;
+//        set_time_limit(0);
+//        $response = $wsdl->checkUserEmailValidity(array("user_email"=>$user_email));            
+//        
+//        if($response->return == true){
+//            $result["err"] = "0";
+//            $result["msg"] = "Email accepted";
+//        }
+//        else{
+//            $result["err"] = "1";
+//            $result["msg"] = "Email already exists";
+//        }
+//        return(json_encode($result));
+//    }
+  
 ?>
