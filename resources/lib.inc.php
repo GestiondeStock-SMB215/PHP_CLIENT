@@ -3,6 +3,20 @@
     session_start();
     error_reporting(7);
     
+    if(isset($_SESSION["pages"])){
+        $pages = $_SESSION["pages"];
+        $curpage = $_SERVER["PHP_SELF"];
+        $result = false;
+        foreach($pages as $page){
+            if($page["page_url"] == $curpage){
+                $result = true;
+            }
+        }
+        if($result != true){
+            header("location:/index.php");
+        }
+    }
+    
     if(!isset($_SESSION["user"])){ //IF LOGOUT
         if($_SERVER["PHP_SELF"] != "/login.php"){ //IF NOT IN LOGIN PAGE
             if(!stripos($_SERVER['PHP_SELF'], "resources/ajax")){ //IF NOT IN AJAX DIR                
@@ -15,6 +29,8 @@
             header("location:/index.php");
         }
     }
+    
+    
     
     //WSDL FILE
     $wsdl =  new SoapClient('http://localhost:8080/JAX_WS/JAX_WS?WSDL');
@@ -85,55 +101,96 @@
        }
     }
     
-    function getMenu($user_role_id){
+    function getPages($user_role_id){
         global $wsdl;
         set_time_limit(0);
         $pages = array();
-        $response = $wsdl->getPages();
-        print_r($response);
-//        foreach($response as $return){
-//            foreach ($return as $item){
-//                echo $item->page_name;
-//                array_push($pages, array($item->page_id, $item->page_parent_id, $item->page_name));
-//            }
-//        }
-//        echo $pages[0][2];
+        $response = $wsdl->getPages(array("user_role_id"=>$user_role_id));
+        foreach($response as $return){
+            foreach ($return as $item){
+                array_push($pages, array("page_id" => $item->page_id, "page_parent_id" => $item->page_parent_id, 
+                    "page_name" => $item->page_name, "page_url" => $item->page_url));
+            }
+        }
+        $_SESSION["pages"] = $pages;
     }
     
-//    function checkUserNameValidity($user_username){
-//        $user_username = mysql_escape_mimic($user_username);
-//        $result = array();
-//        global $wsdl;
-//        set_time_limit(0);
-//        $response = $wsdl->checkUserNameValidity(array("user_username"=>$user_username));            
-//        
-//        if($response->return == true){
-//            $result["err"] = "0";
-//            $result["msg"] = "Username accepted";
-//        }
-//        else{
-//            $result["err"] = "1";
-//            $result["msg"] = "Username already exists";
-//        }
-//        return(json_encode($result));
-//    }
+    function getMenu($user_role_id){
+        //$pages = $_SESSION["pages"] ;
         
-//    function checkUserEmailValidity($user_email){
-//        $user_email = mysql_escape_mimic($user_email);
-//        $result = array();
-//        global $wsdl;
-//        set_time_limit(0);
-//        $response = $wsdl->checkUserEmailValidity(array("user_email"=>$user_email));            
-//        
-//        if($response->return == true){
-//            $result["err"] = "0";
-//            $result["msg"] = "Email accepted";
-//        }
-//        else{
-//            $result["err"] = "1";
-//            $result["msg"] = "Email already exists";
-//        }
-//        return(json_encode($result));
-//    }
+        //TO BE DELETED ON PRODUCTION        
+        global $wsdl;
+        set_time_limit(0);
+        $pages = array();
+        $response = $wsdl->getPages(array("user_role_id"=>$user_role_id));
+        foreach($response as $return){
+            foreach ($return as $item){
+                array_push($pages, array("page_id" => $item->page_id, "page_parent_id" => $item->page_parent_id, 
+                    "page_name" => $item->page_name, "page_url" => $item->page_url, "page_in_menu" => $item->page_in_menu));
+            }
+        }
+        $_SESSION["pages"] = $pages;
+        //TO BE DELETED ON PRODUCTION
+        
+        for($i = 0; $i < sizeof($pages); $i++){
+            if($pages[$i]["page_parent_id"] == 0 && $pages[$i]["page_in_menu"] == 1){
+                echo "<div class=\"topMenu\">";
+                echo "<div class=\"title\">".$pages[$i]["page_name"]."</div>";
+                echo "<div id=\"".$pages[$i]["page_name"]."\" class=\"sub\">";
+                for($j = 0; $j < sizeof($pages); $j++){
+                    if($pages[$j]["page_parent_id"] == $pages[$i]["page_id"] && $pages[$i]["page_in_menu"] == 1){
+                        echo "<a href=\"".$pages[$j]["page_url"]."\"><div class=\"ttlSub\">".$pages[$j]["page_name"]."</div></a>";
+                    }
+                }
+                echo "</div></div></div>";
+            }
+        }
+    }
+    
+    function getRootPages(){
+        $pages = $_SESSION["pages"];
+        foreach($pages as $page){
+            if($page["page_parent_id"] == 0){
+                echo "<option value=\"".$pgae["page_id"]."\">".$page["page_name"]."</option>";
+            }
+        }
+    }
+
+    
+    function checkUserNameValidity($user_username){
+        $user_username = mysql_escape_mimic($user_username);
+        $result = array();
+        global $wsdl;
+        set_time_limit(0);
+        $response = $wsdl->checkUserNameValidity(array("user_username"=>$user_username));            
+        
+        if($response->return == true){
+            $result["err"] = "0";
+            $result["msg"] = "Username accepted";
+        }
+        else{
+            $result["err"] = "1";
+            $result["msg"] = "Username already exists";
+        }
+        return(json_encode($result));
+    }
+        
+    function checkUserEmailValidity($user_email){
+        $user_email = mysql_escape_mimic($user_email);
+        $result = array();
+        global $wsdl;
+        set_time_limit(0);
+        $response = $wsdl->checkUserEmailValidity(array("user_email"=>$user_email));            
+        
+        if($response->return == true){
+            $result["err"] = "0";
+            $result["msg"] = "Email accepted";
+        }
+        else{
+            $result["err"] = "1";
+            $result["msg"] = "Email already exists";
+        }
+        return(json_encode($result));
+    }
   
 ?>

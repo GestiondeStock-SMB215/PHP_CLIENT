@@ -34,6 +34,9 @@
                     $user["user_status"] = $item->user_status;
                     $user["user_time_stamp"] = $item->user_time_stamp;
                     
+                    //TO BE UN-COMMENTED ON PRODUCTION
+                    //getPages($item->user_role_id);
+                    
                     $_SESSION["user"] = $user;
                     
                     getPage();
