@@ -1,9 +1,7 @@
 <?php
-    $acl = 1;
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 ?>
 
-   
 <form id="registerForm" name="category" method="POST" action="add.php" >
     <div class="registerContainer">
         <h3>CATEGORY</h3>

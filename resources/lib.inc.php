@@ -82,7 +82,12 @@
         
         foreach($response as $return){
             foreach ($return as $item){
-                echo "<option value=\"".$item->cnt_id."\">".$item->cnt_nicename."</option>";
+                if($item->cnt_nicename == "Lebanon"){
+                    echo "<option value=\"".$item->cnt_id."\" selected>".$item->cnt_nicename."</option>";
+                }
+                else{
+                    echo "<option value=\"".$item->cnt_id."\">".$item->cnt_nicename."</option>";
+                }
             }
         }
     }

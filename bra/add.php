@@ -1,10 +1,21 @@
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 ?>
-
-<form id="registerForm"action="add.php" >
+<script>
+$(document).ready(function(){
+    $("#btnRegister").click(function () {
+        addBranch()();
+    });
+    $("#registerForm").keypress(function (event) {
+        if(event.which === 13){
+            addBranch();
+        }
+    });
+});
+</script>
+<form id="registerForm" >
     <div class="registerContainer">
-        <h3>BRANCHE</h3>
+        <h3>BRANCH</h3>
 
         <div class="lbl">Name:
             <input type="text" class="input" id="bra_name" /></div>
@@ -37,9 +48,11 @@
             
         <div class="lbl">Email:
             <input type="text" class="input" id="bra_email" /></div>
-
-        <input id="btnRegister" class="btnRegister" type="reset" value="CANCEL" style="float:left;" />
-        <input id="btnRegister" class="btnRegister" name="submit" type="submit" value="SAVE" />    
+        
+        <input id="btnRegister" class="btnRegister" name="submit" value="SAVE"  style="float:left;"/>    
+        <input class="btnRegister" type="reset" value="RESET"   style="float:left;"/>
+        <input class="btnRegister" type="reset" value="CANCEL" onclick="javascript:window.location.href='show.php'"   style="float:left;"/>
+        
 
         <div class="loader"></div>
         <div class="lblMsg" id="lblMsg"></div>
@@ -48,8 +61,3 @@
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/footer.inc.php";
 ?>
-
-<?php
-    require_once $_SERVER["DOCUMENT_ROOT"]."/resources/footer.inc.php";
-?>
-

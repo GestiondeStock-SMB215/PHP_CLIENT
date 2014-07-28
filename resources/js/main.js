@@ -274,3 +274,51 @@ function addPage(){
         $('#lblMsg').html("Please fill in all required fields");
     }
 }
+
+function addBranch(){
+    
+    bra_name        = $("#bra_name").val();
+    bra_cnt_id      = $("#bra_cnt_id").val();
+    bra_city        = $("#bra_city").val();
+    bra_add_srt     = $("#bra_add_srt").val();
+    bra_add_1       = $("#bra_add_1").val();
+    bra_tel_1       = $("#bra_tel_1").val();
+    bra_tel_2       = $("#bra_tel_2").val();
+    bra_fax         = $("#bra_fax").val();
+    bra_email       = $("#bra_email").val();
+
+    wantedData = {bra_name:bra_name, bra_cnt_id:bra_cnt_id, bra_city:bra_city,
+                  bra_add_srt:bra_add_srt, bra_add_1:bra_add_1, bra_tel_1:bra_tel_1,
+                  bra_tel_2:bra_tel_2, bra_fax:bra_fax, bra_email:bra_email};
+        
+    if(bra_name != "" && bra_cnt_id != "" && bra_city != "" && bra_add_1 != "" && bra_tel_1 != ""){
+        $.ajax({
+            type         : "POST",
+            url          : "/resources/ajax/addBranch.php",
+            data         : wantedData,
+            cache        : false,
+            dataType     : "json",
+            beforeSend   : function () {
+                $('#lblMsg').html("");
+                $('#loader').show();
+            },
+            complete: function () {
+                $('#loader').hide();
+            },
+            success      : function(result){
+                
+                console.log(result.msg);
+                if(result.msg == "1"){
+                    $('#lblMsg').html("Branch has been added successfuly");
+                }
+                else{
+                    $('#lblMsg').html("Branch has not been added.");
+                }
+                
+            }
+        });
+    }
+    else{
+        $('#lblMsg').html("Please fill in all required fields");
+    }
+}
