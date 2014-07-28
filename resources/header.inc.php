@@ -1,18 +1,31 @@
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/lib.inc.php";
 ?>
-
+<DOCTYPE html>
 <html>
     <head>
         <title>GSS - Cnam Liban</title>
         <link rel="icon" type="image/png" href="img/btn/favicon.png" />        
-        <script src="/resources/js/jquery-1.11.0.js"></script>   
+        <script src="/resources/js/jquery-2.1.1.min.js"></script>   
         <script src="/resources/js/main.js"></script>   
         
         <link type="text/css" rel="stylesheet" href="/resources/css/style.css" />
         <meta content="utf-8" http-equiv="encoding" />
     </head>
     <body>
+        <script>
+        $(document).ready(function(){  
+            $('.welcome').click(function () {
+                $('.pnlLogin').slideToggle("slide");
+            });
+
+            $('.title').click(function(){
+                var id = $(this).html();
+                $('.sub').slideUp(); 
+                $('#' + id).slideToggle();        
+            });
+        });
+        </script>  
         <?php
             if($_SERVER['PHP_SELF'] != "/login.php"){
         ?>
@@ -29,7 +42,7 @@
                 <div class="pnlLogin">
                     <div class="lgnTop" style="left:54px;"></div>
                     <div id="divLoggedIn" class="lgnCont">
-                        <a href="user/profile.php">My Profile</a><div class="clear"></div>
+                        <a href="/user/profile.php">My Profile</a><div class="clear"></div>
                         <a href="/logout.php">LOGOUT</a>
                     </div>                                
                 </div>
@@ -38,3 +51,4 @@
         <?php
             }
         ?>
+<div class="main">

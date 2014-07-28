@@ -13,7 +13,9 @@
             }
         }
         if($result != true){
-            header("location:/index.php");
+            if(!stripos($_SERVER['PHP_SELF'], "resources/ajax")){ //IF NOT IN AJAX DIR                
+                header("location:/index.php");                
+            }            
         }
     }
     
@@ -142,7 +144,7 @@
                         echo "<a href=\"".$pages[$j]["page_url"]."\"><div class=\"ttlSub\">".$pages[$j]["page_name"]."</div></a>";
                     }
                 }
-                echo "</div></div></div>";
+                echo "</div></div>";
             }
         }
     }
@@ -151,11 +153,29 @@
         $pages = $_SESSION["pages"];
         foreach($pages as $page){
             if($page["page_parent_id"] == 0){
-                echo "<option value=\"".$pgae["page_id"]."\">".$page["page_name"]."</option>";
+                echo "<option value=\"".$page["page_id"]."\">".$page["page_name"]."</option>";
             }
         }
     }
 
+    function createPageDirectory($page_url){
+        $arr = explode("/", $page_url);
+        
+        $pageDir = $_SERVER['DOCUMENT_ROOT']."/".$arr[1]."/";
+        
+        if(!file_exists($pageDir) OR !is_dir($pageDir)){
+            mkdir($pageDir);         
+        }
+        if(!file_exists($pageDir."/".$arr[2])){
+            $pageFile = fopen($pageDir."/".$arr[2], 'w') or die("unable to create file");
+            $txt = "<?php\n";
+            $txt .= "require_once ";
+            $txt .= "$";$txt .= "_";$txt .= "SERVER[\"DOCUMENT_ROOT\"].\"/resources/header.inc.php\";";
+            fwrite($pageFile, $txt);
+            fclose($pageFile);        
+        }        
+
+    }
     
     function checkUserNameValidity($user_username){
         $user_username = mysql_escape_mimic($user_username);

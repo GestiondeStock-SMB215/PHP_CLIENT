@@ -3,20 +3,13 @@
 ?>
 <script>
 $(document).ready(function(){
-    //getRoles();
     $("#btnRegister").click(function () {
-        addUser();
+        addPage()();
     });
     $("#registerForm").keypress(function (event) {
         if(event.which === 13){
-            addUser();
+            addPage();
         }
-    });
-    $("#user_username").blur(function () {
-        checkUserNameValidity();
-    });
-    $("#user_email").blur(function () {
-        checkUserEmailValidity();
     });
 });
 </script>
@@ -24,7 +17,7 @@ $(document).ready(function(){
     <div class="registerContainer">
         <div class="lbl">Parent page:
             <div class="ddl">
-                <select id="page_parent_id">
+                <select id="page_parent_id" >
                     <option value="5">Please choose</option>
                     <option value="0">Root</option>
                     <?= getRootPages() ?>
@@ -39,7 +32,15 @@ $(document).ready(function(){
             <input type="text" class="input" id="page_url" /></div>
 
         <div class="lbl">ACL:
-            <input type="text" class="input" id="page_acl" /></div>
+            <select class="input" id="page_acl">
+                <option value="">Please choose</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
 
         <div class="lbl">IN MENU:
             <input type="checkbox" class="input" id="page_in_menu" /></div>

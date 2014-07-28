@@ -39,7 +39,7 @@
                     
                     $_SESSION["user"] = $user;
                     
-                    getPage();
+                    getPages($item->user_role_id);
                 }                
             }
         }
