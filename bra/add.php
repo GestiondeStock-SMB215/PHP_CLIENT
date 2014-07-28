@@ -4,7 +4,7 @@
 <script>
 $(document).ready(function(){
     $("#btnRegister").click(function () {
-        addBranch()();
+        addBranch();
     });
     $("#registerForm").keypress(function (event) {
         if(event.which === 13){
@@ -56,7 +56,7 @@ $(document).ready(function(){
 
         <div class="loader"></div>
         <div class="lblMsg" id="lblMsg"></div>
-    </div
+    </div>
 </form>
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/footer.inc.php";

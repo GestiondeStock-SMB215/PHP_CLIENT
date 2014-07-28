@@ -322,3 +322,96 @@ function addBranch(){
         $('#lblMsg').html("Please fill in all required fields");
     }
 }
+
+function addCategory(){
+    
+    cat_name        = $("#cat_name").val();
+    cat_desc        = $("#cat_desc").val();
+    cat_pic         = $("#cat_pic").val();
+
+    wantedData = {cat_name:cat_name, cat_desc:cat_desc, cat_pic:cat_pic};
+        
+    if(cat_name != "" && cat_desc != "" ){
+        $.ajax({
+            type         : "POST",
+            url          : "/resources/ajax/addCategory.php",
+            data         : wantedData,
+            cache        : false,
+            dataType     : "json",
+            beforeSend   : function () {
+                $('#lblMsg').html("");
+                $('#loader').show();
+            },
+            complete: function () {
+                $('#loader').hide();
+            },
+            success      : function(result){
+                
+                console.log(result.msg);
+                if(result.msg == "1"){
+                    $('#lblMsg').html("Category has been added successfuly");
+                }
+                else{
+                    $('#lblMsg').html("Category has not been added.");
+                }
+                
+            }
+        });
+    }
+    else{
+        $('#lblMsg').html("Please fill in all required fields");
+    }
+}
+function addCustomer(){
+    cust_comp          = $("#cust_comp").val();
+    cust_name          = $("#cust_name").val();
+    cust_title         = $("#cust_title").val();
+    cust_add_1         = $("#cust_add_1").val();
+    cust_add_2         = $("#cust_add_2").val();
+    cust_city          = $("#cust_city").val();
+    cust_cnt_id        = $("#cust_cnt_id").val();
+    cust_tel_1         = $("#cust_tel_1").val();
+    cust_tel_2         = $("#cust_tel_2").val();
+    cust_fax           = $("#cust_fax").val();
+    cust_email         = $("#cust_email").val();
+    cust_site          = $("#cust_site").val();
+    cust_logo          = $("#cust_logo").val();
+
+    wantedData = {cust_comp:cust_comp, cust_name:cust_name, cust_title:cust_title,
+                  cust_add_1:cust_add_1, cust_add_2:cust_add_2, cust_city:cust_city,
+                  cust_cnt_id:cust_cnt_id, cust_tel_1:cust_tel_1, cust_tel_2:cust_tel_2,
+                  cust_fax:cust_fax, cust_email:cust_email, cust_site:cust_site, cust_logo:cust_logo };
+        
+    if(cust_comp != "" && cust_name != "" && cust_add_1 != ""
+       && cust_cnt_id != "" && cust_tel_1 != "" && cust_fax != ""
+       && cust_email != "" && cust_site != ""){
+        $.ajax({
+            type         : "POST",
+            url          : "/resources/ajax/addCustomer.php",
+            data         : wantedData,
+            cache        : false,
+            dataType     : "json",
+            beforeSend   : function () {
+                $('#lblMsg').html("");
+                $('#loader').show();
+            },
+            complete: function () {
+                $('#loader').hide();
+            },
+            success      : function(result){
+                
+                console.log(result.msg);
+                if(result.msg == "1"){
+                    $('#lblMsg').html("Customer has been added successfuly");
+                }
+                else{
+                    $('#lblMsg').html("Customer has not been added.");
+                }
+                
+            }
+        });
+    }
+    else{
+        $('#lblMsg').html("Please fill in all required fields");
+    }
+}
