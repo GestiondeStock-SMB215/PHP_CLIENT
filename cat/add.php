@@ -2,6 +2,7 @@
     $acl = 1;
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 ?>
+
    
 <form id="registerForm" name="category" method="POST" action="add.php" >
     <div class="registerContainer">
@@ -23,9 +24,9 @@
         <div class="loader"></div>
         <div class="lblMsg" id="lblMsg"></div>
     </div
-</form>
+</form>   
 <script langage="javascript">
-        $("#cat_desc").keyup(function(){
+       $("#cat_desc").keyup(function(){
     $("#shortname").val($(this).val().substring(0,10));
 });
 </script>

@@ -31,7 +31,7 @@
             header("location:/index.php");
         }
     }
-    
+
     //WSDL FILE
     $wsdl =  new SoapClient('http://localhost:8080/JAX_WS/JAX_WS?WSDL');
     

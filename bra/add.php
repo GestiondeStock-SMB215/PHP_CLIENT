@@ -1,6 +1,7 @@
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 ?>
+
 <form id="registerForm"action="add.php" >
     <div class="registerContainer">
         <h3>BRANCHE</h3>
@@ -47,3 +48,8 @@
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/footer.inc.php";
 ?>
+
+<?php
+    require_once $_SERVER["DOCUMENT_ROOT"]."/resources/footer.inc.php";
+?>
+
