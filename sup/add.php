@@ -4,11 +4,11 @@
 <script>
 $(document).ready(function(){
     $("#btnRegister").click(function () {
-        addCustomer();
+        addSupplier();
     });
     $("#registerForm").keypress(function (event) {
         if(event.which === 13){
-            addCustomer();
+            addSupplier();
         }
     });
 });
@@ -16,49 +16,49 @@ $(document).ready(function(){
 
 <form id="registerForm" >
     <div class="registerContainer">
-        <h3>CUSTOMER</h3>
+        <h3>SUPPLIER</h3>
         <div class="lbl">Company:
-            <input type="text" class="input" id="cust_comp"/></div>
+            <input type="text" class="input" id="sup_comp"/></div>
 
         <div class="lbl">Name:
-            <input type="text" class="input" id="cust_name" /></div>
+            <input type="text" class="input" id="sup_name" /></div>
             
             <div class="lbl">Title:
-            <input type="text" class="input" id="cust_title" /></div>
+            <input type="text" class="input" id="sup_title" /></div>
 
         <div class="lbl">Address 1:
-            <input type="text" class="input" id="cust_add_1" /></div>
+            <input type="text" class="input" id="sup_add_1" /></div>
             
         <div class="lbl">Address 2:
-            <input type="text" class="input" id="cust_add_2" /></div>
+            <input type="text" class="input" id="sup_add_2" /></div>
 
         <div class="lbl">City:
-            <input type="text" class="input" id="cust_city" /></div>
+            <input type="text" class="input" id="sup_city" /></div>
 
         <div class="lbl">Country:
-            <select class="input" id="cust_cnt_id">
+            <select class="input" id="sup_cnt_id">
             <option value="">Please choose</option>
             <?= getCountries(); ?>
             </select>
         </div>
 
         <div class="lbl">Tel 1:
-            <input type="text" class="input" id="cust_tel_1" /></div>
+            <input type="text" class="input" id="sup_tel_1" /></div>
             
         <div class="lbl">Tel 2:
-            <input type="text" class="input" id="cust_tel_2" /></div>
+            <input type="text" class="input" id="sup_tel_2" /></div>
             
             <div class="lbl">Fax:
-            <input type="text" class="input" id="cust_fax" /></div>
+            <input type="text" class="input" id="sup_fax" /></div>
             
             <div class="lbl">Email:
-            <input type="text" class="input" id="cust_email" /></div>
+            <input type="text" class="input" id="sup_email" /></div>
             
              <div class="lbl">Site:
-             <input type="text" class="input" id="cust_site" /></div>
+             <input type="text" class="input" id="sup_site" /></div>
              
              <div class="lbl">Logo:
-             <input type="file" class="input" id="cust_logo"/></div>
+             <input type="file" class="input" id="sup_logo"/></div>
             
             
             <input id="btnRegister" class="btnRegister" type="button" name="submit" value="SAVE"  style="float:left;"/>    

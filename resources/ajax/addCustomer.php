@@ -19,10 +19,10 @@
         $result = array();
         global $wsdl;
         set_time_limit(0);
-        $response = $wsdl->addCustomer(array("cust_comp"=>$cust_comp, "cust_name"=>$cust_name,"cust_title"=>$cust_title, 
-            "cust_add_1"=>$cust_add_1, "cust_add_2"=>$cust_add_2, "cust_city"=>$cust_city,
-            "cust_cnt_id"=>$cust_cnt_id, "cust_tel_1"=>$cust_tel_1, "cust_tel_2"=>$cust_tel_2,
-            "cust_fax"=>$cust_fax, "cust_email"=>$cust_email, "cust_site"=>$cust_site, "cust_logo"=>$cust_logo));
+        $response = $wsdl->addCustomer(array("cust_comp"=>$cust_comp,"cust_name"=>$cust_name,"cust_title"=>$cust_title, 
+            "cust_add_1"=>$cust_add_1,"cust_add_2"=>$cust_add_2,"cust_city"=>$cust_city,
+            "cust_cnt_id"=>$cust_cnt_id,"cust_tel_1"=>$cust_tel_1,"cust_tel_2"=>$cust_tel_2,
+            "cust_fax"=>$cust_fax,"cust_email"=>$cust_email,"cust_site"=>$cust_site,"cust_logo"=>$cust_logo));
 
         $result["msg"] = $response->return;
         echo(json_encode($result));        

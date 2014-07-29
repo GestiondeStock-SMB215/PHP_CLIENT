@@ -415,3 +415,56 @@ function addCustomer(){
         $('#lblMsg').html("Please fill in all required fields");
     }
 }
+function addSupplier(){
+    sup_comp          = $("#sup_comp").val();
+    sup_name          = $("#sup_name").val();
+    sup_title         = $("#sup_title").val();
+    sup_add_1         = $("#sup_add_1").val();
+    sup_add_2         = $("#sup_add_2").val();
+    sup_city          = $("#sup_city").val();
+    sup_cnt_id        = $("#sup_cnt_id").val();
+    sup_tel_1         = $("#sup_tel_1").val();
+    sup_tel_2         = $("#sup_tel_2").val();
+    sup_fax           = $("#sup_fax").val();
+    sup_email         = $("#sup_email").val();
+    sup_site          = $("#sup_site").val();
+    sup_logo          = $("#sup_logo").val();
+
+    wantedData = {sup_comp:sup_comp, sup_name:sup_name, sup_title:sup_title,
+                  sup_add_1:sup_add_1, sup_add_2:sup_add_2, sup_city:sup_city,
+                  sup_cnt_id:sup_cnt_id, sup_tel_1:sup_tel_1, sup_tel_2:sup_tel_2,
+                  sup_fax:sup_fax, sup_email:sup_email, sup_site:sup_site, sup_logo:sup_logo };
+        
+    if(sup_comp != "" && sup_name != "" && sup_add_1 != ""
+       && sup_cnt_id != "" && sup_tel_1 != "" && sup_fax != ""
+       && sup_email != "" && sup_site != ""){
+        $.ajax({
+            type         : "POST",
+            url          : "/resources/ajax/addSupplier.php",
+            data         : wantedData,
+            cache        : false,
+            dataType     : "json",
+            beforeSend   : function () {
+                $('#lblMsg').html("");
+                $('#loader').show();
+            },
+            complete: function () {
+                $('#loader').hide();
+            },
+            success      : function(result){
+                
+                console.log(result.msg);
+                if(result.msg == "1"){
+                    $('#lblMsg').html("Supplier has been added successfuly");
+                }
+                else{
+                    $('#lblMsg').html("Supplier has not been added.");
+                }
+                
+            }
+        });
+    }
+    else{
+        $('#lblMsg').html("Please fill in all required fields");
+    }
+}
