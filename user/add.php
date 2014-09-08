@@ -55,8 +55,8 @@ $(document).ready(function(){
                 </select>
             </div>
         </div>        
-
         <input id="btnRegister" class="btnRegister" name="submit" type="button" value="Register" />
+        <input id="" class="btnRegister" name="Back" type="button" value="Cancel" onclick="javascript=window.location.href='show.php'" />                
         <div class="loader"></div>
         <div class="lblMsg" id="lblMsg"></div>
     </div

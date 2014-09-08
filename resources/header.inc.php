@@ -7,9 +7,13 @@
         <title>GSS - Cnam Liban</title>
         <link rel="icon" type="image/png" href="img/btn/favicon.png" />        
         <script src="/resources/js/jquery-2.1.1.min.js"></script>   
+        <script src="/resources/js/datatables.js"></script>   
+        <script src="/resources/js/tabetools.js"></script>   
         <script src="/resources/js/main.js"></script>   
         
         <link type="text/css" rel="stylesheet" href="/resources/css/style.css" />
+        <link type="text/css" rel="stylesheet" href="/resources/css/datatables.css" />
+        <link type="text/css" rel="stylesheet" href="/resources/css/tabletools.css" />
         <meta content="utf-8" http-equiv="encoding" />
     </head>
     <body>

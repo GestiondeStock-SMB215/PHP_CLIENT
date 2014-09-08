@@ -119,34 +119,92 @@
         }
         $_SESSION["pages"] = $pages;
     }
+    function getAllPages(){
+        global $wsdl;
+        set_time_limit(0);
+        $objs = array();
+        $response = $wsdl->getPages();
+        foreach($response as $return){
+            foreach ($return as $item){
+                array_push(
+                    $objs, 
+                    array(
+                        "page_id"           => $item->page_id, 
+                        "page_parent_id"    => $item->page_parent_id, 
+                        "page_name"         => $item->page_name, 
+                        "page_url"          => $item->page_url, 
+                        "page_acl"          => $item->page_acl, 
+                        "page_in_menu"      => $item->page_in_menu, 
+                        "page_time_stamp"   => $item->page_time_stamp
+                    )
+                );
+            }
+        }
+       
+        return $objs;
+    }
+    function getAllUsers(){
+        global $wsdl;
+        set_time_limit(0);
+        $objs = array();
+        $response = $wsdl->getUsers();
+        
+        foreach($response as $return){
+            foreach ($return as $item){
+                array_push(
+                    $objs, 
+                    array(
+                        "user_id"           => $item->user_id, 
+                        "user_role_id"      => $item->user_role_id, 
+                        "user_name"         => $item->user_name, 
+                        "user_username"     => $item->user_username, 
+                        "user_email"        => $item->user_email, 
+                        "user_last_login"   => $item->user_last_login, 
+                        "user_status"       => $item->user_status,
+                        "user_time_stamp"   => $item->user_time_stamp
+                    )
+                );
+            }
+        }
+       
+        return $objs;
+    }
     
     function getMenu($user_role_id){
-        //$pages = $_SESSION["pages"] ;
-        
-        //TO BE DELETED ON PRODUCTION        
         global $wsdl;
         set_time_limit(0);
         $pages = array();
+        
+        //GET ALL PERMITTED PAGES
         $response = $wsdl->getPages(array("user_role_id"=>$user_role_id));
+        
         foreach($response as $return){
             foreach ($return as $item){
-                array_push($pages, array("page_id" => $item->page_id, "page_parent_id" => $item->page_parent_id, 
-                    "page_name" => $item->page_name, "page_url" => $item->page_url, "page_in_menu" => $item->page_in_menu));
+                array_push(
+                    $pages, 
+                    array(
+                        "page_id" => $item->page_id, 
+                        "page_parent_id" => $item->page_parent_id,
+                        "page_name" => $item->page_name, 
+                        "page_url" => $item->page_url, 
+                        "page_in_menu" => $item->page_in_menu,
+                        "page_order" => $item->page_order
+                    )
+                );
             }
         }
         $_SESSION["pages"] = $pages;
-        //TO BE DELETED ON PRODUCTION
         
-        for($i = 0; $i < sizeof($pages); $i++){
-            if($pages[$i]["page_parent_id"] == 0 && $pages[$i]["page_in_menu"] == 1){
+        foreach($pages as $page){
+            if($page["page_parent_id"] == 0 && $page["page_in_menu"] == 1){
                 echo "<div class=\"topMenu\">";
-                echo "<div class=\"title\">".$pages[$i]["page_name"]."</div>";
-                echo "<div id=\"".$pages[$i]["page_name"]."\" class=\"sub\">";
-                for($j = 0; $j < sizeof($pages); $j++){
-                    if($pages[$j]["page_parent_id"] == $pages[$i]["page_id"] && $pages[$i]["page_in_menu"] == 1){
-                        echo "<a href=\"".$pages[$j]["page_url"]."\"><div class=\"ttlSub\">".$pages[$j]["page_name"]."</div></a>";
+                    echo "<div class=\"title\">".$page["page_name"]."</div>";
+                    echo "<div id=\"".$page["page_name"]."\" class=\"sub\">";
+                    foreach($pages as $subpage){
+                        if(($subpage["page_parent_id"] == $page["page_id"]) && ($subpage["page_in_menu"] == 1)){
+                            echo "<a href=\"".$subpage["page_url"]."\"><div class=\"ttlSub\">".$subpage["page_name"]."</div></a>";     
+                        }
                     }
-                }
                 echo "</div></div>";
             }
         }
@@ -160,6 +218,7 @@
             }
         }
     }
+    
 
     function createPageDirectory($page_url){
         $arr = explode("/", $page_url);

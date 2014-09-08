@@ -13,11 +13,12 @@ $(document).ready(function() {
     <thead>
         <tr>
             <th>ID</th>
-            <th>Parent ID</th>
+            <th>Role ID</th>
             <th>Name</th>
-            <th>URL</th>
-            <th>ACL</th>
-            <th>In Menu</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Last Login</th>
+            <th>Status</th>
             <th>Time Stamp</th>
             <th>Edit</th>
             <th>Delete</th>
@@ -25,14 +26,14 @@ $(document).ready(function() {
     </thead>
     <tbody>
         <?php
-            $pages = getAllPages();
-            foreach($pages as $page){
+            $objs = getAllUsers();
+            foreach($objs as $obj){
                 echo "<tr>";
-                foreach($page as $key => $value){
-                    echo "<td>$value</td>";
+                foreach($obj as $key => $value){
+                    echo "<td nowrap>$value</td>";
                 }
-                echo "<td><a href=\"edit.php?id=".$page["page_id"].""."\">Edit</a></td>";
-                echo "<td><a href=\"delete.php?id=".$page["page_id"]."\">Delete</a></td>";
+                echo "<td><a href=\"edit.php?id=".$obj["user_id"].""."\">Edit</a></td>";
+                echo "<td><a href=\"delete.php?id=".$obj["user_id"]."\">Delete</a></td>";
                 echo "</tr>";
             }
         ?>
@@ -40,12 +41,15 @@ $(document).ready(function() {
     <tfoot>
         <tr>
             <th>ID</th>
-            <th>Parent ID</th>
+            <th>Role ID</th>
             <th>Name</th>
-            <th>URL</th>
-            <th>ACL</th>
-            <th>In Menu</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Last Login</th>
+            <th>Status</th>
             <th>Time Stamp</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </tfoot>    
 </table>
