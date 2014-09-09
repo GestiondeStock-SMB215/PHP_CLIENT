@@ -26,7 +26,12 @@ $(document).ready(function(){
             <div class="ddl">
                 <select id="user_role_id">
                     <option value="">Please choose</option>
-                    <?= getRoles() ?>
+                    <?php
+                        $roles = getRoles();
+                        foreach($roles as $role){
+                            echo "<option value=\"".$role["role_id"]."\">".$role["role_name"]."</option>";
+                        }
+                    ?>
                 </select>
             </div>
         </div>

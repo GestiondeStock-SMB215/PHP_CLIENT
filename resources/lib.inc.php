@@ -1,7 +1,7 @@
 <?php
     date_default_timezone_set("Asia/Beirut");
     session_start();
-    error_reporting(7);
+//    error_reporting(7);
     
 //    if(isset($_SESSION["pages"])){
 //        $pages = $_SESSION["pages"];
@@ -77,19 +77,19 @@
     }
     function getCountries(){
         global $wsdl;
+        $countries = array();
         set_time_limit(0);
         $response = $wsdl->getCountries();
-        
-        foreach($response as $return){
-            foreach ($return as $item){
-                if($item->cnt_nicename == "Lebanon"){
-                    echo "<option value=\"".$item->cnt_id."\" selected>".$item->cnt_nicename."</option>";
-                }
-                else{
-                    echo "<option value=\"".$item->cnt_id."\">".$item->cnt_nicename."</option>";
-                }
-            }
+        foreach($response->return as $country){
+            array_push(
+                $countries, 
+                array(
+                    "cnt_id" => $country->cnt_id,
+                    "cnt_nicename" => $country->cnt_nicename
+                )
+            );
         }
+        return $countries;
     }
     
     /* GET FROM DB */
@@ -99,11 +99,18 @@
         set_time_limit(0);
         $response = $wsdl->getRoles();
         
-        foreach($response as $return){
-            foreach ($return as $item){
-                echo "<option value=\"".$item->role_id."\">".$item->role_name."</option>";
-           }
-       }
+        $roles = array();
+        foreach($response->return as $item){
+            array_push(
+                $roles,
+                array(
+                    "role_id" => $item->role_id,
+                    "role_name" => $item->role_name,
+                    "role_time_stamp" => $item->role_time_stamp
+                )
+            );
+        }
+        return $roles;
     }
     
     function getPages($user_role_id){
@@ -124,21 +131,19 @@
         set_time_limit(0);
         $objs = array();
         $response = $wsdl->getPages();
-        foreach($response as $return){
-            foreach ($return as $item){
-                array_push(
-                    $objs, 
-                    array(
-                        "page_id"           => $item->page_id, 
-                        "page_parent_id"    => $item->page_parent_id, 
-                        "page_name"         => $item->page_name, 
-                        "page_url"          => $item->page_url, 
-                        "page_acl"          => $item->page_acl, 
-                        "page_in_menu"      => $item->page_in_menu, 
-                        "page_time_stamp"   => $item->page_time_stamp
-                    )
-                );
-            }
+        foreach($response->return as $item){
+            array_push(
+                $objs, 
+                array(
+                    "page_id"           => $item->page_id, 
+                    "page_parent_id"    => $item->page_parent_id, 
+                    "page_name"         => $item->page_name, 
+                    "page_url"          => $item->page_url, 
+                    "page_acl"          => $item->page_acl, 
+                    "page_in_menu"      => $item->page_in_menu, 
+                    "page_time_stamp"   => $item->page_time_stamp
+                )
+            );
         }
        
         return $objs;
@@ -255,7 +260,6 @@
         else{
             $response = $wsdl->getBranches();
         }
-        
         foreach($response as $return){
             foreach ($return as $item){
                 array_push(
@@ -280,18 +284,6 @@
         return $objs;
     }
     
-    function getCountryNiceName($cnt_id){
-        global $wsdl;
-        set_time_limit(0);
-        $response = $wsdl->getCountryNiceName(array("cnt_id" => $cnt_id));
-        return $response->return;
-    }
-    function getPageName($page_id){
-        global $wsdl;
-        set_time_limit(0);
-        $response = $wsdl->getPageName(array("page_id" => $page_id));
-        return $response->return;
-    }
     function getRoleName($role_id){
         global $wsdl;
         set_time_limit(0);
