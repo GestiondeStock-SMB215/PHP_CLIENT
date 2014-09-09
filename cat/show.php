@@ -25,7 +25,7 @@ function getCategories(){
         global $wsdl;
         set_time_limit(0);
         $response = $wsdl->getCategories();
-        echo "<div class='registerContainer'>".
+        echo "<div class='registerContainer' id='example'>".
              "<h3>CATEGORIES</h3>".
              "<div class='global'>".
              "<div class='name'>NAME</div>".
