@@ -8,6 +8,7 @@ $(document).ready(function() {
     });
 });
 </script>
+<div class="clear"></div>
 <table width="100%"><tr><td><h3>Branch Management</h3></td><td align="right"><input type="button" value="Create" class="myButton" onclick="javascript:window.location.href='add.php'"/></td></tr></table>
 <table id="example" class="display cell-border">
     <thead>
@@ -24,11 +25,17 @@ $(document).ready(function() {
     <tbody>
         <?php
             $objs = getBranches(null);
+            $countries = getCountries();
+            
             foreach($objs as $obj){
                 echo "<tr>";
                     echo "<td>".$obj["bra_id"]."</td>";
                     echo "<td>".$obj["bra_name"]."</td>";
-                    echo "<td>".getCountryNiceName($obj["bra_cnt_id"])."</td>";
+                    foreach ($countries as $country){
+                        if($country["cnt_id"] == $obj["bra_cnt_id"]){
+                            echo "<td>".$country["cnt_nicename"]."</td>";
+                        }
+                    }
                     echo "<td>".$obj["bra_city"]."</td>";
                     echo "<td>".$obj["bra_time_stamp"]."</td>";
                 echo "<td><a href=\"edit.php?bra_id=".$obj["bra_id"].""."\">Edit</a></td>";

@@ -8,7 +8,8 @@ $(document).ready(function() {
     });
 });
 </script>
-<table width="100%"><tr><td><h3>Page Management</h3></td><td align="right"><input type="button" value="Create" class="myButton" onclick="javascript:window.location.href='add.php'"/></td></tr></table>
+<div class="clear"></div>
+<table width="100%"><tr><td><h3>User Management</h3></td><td align="right"><input type="button" value="Create" class="myButton" onclick="javascript:window.location.href='add.php'"/></td></tr></table>
 <table id="example" class="display cell-border">
     <thead>
         <tr>
@@ -27,10 +28,15 @@ $(document).ready(function() {
     <tbody>
         <?php
             $objs = getAllUsers();
+            $roles = getRoles();
             foreach($objs as $obj){
                 echo "<tr>";
                 echo "<td>".$obj["user_id"]."</td>";
-                echo "<td>".getRoleName($obj["user_role_id"])."</td>";
+                foreach ($roles as $role){
+                    if($role["role_id"] == $obj["user_role_id"]){
+                        echo "<td>".$role["role_name"]."</td>";
+                    }
+                }
                 echo "<td>".$obj["user_name"]."</td>";
                 echo "<td>".$obj["user_username"]."</td>";
                 echo "<td>".$obj["user_email"]."</td>";
