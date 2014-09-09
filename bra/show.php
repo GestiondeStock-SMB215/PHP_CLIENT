@@ -1,26 +1,55 @@
 <?php
-    $acl = 1;
-    require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
-
-
- function getBranches(){
-        global $wsdl;
-        set_time_limit(0);
-        $response = $wsdl->getBranches();
-        echo "<div class='registerContainer'><h1>BRANCHES</h1>";
-        foreach($response as $item){
-           
-                echo "<div class='lbl'>";
-                //echo "<div class='topMenu'>";
-                echo "<div class='topMenu'>".$item->bra_name."</div>";
-                echo "<div class='topMenu'>".$item->bra_city."</div>";
-                echo $item->bra_tel_1;
-                echo $item->bra_fax;
-                echo $item->bra_email;
-                echo "</div></div";
-            }
-       }
-    
-    getBranches();
+require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 ?>
-<style>
+<script>
+$(document).ready(function() {
+    $('#example').dataTable({
+        "iDisplayLength":5  
+    });
+});
+</script>
+<table width="100%"><tr><td><h3>Branch Management</h3></td><td align="right"><input type="button" value="Create" class="myButton" onclick="javascript:window.location.href='add.php'"/></td></tr></table>
+<table id="example" class="display cell-border">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Branch Name</th>
+            <th>Country</th>
+            <th>City</th>
+            <th>Time Stamp</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+            $objs = getBranches(null);
+            foreach($objs as $obj){
+                echo "<tr>";
+                    echo "<td>".$obj["bra_id"]."</td>";
+                    echo "<td>".$obj["bra_name"]."</td>";
+                    echo "<td>".getCountryNiceName($obj["bra_cnt_id"])."</td>";
+                    echo "<td>".$obj["bra_city"]."</td>";
+                    echo "<td>".$obj["bra_time_stamp"]."</td>";
+                echo "<td><a href=\"edit.php?bra_id=".$obj["bra_id"].""."\">Edit</a></td>";
+                echo "<td><a href=\"delete.php?bra_id=".$obj["bra_id"]."\">Delete</a></td>";
+                echo "</tr>";
+            }
+        ?>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>ID</th>
+            <th>Branch Name</th>
+            <th>Country</th>
+            <th>City</th>
+            <th>Time Stamp</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </tfoot>    
+</table>
+
+<?php
+require_once $_SERVER["DOCUMENT_ROOT"]."/resources/footer.inc.php";
+?>

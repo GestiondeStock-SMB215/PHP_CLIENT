@@ -13,7 +13,7 @@ $(document).ready(function() {
     <thead>
         <tr>
             <th>ID</th>
-            <th>Parent ID</th>
+            <th>Parent</th>
             <th>Name</th>
             <th>URL</th>
             <th>ACL</th>
@@ -25,14 +25,18 @@ $(document).ready(function() {
     </thead>
     <tbody>
         <?php
-            $pages = getAllPages();
-            foreach($pages as $page){
+            $objs = getAllPages();
+            foreach($objs as $obj){
                 echo "<tr>";
-                foreach($page as $key => $value){
-                    echo "<td>$value</td>";
-                }
-                echo "<td><a href=\"edit.php?id=".$page["page_id"].""."\">Edit</a></td>";
-                echo "<td><a href=\"delete.php?id=".$page["page_id"]."\">Delete</a></td>";
+                echo "<td>".$obj["page_id"]."</td>";
+                echo "<td>".getPageName($obj["page_parent_id"])."</td>";
+                echo "<td>".$obj["page_name"]."</td>";
+                echo "<td>".$obj["page_url"]."</td>";
+                echo "<td>".$obj["page_acl"]."</td>";
+                echo "<td>".$obj["page_in_menu"]."</td>";
+                echo "<td>".$obj["page_time_stamp"]."</td>";
+                echo "<td><a href=\"edit.php?page_id=".$page["page_id"].""."\">Edit</a></td>";
+                echo "<td><a href=\"delete.php?page_id=".$page["page_id"]."\">Delete</a></td>";
                 echo "</tr>";
             }
         ?>
@@ -40,7 +44,7 @@ $(document).ready(function() {
     <tfoot>
         <tr>
             <th>ID</th>
-            <th>Parent ID</th>
+            <th>Parent</th>
             <th>Name</th>
             <th>URL</th>
             <th>ACL</th>

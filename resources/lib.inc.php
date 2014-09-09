@@ -274,5 +274,63 @@
         }
         return(json_encode($result));
     }
-  
+    function deletePage($page_id){
+        global $wsdl;
+        set_time_limit(0);
+        $response = $wsdl->deletePage(array("page_id"=>$page_id));                    
+    }
+    
+    function getBranches($bra_id){
+        global $wsdl;
+        set_time_limit(0);
+        $objs = array();
+        if(isset($bra_id)){
+            $response = $wsdl->getBranches($bra_id);
+        }
+        else{
+            $response = $wsdl->getBranches();
+        }
+        
+        foreach($response as $return){
+            foreach ($return as $item){
+                array_push(
+                    $objs, 
+                    array(
+                        "bra_id"            => $item->bra_id, 
+                        "bra_cnt_id"        => $item->bra_cnt_id, 
+                        "bra_name"          => $item->bra_name, 
+                        "bra_city"          => $item->bra_city, 
+                        "bra_add_str"       => $item->bra_add_str, 
+                        "bra_add_1"         => $item->bra_add_1, 
+                        "bra_tel_1"         => $item->bra_tel_1,
+                        "bra_tel_2"         => $item->bra_tel_2,
+                        "bra_fax"           => $item->bra_fax,
+                        "bra_email"         => $item->bra_email,
+                        "bra_time_stamp"    => $item->bra_time_stamp
+                    )
+                );
+            }
+        }
+       
+        return $objs;
+    }
+    
+    function getCountryNiceName($cnt_id){
+        global $wsdl;
+        set_time_limit(0);
+        $response = $wsdl->getCountryNiceName(array("cnt_id" => $cnt_id));
+        return $response->return;
+    }
+    function getPageName($page_id){
+        global $wsdl;
+        set_time_limit(0);
+        $response = $wsdl->getPageName(array("page_id" => $page_id));
+        return $response->return;
+    }
+    function getRoleName($role_id){
+        global $wsdl;
+        set_time_limit(0);
+        $response = $wsdl->getRoleName(array("role_id" => $role_id));
+        return $response->return;
+    }
 ?>

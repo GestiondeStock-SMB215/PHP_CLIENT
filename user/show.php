@@ -13,7 +13,7 @@ $(document).ready(function() {
     <thead>
         <tr>
             <th>ID</th>
-            <th>Role ID</th>
+            <th>Role</th>
             <th>Name</th>
             <th>Username</th>
             <th>Email</th>
@@ -29,9 +29,14 @@ $(document).ready(function() {
             $objs = getAllUsers();
             foreach($objs as $obj){
                 echo "<tr>";
-                foreach($obj as $key => $value){
-                    echo "<td nowrap>$value</td>";
-                }
+                echo "<td>".$obj["user_id"]."</td>";
+                echo "<td>".getRoleName($obj["user_role_id"])."</td>";
+                echo "<td>".$obj["user_name"]."</td>";
+                echo "<td>".$obj["user_username"]."</td>";
+                echo "<td>".$obj["user_email"]."</td>";
+                echo "<td>".$obj["user_last_login"]."</td>";
+                echo "<td>".$obj["user_status"]."</td>";
+                echo "<td>".$obj["user_time_stamp"]."</td>";
                 echo "<td><a href=\"edit.php?id=".$obj["user_id"].""."\">Edit</a></td>";
                 echo "<td><a href=\"delete.php?id=".$obj["user_id"]."\">Delete</a></td>";
                 echo "</tr>";
@@ -41,7 +46,7 @@ $(document).ready(function() {
     <tfoot>
         <tr>
             <th>ID</th>
-            <th>Role ID</th>
+            <th>Role</th>
             <th>Name</th>
             <th>Username</th>
             <th>Email</th>
