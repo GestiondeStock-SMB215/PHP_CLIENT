@@ -3,9 +3,10 @@ function getUserByUsername() {
     user_password = $("#txtPswd").val();
     if (user_password !== "" && user_password !== "") {
         wantedData = {user_username: user_username ,user_password: user_password };
+
         $.ajax({
             type         : "POST",
-            url          : "/resources/ajax/getUserByUsername.php",
+            url          : "/resources/ajax.php?func=getUserByUsername",
             data         : wantedData,
             cache        : false,
             dataType     : "json",
@@ -39,7 +40,7 @@ function checkUserNameValidity() {
         wantedData = {user_username: user_username};
         $.ajax({
             type         : "POST",
-            url          : "/resources/ajax/checkUserNameValidity.php",
+            url          : "/resources/ajax.php?func=checkUserNameValidity",
             data         : wantedData,
             cache        : false,
             dataType     : "json",
@@ -61,7 +62,7 @@ function checkUserEmailValidity() {
         wantedData = {user_email: user_email};
         $.ajax({
             type         : "POST",
-            url          : "/resources/ajax/checkUserEmailValidity.php",
+            url          : "/resources/ajax.php?func=checkUserEmailValidity",
             data         : wantedData,
             cache        : false,
             dataType     : "json",
@@ -100,7 +101,7 @@ function addUser() {
                                     if (user_status != "" && user_status != " ") {
                                         $.ajax({
                                             type         : "POST",
-                                            url          : "/resources/ajax/addUser.php",
+                                            url          : "/resources/ajax.php?func=addUser",
                                             data         : wantedData,
                                             cache        : false,
                                             dataType     : "json",
@@ -186,7 +187,7 @@ function editUser() {
                                 if (identicPswd(user_password, user_password_conf) == true) {
                                     $.ajax({
                                         type         : "POST",
-                                        url          : "/resources/ajax/editUser.php",
+                                        url          : "/resources/ajax.php?func=editUser",
                                         data         : wantedData,
                                         cache        : false,
                                         dataType     : "json",
@@ -238,15 +239,15 @@ function addPage(){
     page_url        = $("#page_url").val();
     page_acl        = $("#page_acl").val();
     page_in_menu    = $("#page_in_menu").is(":checked");
+    page_order      = $("#page_order").val();
     if(page_in_menu){page_in_menu = 1;}else{page_in_menu = 0;}
       
     wantedData = {page_parent_id:page_parent_id, page_name:page_name, page_url:page_url, 
-            page_acl: page_acl, page_in_menu:page_in_menu};
-        
+            page_acl: page_acl, page_in_menu:page_in_menu, page_order:page_order};
     if(page_name != "" && page_parent_id != "" && page_acl != ""){
         $.ajax({
             type         : "POST",
-            url          : "/resources/ajax/addPage.php",
+            url          : "/resources/ajax.php?func=addPage",
             data         : wantedData,
             cache        : false,
             dataType     : "json",
@@ -294,7 +295,7 @@ function addBranch(){
     if(bra_name != "" && bra_cnt_id != "" && bra_city != "" && bra_add_1 != "" && bra_tel_1 != ""){
         $.ajax({
             type         : "POST",
-            url          : "/resources/ajax/addBranch.php",
+            url          : "/resources/ajax.php?func=addBranch",
             data         : wantedData,
             cache        : false,
             dataType     : "json",
@@ -334,7 +335,7 @@ function addCategory(){
     if(cat_name != "" && cat_desc != "" ){
         $.ajax({
             type         : "POST",
-            url          : "/resources/ajax/addCategory.php",
+            url          : "/resources/ajax.php?func=addCategory",
             data         : wantedData,
             cache        : false,
             dataType     : "json",
@@ -387,7 +388,7 @@ function addCustomer(){
        && cust_email != "" && cust_site != ""){
         $.ajax({
             type         : "POST",
-            url          : "/resources/ajax/addCustomer.php",
+            url          : "/resources/ajax.php?func=addCustomer",
             data         : wantedData,
             cache        : false,
             dataType     : "json",
@@ -440,7 +441,7 @@ function addSupplier(){
        && sup_email != "" && sup_site != ""){
         $.ajax({
             type         : "POST",
-            url          : "/resources/ajax/addSupplier.php",
+            url          : "/resources/ajax.php?func=addSupplier",
             data         : wantedData,
             cache        : false,
             dataType     : "json",

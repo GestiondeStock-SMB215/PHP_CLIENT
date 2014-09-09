@@ -55,4 +55,4 @@
         <?php
             }
         ?>
-<div class="main">
+        <div class="main">

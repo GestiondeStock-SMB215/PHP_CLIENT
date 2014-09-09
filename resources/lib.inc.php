@@ -3,34 +3,34 @@
     session_start();
     error_reporting(7);
     
-    if(isset($_SESSION["pages"])){
-        $pages = $_SESSION["pages"];
-        $curpage = $_SERVER["PHP_SELF"];
-        $result = false;
-        foreach($pages as $page){
-            if($page["page_url"] == $curpage){
-                $result = true;
-            }
-        }
-        if($result != true){
-            if(!stripos($_SERVER['PHP_SELF'], "resources/ajax")){ //IF NOT IN AJAX DIR                
-                header("location:/index.php");                
-            }            
-        }
-    }
-    
-    if(!isset($_SESSION["user"])){ //IF LOGOUT
-        if($_SERVER["PHP_SELF"] != "/login.php"){ //IF NOT IN LOGIN PAGE
-            if(!stripos($_SERVER['PHP_SELF'], "resources/ajax")){ //IF NOT IN AJAX DIR                
-                header("location:/login.php");                
-            }
-        }
-    }
-    else{
-        if($_SERVER['PHP_SELF'] == "/login.php"){
-            header("location:/index.php");
-        }
-    }
+//    if(isset($_SESSION["pages"])){
+//        $pages = $_SESSION["pages"];
+//        $curpage = $_SERVER["PHP_SELF"];
+//        $result = false;
+//        foreach($pages as $page){
+//            if($page["page_url"] == $curpage){
+//                $result = true;
+//            }
+//        }
+//        if($result != true){
+//            if(!stripos($_SERVER['PHP_SELF'], "resources/ajax")){ //IF NOT IN AJAX DIR                
+//               header("location:/index.php");                
+//            }            
+//        }
+//    }
+//    
+//    if(!isset($_SESSION["user"])){ //IF LOGOUT
+//        if($_SERVER["PHP_SELF"] != "/login.php"){ //IF NOT IN LOGIN PAGE
+//            if(!stripos($_SERVER['PHP_SELF'], "resources/ajax")){ //IF NOT IN AJAX DIR                
+//                header("location:/login.php");                
+//            }
+//        }
+//    }
+//    else{
+//        if($_SERVER['PHP_SELF'] == "/login.php"){
+//            header("location:/index.php");
+//        }
+//    }
 
     //WSDL FILE
     $wsdl =  new SoapClient('http://localhost:8080/JAX_WS/JAX_WS?WSDL');
@@ -238,42 +238,7 @@
         }        
 
     }
-    
-    function checkUserNameValidity($user_username){
-        $user_username = mysql_escape_mimic($user_username);
-        $result = array();
-        global $wsdl;
-        set_time_limit(0);
-        $response = $wsdl->checkUserNameValidity(array("user_username"=>$user_username));            
-        
-        if($response->return == true){
-            $result["err"] = "0";
-            $result["msg"] = "Username accepted";
-        }
-        else{
-            $result["err"] = "1";
-            $result["msg"] = "Username already exists";
-        }
-        return(json_encode($result));
-    }
-        
-    function checkUserEmailValidity($user_email){
-        $user_email = mysql_escape_mimic($user_email);
-        $result = array();
-        global $wsdl;
-        set_time_limit(0);
-        $response = $wsdl->checkUserEmailValidity(array("user_email"=>$user_email));            
-        
-        if($response->return == true){
-            $result["err"] = "0";
-            $result["msg"] = "Email accepted";
-        }
-        else{
-            $result["err"] = "1";
-            $result["msg"] = "Email already exists";
-        }
-        return(json_encode($result));
-    }
+
     function deletePage($page_id){
         global $wsdl;
         set_time_limit(0);

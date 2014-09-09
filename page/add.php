@@ -44,6 +44,8 @@ $(document).ready(function(){
 
         <div class="lbl">IN MENU:
             <input type="checkbox" class="input" id="page_in_menu" /></div>
+        <div class="lbl">ORDER:
+            <input type="number" class="input" id="page_order" /></div>
         <input id="btnRegister" class="btnRegister" name="submit" type="button" value="Register" />
         <input id="" class="btnRegister" name="Back" type="button" value="Cancel" onclick="javascript=window.location.href='show.php'" />        
         <div class="loader"></div>
