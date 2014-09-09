@@ -38,8 +38,8 @@ $(document).ready(function() {
                     }
                     echo "<td>".$obj["bra_city"]."</td>";
                     echo "<td>".$obj["bra_time_stamp"]."</td>";
-                echo "<td><a href=\"edit.php?bra_id=".$obj["bra_id"].""."\">Edit</a></td>";
-                echo "<td><a href=\"delete.php?bra_id=".$obj["bra_id"]."\">Delete</a></td>";
+                echo "<td><a href=\"edit.php?bra_id=".$obj["bra_id"].""."\">Edit</a>&nbsp;</td>";
+                echo "<td><a href=\"delete.php?bra_id=".$obj["bra_id"]."\">Delete</a>&nbsp;</td>";
                 echo "</tr>";
             }
         ?>

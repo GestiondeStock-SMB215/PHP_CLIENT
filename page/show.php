@@ -45,8 +45,8 @@ $(document).ready(function() {
                 echo "<td>".$obj["page_acl"]."</td>";
                 echo "<td>".$obj["page_in_menu"]."</td>";
                 echo "<td>".$obj["page_time_stamp"]."</td>";
-                echo "<td><a href=\"edit.php?page_id=".$obj["page_id"].""."\">Edit</a></td>";
-                echo "<td><a href=\"delete.php?page_id=".$obj["page_id"]."\">Delete</a></td>";
+                echo "<td><a href=\"edit.php?page_id=".$obj["page_id"].""."\">Edit</a>&nbsp;</td>";
+                echo "<td><a href=\"delete.php?page_id=".$obj["page_id"]."\">Delete</a>&nbsp;</td>";
                 echo "</tr>";
             }
         ?>
