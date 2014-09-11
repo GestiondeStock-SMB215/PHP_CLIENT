@@ -3,34 +3,26 @@
     session_start();
 //    error_reporting(7);
     
-//    if(isset($_SESSION["pages"])){
-//        $pages = $_SESSION["pages"];
-//        $curpage = $_SERVER["PHP_SELF"];
-//        $result = false;
-//        foreach($pages as $page){
-//            if($page["page_url"] == $curpage){
-//                $result = true;
-//            }
-//        }
-//        if($result != true){
-//            if(!stripos($_SERVER['PHP_SELF'], "resources/ajax")){ //IF NOT IN AJAX DIR                
-//               header("location:/index.php");                
-//            }            
-//        }
-//    }
-//    
-//    if(!isset($_SESSION["user"])){ //IF LOGOUT
-//        if($_SERVER["PHP_SELF"] != "/login.php"){ //IF NOT IN LOGIN PAGE
-//            if(!stripos($_SERVER['PHP_SELF'], "resources/ajax")){ //IF NOT IN AJAX DIR                
-//                header("location:/login.php");                
-//            }
-//        }
-//    }
-//    else{
-//        if($_SERVER['PHP_SELF'] == "/login.php"){
-//            header("location:/index.php");
-//        }
-//    }
+    //USER LOGGED IN//
+    $curPage = explode("/", $_SERVER["PHP_SELF"])[1];
+    
+    if($curPage == "login.php"){
+        if(isset($_SESSION["user"])){
+            header("location:index.php");
+        }
+    }
+    else{
+        if($curPage != "resources"){
+            if(!isset($_SESSION["user"])){
+                header("location:login.php");
+            }
+            else{
+                if(!in_array($_SERVER["PHP_SELF"], $_SESSION["pages"])){
+                    header("location:/index.php");
+                }
+            }
+        }
+    }
 
     //WSDL FILE
     $wsdl =  new SoapClient('http://localhost:8080/JAX_WS/JAX_WS?WSDL');
@@ -75,6 +67,7 @@
             }
         }
     }
+    
     function getCountries(){
         global $wsdl;
         $countries = array();
@@ -117,15 +110,27 @@
         global $wsdl;
         set_time_limit(0);
         $pages = array();
+        $fullPages = array();
         $response = $wsdl->getPages(array("user_role_id"=>$user_role_id));
         foreach($response as $return){
             foreach ($return as $item){
-                array_push($pages, array("page_id" => $item->page_id, "page_parent_id" => $item->page_parent_id, 
-                    "page_name" => $item->page_name, "page_url" => $item->page_url));
+                array_push(
+                    $fullPages, 
+                    array(
+                        "page_id" => $item->page_id, 
+                        "page_parent_id" => $item->page_parent_id, 
+                        "page_name" => $item->page_name, 
+                        "page_in_menu"=>$item->page_in_menu, 
+                        "page_url" => $item->page_url
+                    )
+                );
+                array_push($pages, $item->page_url);
             }
         }
-        $_SESSION["pages"] = $pages;
+        $_SESSION["pages"]      = $pages;
+        $_SESSION["fullPages"]  = $fullPages;
     }
+    
     function getAllPages(){
         global $wsdl;
         set_time_limit(0);
@@ -148,6 +153,7 @@
        
         return $objs;
     }
+    
     function getAllUsers(){
         global $wsdl;
         set_time_limit(0);
@@ -178,34 +184,15 @@
     function getMenu($user_role_id){
         global $wsdl;
         set_time_limit(0);
-        $pages = array();
         
-        //GET ALL PERMITTED PAGES
-        $response = $wsdl->getPages(array("user_role_id"=>$user_role_id));
+        $fullPages = $_SESSION["fullPages"];
         
-        foreach($response as $return){
-            foreach ($return as $item){
-                array_push(
-                    $pages, 
-                    array(
-                        "page_id" => $item->page_id, 
-                        "page_parent_id" => $item->page_parent_id,
-                        "page_name" => $item->page_name, 
-                        "page_url" => $item->page_url, 
-                        "page_in_menu" => $item->page_in_menu,
-                        "page_order" => $item->page_order
-                    )
-                );
-            }
-        }
-        $_SESSION["pages"] = $pages;
-        
-        foreach($pages as $page){
+        foreach($fullPages as $page){
             if($page["page_parent_id"] == 0 && $page["page_in_menu"] == 1){
                 echo "<div class=\"topMenu\">";
                     echo "<div class=\"title\">".$page["page_name"]."</div>";
                     echo "<div id=\"".$page["page_name"]."\" class=\"sub\">";
-                    foreach($pages as $subpage){
+                    foreach($fullPages as $subpage){
                         if(($subpage["page_parent_id"] == $page["page_id"]) && ($subpage["page_in_menu"] == 1)){
                             echo "<a href=\"".$subpage["page_url"]."\"><div class=\"ttlSub\">".$subpage["page_name"]."</div></a>";     
                         }
