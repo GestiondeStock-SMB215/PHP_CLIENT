@@ -3,7 +3,7 @@
     session_start();
 //    error_reporting(7);
     
-    //USER LOGGED IN//
+    //SECURITY//
     $curPage = explode("/", $_SERVER["PHP_SELF"])[1];
     
     if($curPage == "login.php"){
@@ -23,6 +23,7 @@
             }
         }
     }
+    //SECURITY//
 
     //WSDL FILE
     $wsdl =  new SoapClient('http://localhost:8080/JAX_WS/JAX_WS?WSDL');
@@ -203,14 +204,19 @@
     }
     
     function getRootPages(){
-        $pages = $_SESSION["pages"];
-        foreach($pages as $page){
-            if($page["page_parent_id"] == 0){
-                echo "<option value=\"".$page["page_id"]."\">".$page["page_name"]."</option>";
+        $fullPages = $_SESSION["fullPages"];
+        foreach($fullPages as $page1){
+            $found = false;
+            foreach($fullPages as $page2){
+                if($page1["page_id"] == $page2["page_parent_id"] || (explode("/", $page1["page_url"])[2] == "show.php")){
+                    $found = true;
+                }
+            }
+            if($found){
+                echo "<option value=\"".$page1["page_id"]."\">".$page1["page_name"]."</option>";
             }
         }
     }
-    
 
     function createPageDirectory($page_url){
         $arr = explode("/", $page_url);
@@ -224,7 +230,12 @@
             $pageFile = fopen($pageDir."/".$arr[2], 'w') or die("unable to create file");
             $txt = "<?php\n";
             $txt .= "require_once ";
-            $txt .= "$";$txt .= "_";$txt .= "SERVER[\"DOCUMENT_ROOT\"].\"/resources/header.inc.php\";";
+            $txt .= "$";$txt .= "_";$txt .= "SERVER[\"DOCUMENT_ROOT\"].\"/resources/header.inc.php\";\n";
+            $txt .= "?>\n";
+            $txt .= "<?php\n";
+            $txt .= "require_once ";
+            $txt .= "$";$txt .= "_";$txt .= "SERVER[\"DOCUMENT_ROOT\"].\"/resources/footer.inc.php\";\n";
+            $txt .= "?>\n";
             fwrite($pageFile, $txt);
             fclose($pageFile);        
         }        
@@ -277,4 +288,51 @@
         $response = $wsdl->getRoleName(array("role_id" => $role_id));
         return $response->return;
     }
+    
+    function getCategories(){
+        global $wsdl;
+        $objs = array();
+        set_time_limit(0);
+        $response = $wsdl->getCategories();
+        foreach($response->return as $obj){
+            array_push(
+                $objs, 
+                array(
+                    "cat_id"        => $obj->cat_id,
+                    "cat_name"      => $obj->cat_name,
+                    "cat_desc"      => $obj->cat_desc,
+                    "cat_pic"       => $obj->cat_pic,
+                    "cat_time_stamp"=> $obj->cat_time_stamp
+                )
+            );
+        }
+        return $objs;
+    }
+
+    function getProducts(){
+        global $wsdl;
+        $objs = array();
+        set_time_limit(0);
+        $response = $wsdl->getProducts();
+        foreach($response->return as $obj){
+            array_push(
+                $objs, 
+                array(
+                    "prod_id"           => $obj->prod_id,
+                    "prod_cat_id"       => $obj->prod_cat_id,
+                    "prod_sku"          => $obj->prod_sku,
+                    "prod_upc"          => $obj->prod_upc,
+                    "prod_name"         => $obj->prod_name,
+                    "prod_desc"         => $obj->prod_desc,
+                    "prod_qty"          => $obj->prod_qty,
+                    "prod_qty_per_unit" => $obj->prod_qty_per_unit,
+                    "prod_color"        => $obj->prod_color,
+                    "prod_size"         => $obj->prod_size,
+                    "prod_time_stamp"   => $obj->prod_time_stamp
+                )
+            );
+        }
+        return $objs;
+    }
+    
 ?>
