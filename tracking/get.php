@@ -6,7 +6,7 @@ if(isset($_GET["trans_id"])){
     //header("location:/error.php?id_err=1");
 }
 
-$fileLoc = $_SERVER["DOCUMENT_ROOT"]."/gss/GSS_PHP_CLIENT/tracking/log/log-$trans_id.txt";
+$fileLoc = $_SERVER["DOCUMENT_ROOT"]."/tracking/log/log-$trans_id.txt";
 if(file_exists($fileLoc)){
     $coords = array();
     $content = file_get_contents($fileLoc);

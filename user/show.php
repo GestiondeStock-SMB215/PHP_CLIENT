@@ -43,8 +43,8 @@ $(document).ready(function() {
                 echo "<td>".$obj["user_last_login"]."</td>";
                 echo "<td>".$obj["user_status"]."</td>";
                 echo "<td>".$obj["user_time_stamp"]."</td>";
-                echo "<td><a href=\"edit.php?id=".$obj["user_id"].""."\">Edit</a>&nbsp;</td>";
-                echo "<td><a href=\"delete.php?id=".$obj["user_id"]."\">Delete</a>&nbsp;</td>";
+                echo "<td><a href=\"edit.php?id=".$obj["user_id"].""."\">Edit</a></td>";
+                echo "<td><a href=\"delete.php?id=".$obj["user_id"]."\">Delete</a></td>";
                 echo "</tr>";
             }
         ?>
