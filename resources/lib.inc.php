@@ -8,17 +8,17 @@
     
     if($curPage == "login.php"){
         if(isset($_SESSION["user"])){
-            header("location:index.php");
+            //header("location:index.php");
         }
     }
     else{
         if($curPage != "resources"){
             if(!isset($_SESSION["user"])){
-                header("location:login.php");
+                //header("location:login.php");
             }
             else{
                 if(!in_array($_SERVER["PHP_SELF"], $_SESSION["pages"])){
-                    header("location:/index.php");
+                    //header("location:/index.php");
                 }
             }
         }
