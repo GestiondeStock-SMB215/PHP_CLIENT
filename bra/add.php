@@ -3,12 +3,13 @@
 ?>
 <script>
 $(document).ready(function(){
+    var bra_id = -1;
     $("#btnRegister").click(function () {
-        addBranch();
+        addBranch(bra_id);
     });
     $("#registerForm").keypress(function (event) {
         if(event.which === 13){
-            addBranch();
+            addBranch(bra_id);
         }
     });
 });

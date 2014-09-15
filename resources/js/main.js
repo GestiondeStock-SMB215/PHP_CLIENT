@@ -276,7 +276,7 @@ function addPage(){
     }
 }
 
-function addBranch(){
+function addBranch(braId){
     
     bra_name        = $("#bra_name").val();
     bra_cnt_id      = $("#bra_cnt_id").val();
@@ -460,8 +460,7 @@ function addSupplier(){
                 }
                 else{
                     $('#lblMsg').html("Supplier has not been added.");
-                }
-                
+                }                
             }
         });
     }

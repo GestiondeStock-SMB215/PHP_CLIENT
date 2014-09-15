@@ -164,7 +164,6 @@ function addPage(){
             }
         }
         
-        
         if(!$page_exist){
             createPageDirectory($page_url);
 
@@ -291,4 +290,25 @@ function addCategory(){
         exit;
     }
 }
+}
+
+function getBranches($bra_id){
+    global $wsdl;
+    set_time_limit(0);
+    $objs = array();
+    $response = $wsdl->getBranches(array("bra_id"=>$bra_id));
+
+    foreach($response->return as $item){
+        $objs["bra_id"] = $item->bra_id;
+        $objs["bra_name"] = $item->bra_name;
+        $objs["bra_city"] = $item->bra_city; 
+        $objs["bra_add_str"] = $item->bra_add_str; 
+        $objs["bra_add_1"] = $item->bra_add_1;
+        $objs["bra_tel_1"] = $item->bra_tel_1; 
+        $objs["bra_tel_2"] = $item->bra_tel_2; 
+        $objs["bra_fax"] = $item->bra_fax;
+        $objs["bra_email"] = $item->bra_email;
+        $objs["bra_time_stamp"] = $item->bra_time_stamp; 
+    }       
+    die (json_encode($objs));    
 }

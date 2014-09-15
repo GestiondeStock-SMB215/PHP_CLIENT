@@ -26,7 +26,15 @@
             $('.title').click(function(){
                 var id = $(this).html();
                 $('.sub').slideUp(); 
-                $('#' + id).slideToggle();        
+                $('#' + id).slideToggle();  
+                var child = $("#" + id + " > li").length;
+                if (child != 0){
+                    var up = (child-1)*24;
+                    $(".main").css('top','-'+up+'px');
+                }
+                else{
+                    $(".main").css('top','0px');
+                }
             });
         });
         </script>  

@@ -6,8 +6,8 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTT6dLqL2eRw4eeQ42SvYPGYrTIdhYOCk&sensor=false"></script>
     <script type="text/javascript" src="resources/js/map.js"></script>
 
-    <div class="mainPageLeft">
-        Statistics
+    <div class="dashboard">
+        
     </div>
     <div class="locationMap">
         <div class="mainBox">
