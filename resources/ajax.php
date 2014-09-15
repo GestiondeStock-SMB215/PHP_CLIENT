@@ -291,7 +291,6 @@ function addCategory(){
         exit;
     }
 }
-}
 
 function getBranches($bra_id){
     global $wsdl;
@@ -345,4 +344,3 @@ function addProduct(){
         exit;
     }
 }
-
