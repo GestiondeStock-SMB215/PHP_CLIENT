@@ -33,8 +33,8 @@ $(document).ready(function() {
                     echo "<td>".$obj["cat_desc"]."</td>";
                     echo "<td>".$obj["cat_pic"]."</td>";
                     echo "<td>".$obj["cat_time_stamp"]."</td>";
-                echo "<td><a href=\"edit.php?bra_id=".$obj["cat_id"].""."\">Edit</a></td>";
-                echo "<td><a href=\"delete.php?bra_id=".$obj["cat_id"]."\">Delete</a></td>";
+                echo "<td><a href=\"edit.php?cat_id=".$obj["cat_id"].""."\">Edit</a></td>";
+                echo "<td><a href=\"delete.php?cat_id=".$obj["cat_id"]."\">Delete</a></td>";
                 echo "</tr>";
             }
         ?>

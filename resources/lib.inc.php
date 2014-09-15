@@ -253,6 +253,21 @@
         set_time_limit(0);
         $response = $wsdl->deleteBranch(array("bra_id"=>$bra_id));        
     }
+    function deleteCategory($cat_id){
+        global $wsdl;
+        set_time_limit(0);
+        $response = $wsdl->deleteCategory(array("cat_id"=>$cat_id));        
+    }
+    function deleteSupplier($sup_id){
+        global $wsdl;
+        set_time_limit(0);
+        $response = $wsdl->deleteSupplier(array("sup_id"=>$sup_id));        
+    }
+    function deleteProduct($prod_id){
+        global $wsdl;
+        set_time_limit(0);
+        $response = $wsdl->deleteProduct(array("prod_id"=>$prod_id));        
+    }
     
     function getBranches($bra_id){
         global $wsdl;
@@ -340,78 +355,63 @@
         }
         return $objs;
     }
-    function getCustomers($cust_id){
+    function getCustomers(){
         global $wsdl;
-        set_time_limit(0);
         $objs = array();
-        if(isset($bra_id)){
-            $response = $wsdl->getCustomers($cust_id);
-        }
-        else{
-            $response = $wsdl->getCustomers();
-        }
-        foreach($response as $return){
-            foreach ($return as $item){
-                array_push(
-                    $objs, 
-                    array(
-                        "cust_id"            => $item->cust_id, 
-                        "cust_comp"          => $item->cust_comp, 
-                        "cust_name"          => $item->cust_name, 
-                        "cust_title"         => $item->cust_title, 
-                        "cust_add_1"         => $item->cust_add_1, 
-                        "cust_add_2"         => $item->cust_add_2, 
-                        "cust_city"          => $item->cust_city,
-                        "cust_cnt_id"        => $item->cust_cnt_id,
-                        "cust_tel_1"         => $item->cust_tel_1,
-                        "cust_tel_2"         => $item->cust_tel_2,
-                        "cust_fax"           => $item->cust_fax,
-                        "cust_email"         => $item->cust_email,
-                        "cust_site"          => $item->cust_site,
-                        "cust_logo"          => $item->cust_logo,
-                        "cust_time_stamp"    => $item->cust_time_stamp
+        set_time_limit(0);
+        $response = $wsdl->getCategories();
+        foreach($response->return as $obj){
+            array_push(
+                $objs, 
+                array(
+                        "cust_id"            => $obj->cust_id, 
+                        "cust_comp"          => $obj->cust_comp, 
+                        "cust_name"          => $obj->cust_name, 
+                        "cust_title"         => $obj->cust_title, 
+                        "cust_add_1"         => $obj->cust_add_1, 
+                        "cust_add_2"         => $obj->cust_add_2, 
+                        "cust_city"          => $obj->cust_city,
+                        "cust_cnt_id"        => $obj->cust_cnt_id,
+                        "cust_tel_1"         => $obj->cust_tel_1,
+                        "cust_tel_2"         => $obj->cust_tel_2,
+                        "cust_fax"           => $obj->cust_fax,
+                        "cust_email"         => $obj->cust_email,
+                        "cust_site"          => $obj->cust_site,
+                        "cust_logo"          => $obj->cust_logo,
+                        "cust_time_stamp"    => $obj->cust_time_stamp
                     )
                 );
             }
-        }
        
         return $objs;
     }
-    function getSuppliers($sup_id){
+    function getSuppliers(){
         global $wsdl;
-        set_time_limit(0);
         $objs = array();
-        if(isset($sup_id)){
-            $response = $wsdl->getSuppliers($sup_id);
-        }
-        else{
-            $response = $wsdl->getSuppliers();
-        }
-        foreach($response as $return){
-            foreach ($return as $item){
-                array_push(
-                    $objs, 
+        set_time_limit(0); 
+        $response = $wsdl->getSuppliers();
+        foreach($response->return as $obj){
+            array_push(
+                $objs, 
                     array(
-                        "sup_id"            => $item->sup_id, 
-                        "sup_comp"          => $item->sup_comp, 
-                        "sup_name"          => $item->sup_name, 
-                        "sup_title"         => $item->sup_title, 
-                        "sup_add_1"         => $item->sup_add_1, 
-                        "sup_add_2"         => $item->sup_add_2, 
-                        "sup_city"          => $item->sup_city,
-                        "sup_cnt_id"        => $item->sup_cnt_id,
-                        "sup_tel_1"         => $item->sup_tel_1,
-                        "sup_tel_2"         => $item->sup_tel_2,
-                        "sup_fax"           => $item->sup_fax,
-                        "sup_email"         => $item->sup_email,
-                        "sup_site"          => $item->sup_site,
-                        "sup_logo"          => $item->sup_logo,
-                        "sup_time_stamp"    => $item->sup_time_stamp
+                        "sup_id"            => $obj->sup_id, 
+                        "sup_comp"          => $obj->sup_comp, 
+                        "sup_name"          => $obj->sup_name, 
+                        "sup_title"         => $obj->sup_title, 
+                        "sup_add_1"         => $obj->sup_add_1, 
+                        "sup_add_2"         => $obj->sup_add_2, 
+                        "sup_city"          => $obj->sup_city,
+                        "sup_cnt_id"        => $obj->sup_cnt_id,
+                        "sup_tel_1"         => $obj->sup_tel_1,
+                        "sup_tel_2"         => $obj->sup_tel_2,
+                        "sup_fax"           => $obj->sup_fax,
+                        "sup_email"         => $obj->sup_email,
+                        "sup_site"          => $obj->sup_site,
+                        "sup_logo"          => $obj->sup_logo,
+                        "sup_time_stamp"    => $obj->sup_time_stamp
                     )
                 );
             }
-        }
-       
         return $objs;
     }
     

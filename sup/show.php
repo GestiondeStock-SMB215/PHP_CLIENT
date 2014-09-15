@@ -41,8 +41,8 @@ $(document).ready(function() {
                     }
                    
                     echo "<td>".$obj["sup_time_stamp"]."</td>";
-                echo "<td><a href=\"edit.php?sup_id=".$obj["cust_id"].""."\">Edit</a></td>";
-                echo "<td><a href=\"delete.php?sup_id=".$obj["cust_id"]."\">Delete</a></td>";
+                echo "<td><a href=\"edit.php?sup_id=".$obj["sup_id"].""."\">Edit</a></td>";
+                echo "<td><a href=\"delete.php?sup_id=".$obj["sup_id"]."\">Delete</a></td>";
                 echo "</tr>";
             }
         ?>

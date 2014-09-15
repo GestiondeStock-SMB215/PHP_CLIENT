@@ -38,7 +38,17 @@ $(document).ready(function(){
         <div class="lbl">Country:
             <select class="input" id="sup_cnt_id">
             <option value="">Please choose</option>
-            <?= getCountries(); ?>
+            <?php
+                $countries = getCountries();
+                foreach($countries as $country){
+                    if($country["cnt_nicename"] == "Lebanon"){
+                        echo "<option value=\"".$country["cnt_id"]."\" selected>".$country["cnt_nicename"]."</option>";
+                    }
+                    else{
+                        echo "<option value=\"".$country["cnt_id"]."\">".$country["cnt_nicename"]."</option>";
+                    }
+                }                
+            ?>
             </select>
         </div>
 

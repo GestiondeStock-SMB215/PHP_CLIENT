@@ -212,6 +212,7 @@ function addBranch(){
 
         exit;
     }
+}
 function addSupplier(){
     if (isset($_POST['sup_comp'])) {
         $sup_comp = mysql_escape_mimic($_POST['sup_comp']);
@@ -291,4 +292,36 @@ function addCategory(){
         exit;
     }
 }
+function addProduct(){
+    if (isset($_POST['prod_cat_id'])) {
+        $prod_cat_id = mysql_escape_mimic($_POST['prod_cat_id']);
+        $prod_sku = mysql_escape_mimic($_POST['prod_sku']);
+        $prod_upc = mysql_escape_mimic($_POST['prod_upc']);
+        $prod_name = mysql_escape_mimic($_POST['prod_name']);
+        $prod_desc = mysql_escape_mimic($_POST['prod_desc']);
+        $prod_qty = mysql_escape_mimic($_POST['prod_qty']);
+        $prod_qty_per_unit = mysql_escape_mimic($_POST['prod_qty_per_unit']);
+        $prod_color = mysql_escape_mimic($_POST['prod_color']);
+        $prod_size = mysql_escape_mimic($_POST['prod_size']);
+        $prod_weight = mysql_escape_mimic($_POST['prod_weight']);
+        $prod_sup_id = mysql_escape_mimic($_POST['prod_sup_id']);
+        $prod_status = mysql_escape_mimic($_POST['prod_status']);
+        $prod_pic = mysql_escape_mimic($_POST['prod_pic']);
+        $prod_vend_id = mysql_escape_mimic($_POST['prod_vend_id']);
+        
+        $result = array();
+        global $wsdl;
+        set_time_limit(0);
+        $response = $wsdl->addProduct(array("prod_cat_id"=>$prod_cat_id,"prod_sku"=>$prod_sku,"prod_upc"=>$prod_upc, 
+            "prod_name"=>$prod_name,"prod_desc"=>$prod_desc,"prod_qty"=>$prod_qty,
+            "prod_qty_per_unit"=>$prod_qty_per_unit,"prod_color"=>$prod_color,"prod_size"=>$prod_size,
+            "prod_weight"=>$prod_weight,"prod_sup_id"=>$prod_sup_id,"prod_status"=>$prod_status,"prod_pic"=>$prod_pic, 
+            "prod_vend_id"=>$prod_vend_id));
+
+        $result["msg"] = $response->return;
+        echo(json_encode($result));        
+
+        exit;
+    }
 }
+

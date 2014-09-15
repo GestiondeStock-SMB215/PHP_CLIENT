@@ -32,7 +32,7 @@ ul{margin:0;padding:0;list-style:none;}
 .header .innerHead .menu .topMenu{float:left;}
 .header .innerHead .menu .topMenu .title{width:150px;cursor: pointer;text-align: center;}
 .header .innerHead .menu .topMenu .title:hover{background-color:#eee;}
-.header .innerHead .menu .topMenu .sub{width:150px;height:auto;background-color:#bbb;display:none;text-align: center;}
+.header .innerHead .menu .topMenu .sub{width:160px;height:auto;background-color:#bbb;display:none;text-align: center;}
 .header .innerHead .menu .topMenu .sub .ttlSub{cursor: pointer;}
 .header .innerHead .menu .topMenu .sub .ttlSub:hover{background-color:#eee;}
 
