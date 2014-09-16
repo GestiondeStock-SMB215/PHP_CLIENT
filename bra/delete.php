@@ -4,7 +4,7 @@ require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 if(isset($_GET["bra_id"])){
     $msg = "Are you sure you want to delete selected branch?";
     if(isset($_GET["action"]) && $_GET["action"]=="delete"){
-        deleteBranch($_GET["bra_id"]);
+        deleteObj("Branch", "bra_id", $_GET["bra_id"]);
         header("location:show.php");
     }
 }

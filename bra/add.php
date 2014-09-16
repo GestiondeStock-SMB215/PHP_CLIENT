@@ -3,13 +3,12 @@
 ?>
 <script>
 $(document).ready(function(){
-    var bra_id = -1;
     $("#btnRegister").click(function () {
-        addBranch(bra_id);
+        addBranch();
     });
     $("#registerForm").keypress(function (event) {
         if(event.which === 13){
-            addBranch(bra_id);
+            addBranch();
         }
     });
 });
@@ -25,16 +24,14 @@ $(document).ready(function(){
             <select class="input" id="bra_cnt_id">
             <option value="">Please choose</option>
             <?php
-                $coutries = getCountries();
-                foreach($coutries as $country){
-                    if($country["cnt_nicename"] == "Lebanon"){
-                        echo "<option value=\"".$country["cnt_id"]."\" selected>".$country["cnt_nicename"]."</option>";
-                    }
-                    else{
-                        echo "<option value=\"".$country["cnt_id"]."\">".$country["cnt_nicename"]."</option>";
-                    }
-                }                
-            ?>
+                $countries = readObj("Country", "cnt_id", "-1");
+                foreach($countries as $cnt){
+                     if($countries["cnt_nicename"] == "Lebanon"){
+                            echo "<option value=\"".$cnt["cnt_id"]."\">".$cnt["cnt_nicename"]."</option>";
+                        }
+                         echo "<option value=\"".$cnt["cnt_id"]."\">".$cnt["cnt_nicename"]."</option>";
+                }
+                ?>
             </select>
         </div>
             
@@ -43,7 +40,7 @@ $(document).ready(function(){
             <input type="text" class="input" id="bra_city" /></div>
 
         <div class="lbl">Street:
-            <input type="text" class="input" id="bra_add_srt" /></div>
+            <input type="text" class="input" id="bra_add_str" /></div>
 
         <div class="lbl">Address 1:
             <input type="text" class="input" id="bra_add_1" /></div>

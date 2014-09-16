@@ -190,10 +190,10 @@ function editUser() {
                                             success      : function(result){
                                                 console.log(result.msg);
                                                 if(result.msg == "1"){
-                                                    $('#lblMsg').html("User has been added successfuly");
+                                                    $('#lblMsg').html("User has been edited successfuly");
                                                 }
                                                 else{
-                                                    $('#lblMsg').html("User has not been added. Please try again");
+                                                    $('#lblMsg').html("User has not been edited. Please try again");
                                                 }
                                             }
                                         });
@@ -287,12 +287,12 @@ function addPage(){
     }
 }
 
-function addBranch(braId){
+function addBranch(){
     
     bra_name        = $("#bra_name").val();
     bra_cnt_id      = $("#bra_cnt_id").val();
     bra_city        = $("#bra_city").val();
-    bra_add_srt     = $("#bra_add_srt").val();
+    bra_add_str     = $("#bra_add_str").val();
     bra_add_1       = $("#bra_add_1").val();
     bra_tel_1       = $("#bra_tel_1").val();
     bra_tel_2       = $("#bra_tel_2").val();
@@ -300,7 +300,7 @@ function addBranch(braId){
     bra_email       = $("#bra_email").val();
 
     wantedData = {bra_name:bra_name, bra_cnt_id:bra_cnt_id, bra_city:bra_city,
-                  bra_add_srt:bra_add_srt, bra_add_1:bra_add_1, bra_tel_1:bra_tel_1,
+                  bra_add_str:bra_add_str, bra_add_1:bra_add_1, bra_tel_1:bra_tel_1,
                   bra_tel_2:bra_tel_2, bra_fax:bra_fax, bra_email:bra_email};
         
     if(bra_name != "" && bra_cnt_id != "" && bra_city != "" && bra_add_1 != "" && bra_tel_1 != ""){
@@ -325,6 +325,53 @@ function addBranch(braId){
                 }
                 else{
                     $('#lblMsg').html("Branch has not been added.");
+                }
+                
+            }
+        });
+    }
+    else{
+        $('#lblMsg').html("Please fill in all required fields");
+    }
+}
+function editBranch(){
+    bra_id          = $("#bra_id").val();
+    bra_name        = $("#bra_name").val();
+    bra_cnt_id      = $("#bra_cnt_id").val();
+    bra_city        = $("#bra_city").val();
+    bra_add_srt     = $("#bra_add_srt").val();
+    bra_add_1       = $("#bra_add_1").val();
+    bra_tel_1       = $("#bra_tel_1").val();
+    bra_tel_2       = $("#bra_tel_2").val();
+    bra_fax         = $("#bra_fax").val();
+    bra_email       = $("#bra_email").val();
+
+    wantedData = {bra_id:bra_id,bra_name:bra_name, bra_cnt_id:bra_cnt_id, bra_city:bra_city,
+                  bra_add_str:bra_add_str, bra_add_1:bra_add_1, bra_tel_1:bra_tel_1,
+                  bra_tel_2:bra_tel_2, bra_fax:bra_fax, bra_email:bra_email};
+        
+    if(bra_name != "" && bra_cnt_id != "" && bra_city != "" && bra_add_1 != "" && bra_tel_1 != ""){
+        $.ajax({
+            type         : "POST",
+            url          : "/resources/ajax.php?func=editBranch",
+            data         : wantedData,
+            cache        : false,
+            dataType     : "json",
+            beforeSend   : function () {
+                $('#lblMsg').html("");
+                $('#loader').show();
+            },
+            complete: function () {
+                $('#loader').hide();
+            },
+            success      : function(result){
+                
+                console.log(result.msg);
+                if(result.msg == "1"){
+                    $('#lblMsg').html("Branch has been edited successfuly");
+                }
+                else{
+                    $('#lblMsg').html("Branch has not been edited.");
                 }
                 
             }
@@ -364,6 +411,45 @@ function addCategory(){
                 }
                 else{
                     $('#lblMsg').html("Category has not been added.");
+                }
+                
+            }
+        });
+    }
+    else{
+        $('#lblMsg').html("Please fill in all required fields");
+    }
+}
+function editCategory(){
+    
+    cat_id          = $("#cat_id").val();
+    cat_name        = $("#cat_name").val();
+    cat_desc        = $("#cat_desc").val();
+
+    wantedData = {cat_id:cat_id,cat_name:cat_name, cat_desc:cat_desc};
+        
+    if(cat_name != "" && cat_desc != "" ){
+        $.ajax({
+            type         : "POST",
+            url          : "/resources/ajax.php?func=editCategory",
+            data         : wantedData,
+            cache        : false,
+            dataType     : "json",
+            beforeSend   : function () {
+                $('#lblMsg').html("");
+                $('#loader').show();
+            },
+            complete: function () {
+                $('#loader').hide();
+            },
+            success      : function(result){
+                
+                console.log(result.msg);
+                if(result.msg == "1"){
+                    $('#lblMsg').html("Category has been edited successfuly");
+                }
+                else{
+                    $('#lblMsg').html("Category has not been edited.");
                 }
                 
             }

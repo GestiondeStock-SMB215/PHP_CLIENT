@@ -60,36 +60,6 @@ function getUserByUsername(){
     }
 }
 
-function addUser(){    
-    if (isset($_POST['user_name'])) {
-        
-        $user_role_id = mysql_escape_mimic($_POST['user_role_id']);
-        $user_name = mysql_escape_mimic($_POST['user_name']);
-        $user_username = mysql_escape_mimic($_POST['user_username']);
-        $user_password = mysql_escape_mimic($_POST['user_password']);
-        $user_email = mysql_escape_mimic($_POST['user_email']);
-        $user_status = mysql_escape_mimic($_POST['user_status']);
-        $result = array();
-        
-        $res = aeObj(
-            "User", 
-            array(
-                "user_id" => "-1",
-                "user_role_id"=> $user_role_id,
-                "user_name"=>$user_name, 
-                "user_username"=>$user_username, 
-                "user_password"=>  md5($user_password),
-                "user_email"=>$user_email, 
-                "user_status"=>$user_status
-            )
-        );     
-        
-        $result["msg"] = $res;
-        echo(json_encode($result));
-        exit;
-    }
-}
-
 function checkUserNameValidity(){
     if (isset($_POST['user_username'])) {
         
@@ -188,6 +158,35 @@ function addPage(){
     }
 }
 
+function addUser(){    
+    if (isset($_POST['user_name'])) {
+        
+        $user_role_id = mysql_escape_mimic($_POST['user_role_id']);
+        $user_name = mysql_escape_mimic($_POST['user_name']);
+        $user_username = mysql_escape_mimic($_POST['user_username']);
+        $user_password = mysql_escape_mimic($_POST['user_password']);
+        $user_email = mysql_escape_mimic($_POST['user_email']);
+        $user_status = mysql_escape_mimic($_POST['user_status']);
+        $result = array();
+        
+        $res = aeObj(
+            "User", 
+            array(
+                "user_id" => "-1",
+                "user_role_id"=> $user_role_id,
+                "user_name"=>$user_name, 
+                "user_username"=>$user_username, 
+                "user_password"=>  md5($user_password),
+                "user_email"=>$user_email, 
+                "user_status"=>$user_status
+            )
+        );     
+        
+        $result["msg"] = $res;
+        echo(json_encode($result));
+        exit;
+    }
+}
 function editUser(){
     if (isset($_POST['user_name'])) {
         $user_id = mysql_escape_mimic($_POST['user_id']);
@@ -199,7 +198,7 @@ function editUser(){
             $user_password = "-1";
         }
         $user_password = md5($user_password);
-        logToFile($user_password);
+        
         $user_email = mysql_escape_mimic($_POST['user_email']);
         $user_status = mysql_escape_mimic($_POST['user_status']);
         $result = array();
@@ -221,11 +220,12 @@ function editUser(){
         exit;
     }
 }
+
 function addCategory(){
     if (isset($_POST['cat_name'])) {
         $cat_name = mysql_escape_mimic($_POST['cat_name']);
         $cat_desc = mysql_escape_mimic($_POST['cat_desc']);
-        logToFile($_POST);
+//        logToFile($_POST);
         $res = aeObj(
             "Category", 
             array(
@@ -243,33 +243,104 @@ function addCategory(){
         exit;
     }
 }
+function editCategory(){
+    if (isset($_POST['cat_id'])) {
+        $cat_id = mysql_escape_mimic($_POST['cat_id']);
+        $cat_name = mysql_escape_mimic($_POST['cat_name']);
+        $cat_desc = mysql_escape_mimic($_POST['cat_desc']);
+   
+        $result = array();
+        
+        $res = aeObj(
+            "Category", 
+            array(
+                "cat_id" => $cat_id,
+                "cat_name"=>$cat_name, 
+                "cat_desc"=>$cat_desc
+            )
+        );
+        $result["msg"] = $res;
+        echo(json_encode($result));
+        exit;
+    }
+}
 
-//
-//function addBranch(){
-//    if (isset($_POST['bra_name'])) {
-//        $bra_name = mysql_escape_mimic($_POST['bra_name']);
-//        $bra_cnt_id = mysql_escape_mimic($_POST['bra_cnt_id']);
-//        $bra_city = mysql_escape_mimic($_POST['bra_city']);
-//        $bra_add_srt = mysql_escape_mimic($_POST['bra_add_srt']);
-//        $bra_add_1 = mysql_escape_mimic($_POST['bra_add_1']);
-//        $bra_tel_1 = mysql_escape_mimic($_POST['bra_tel_1']);
-//        $bra_tel_2 = mysql_escape_mimic($_POST['bra_tel_2']);
-//        $bra_fax = mysql_escape_mimic($_POST['bra_fax']);
-//        $bra_email = mysql_escape_mimic($_POST['bra_email']);
-//        
-//        $result = array();
-//        global $wsdl;
-//        set_time_limit(0);
-//        $response = $wsdl->addBranch(array("bra_name"=> $bra_name, "bra_cnt_id"=> $bra_cnt_id,"bra_city"=>$bra_city, 
-//            "bra_add_srt"=>$bra_add_srt, "bra_add_1"=> $bra_add_1, "bra_tel_1"=>  $bra_tel_1,
-//            "bra_tel_2"=>$bra_tel_2, "bra_fax"=>$bra_fax, "bra_email"=>$bra_email));
-//
-//        $result["msg"] = $response->return;
-//        echo(json_encode($result));        
-//
-//        exit;
-//    }
-//}
+function addBranch(){
+    if (isset($_POST['bra_name'])) {
+        
+        $bra_name = mysql_escape_mimic($_POST['bra_name']);
+        $bra_cnt_id = mysql_escape_mimic($_POST['bra_cnt_id']);
+        $bra_city = mysql_escape_mimic($_POST['bra_city']);
+        $bra_add_str = mysql_escape_mimic($_POST['bra_add_str']);
+        $bra_add_1 = mysql_escape_mimic($_POST['bra_add_1']);
+        $bra_tel_1 = mysql_escape_mimic($_POST['bra_tel_1']);
+        $bra_tel_2 = mysql_escape_mimic($_POST['bra_tel_2']);
+        $bra_fax = mysql_escape_mimic($_POST['bra_fax']);
+        $bra_email = mysql_escape_mimic($_POST['bra_email']);
+        
+        $result = array();
+        
+         $res = aeObj(
+            "Branch", 
+            array(
+               "bra_cat"    => "-1",
+               "bra_name"   => $bra_name,
+               "bra_cnt_id" => $bra_cnt_id,
+               "bra_city"   =>$bra_city, 
+               "bra_add_str"=>$bra_add_str,
+               "bra_add_1"  => $bra_add_1,
+               "bra_tel_1"  =>  $bra_tel_1,
+               "bra_tel_2"  =>$bra_tel_2, 
+               "bra_fax"    =>$bra_fax,
+               "bra_email"  =>$bra_email
+            )
+        );
+       
+
+        $result["msg"] = $res;
+        echo(json_encode($result));        
+
+        exit;
+    }
+}
+function editBranch(){
+    if (isset($_POST['bra_id'])) {
+        $bra_id = mysql_escape_mimic($_POST['bra_id']);
+        $bra_name = mysql_escape_mimic($_POST['bra_name']);
+        $bra_cnt_id = mysql_escape_mimic($_POST['bra_cnt_id']);
+        $bra_city = mysql_escape_mimic($_POST['bra_city']);
+        $bra_add_srt = mysql_escape_mimic($_POST['bra_add_srt']);
+        $bra_add_1 = mysql_escape_mimic($_POST['bra_add_1']);
+        $bra_tel_1 = mysql_escape_mimic($_POST['bra_tel_1']);
+        $bra_tel_2 = mysql_escape_mimic($_POST['bra_tel_2']);
+        $bra_fax = mysql_escape_mimic($_POST['bra_fax']);
+        $bra_email = mysql_escape_mimic($_POST['bra_email']);
+         $res = aeObj(
+            "Branch", 
+            array(
+               "bra_id"=> $bra_id,
+               "bra_name"=> $bra_name,
+               "bra_cnt_id"=> $bra_cnt_id,
+               "bra_city"=>$bra_city, 
+               "bra_add_srt"=>$bra_add_srt,
+               "bra_add_1"=> $bra_add_1,
+               "bra_tel_1"=>  $bra_tel_1,
+               "bra_tel_2"=>$bra_tel_2, 
+               "bra_fax"=>$bra_fax,
+               "bra_email"=>$bra_email
+            )
+        );
+        $result = array();
+
+
+        $result["msg"] = $res;
+        echo(json_encode($result));        
+
+        exit;
+    }
+
+}
+
 //function addSupplier(){
 //    if (isset($_POST['sup_comp'])) {
 //        $sup_comp = mysql_escape_mimic($_POST['sup_comp']);

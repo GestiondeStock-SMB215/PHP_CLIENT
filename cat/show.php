@@ -16,7 +16,6 @@ $(document).ready(function() {
             <th>ID</th>
             <th>Name</th>
             <th>DESCRIPTION</th>
-            <th>PIC</th>
             <th>Time Stamp</th>
             <th>Edit</th>
             <th>Delete</th>
@@ -31,7 +30,6 @@ $(document).ready(function() {
                     echo "<td>".$obj["cat_id"]."</td>";
                     echo "<td>".$obj["cat_name"]."</td>";
                     echo "<td>".$obj["cat_desc"]."</td>";
-                    echo "<td>".$obj["cat_pic"]."</td>";
                     echo "<td>".$obj["cat_time_stamp"]."</td>";
                 echo "<td><a href=\"edit.php?cat_id=".$obj["cat_id"].""."\">Edit</a></td>";
                 echo "<td><a href=\"delete.php?cat_id=".$obj["cat_id"]."\">Delete</a></td>";
@@ -44,7 +42,6 @@ $(document).ready(function() {
             <th>ID</th>
             <th>Name</th>
             <th>DESCRIPTION</th>
-            <th>PIC</th>
             <th>Time Stamp</th>
             <th>Edit</th>
             <th>Delete</th>
