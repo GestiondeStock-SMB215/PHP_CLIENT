@@ -3,7 +3,6 @@
 ?>
 <script>
 $(document).ready(function(){
-    //getRoles();
     $("#btnRegister").click(function () {
         addUser();
     });
@@ -27,7 +26,7 @@ $(document).ready(function(){
                 <select id="user_role_id">
                     <option value="">Please choose</option>
                     <?php
-                        $roles = getRoles();
+                        $roles = readObj("Role", "role_id", "-1");
                         foreach($roles as $role){
                             echo "<option value=\"".$role["role_id"]."\">".$role["role_name"]."</option>";
                         }

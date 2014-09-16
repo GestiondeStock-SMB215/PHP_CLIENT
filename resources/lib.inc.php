@@ -94,7 +94,7 @@
         global $wsdl;
         set_time_limit(0);
         $func = "ae".$obj_type;
-        return $wsdl->$func($array);
+        return $wsdl->$func($array)->return;
     }
     
     function getMenu($user_role_id){

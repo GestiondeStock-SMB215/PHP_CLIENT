@@ -11,6 +11,7 @@ if(isset($_GET["func"])){
         logToFile("This function has been called and not found: ".$_GET["func"]);
     }
 }
+
 function getUserByUsername(){    
     
     if (isset($_POST['user_username'])&&isset($_POST['user_password'])) {
@@ -34,6 +35,7 @@ function getUserByUsername(){
                 else{
                     $result["msg"] = "signedIn";                    
                     $uull = $wsdl->UpdateUserLastLogin(array("user_id" => $item->user_id));
+                    
                     $user = null;
                     $user["user_id"] = $item->user_id;
                     $user["user_name"] = $item->user_name;
@@ -58,134 +60,190 @@ function getUserByUsername(){
     }
 }
 
-//function addUser(){    
-//    if (isset($_POST['user_name'])) {
-//        
-//        $user_role_id = mysql_escape_mimic($_POST['user_role_id']);
-//        $user_name = mysql_escape_mimic($_POST['user_name']);
-//        $user_username = mysql_escape_mimic($_POST['user_username']);
-//        $user_password = mysql_escape_mimic($_POST['user_password']);
-//        $user_email = mysql_escape_mimic($_POST['user_email']);
-//        $user_status = mysql_escape_mimic($_POST['user_status']);
-//        $result = array();
-//        global $wsdl;
-//        set_time_limit(0);
-//        $response = $wsdl->addUser(array("user_role_id"=> $user_role_id,"user_name"=>$user_name, 
-//            "user_username"=>$user_username, "user_password"=>  md5($user_password),
-//            "user_email"=>$user_email, "user_status"=>$user_status));            
-//        
-//        $result["msg"] = $response->return;
-//        echo(json_encode($result));
-//        exit;
-//    }
-//}
-//
-//function editUser(){
-//    if (isset($_POST['user_name'])) {
-//        
-//        $user_name = mysql_escape_mimic($_POST['user_name']);
-//        $user_username = mysql_escape_mimic($_POST['user_username']);
-//        $user_password = mysql_escape_mimic($_POST['user_password']);
-//        $user_email = mysql_escape_mimic($_POST['user_email']);
-//        $result = array();
-//        global $wsdl;
-//        set_time_limit(0);
-//        $response = $wsdl->editUser(array("user_name"=>$user_name, 
-//            "user_username"=>$user_username, "user_password"=>  md5($user_password),
-//            "user_email"=>$user_email));            
-//        
-//        $result["msg"] = $response->return;
-//        echo(json_encode($result));
-//        exit;
-//    }
-//}
-//
-//function checkUserNameValidity(){
-//    if (isset($_POST['user_username'])) {
-//        $user_username = mysql_escape_mimic($_POST['user_username']);
-//        $result = array();
-//        global $wsdl;
-//        set_time_limit(0);
-//        $response = $wsdl->checkUserNameValidity(array("user_username"=>$user_username));            
-//        
-//        if($response->return == true){
-//            $result["err"] = "0";
-//            $result["msg"] = "Username accepted";
-//        }
-//        else{
-//            $result["err"] = "1";
-//            $result["msg"] = "Username already exists";
-//        }
-//        echo json_encode($result);
-//        exit;
-//    }
-//}
-//
-//function checkUserEmailValidity(){
-//    if (isset($_POST['user_email'])) {
-//        $user_email = mysql_escape_mimic($_POST['user_email']);
-//        $result = array();
-//        global $wsdl;
-//        set_time_limit(0);
-//        $response = $wsdl->checkUserEmailValidity(array("user_email"=>$user_email));            
-//        
-//        if($response->return == true){
-//            $result["err"] = "0";
-//            $result["msg"] = "Email accepted";
-//        }
-//        else{
-//            $result["err"] = "1";
-//            $result["msg"] = "Email already exists";
-//        }
-//        echo checkUserEmailValidity(json_encode($result));
-//        exit;
-//    }
-//}
-//
-//function addPage(){
-//    if (isset($_POST['page_name'])) {
-//        
-//        $page_parent_id = mysql_escape_mimic($_POST['page_parent_id']);
-//        $page_name = mysql_escape_mimic($_POST['page_name']);
-//        $page_url = mysql_escape_mimic($_POST['page_url']);
-//        $page_acl = mysql_escape_mimic($_POST['page_acl']);
-//        $page_in_menu = mysql_escape_mimic($_POST['page_in_menu']);
-//        $page_order = mysql_escape_mimic($_POST['page_order']);
-//        
-//        global $wsdl;
-//        set_time_limit(0);
-//        $page_exist = false;
-//        $response = $wsdl->getPages(array("user_role_id"=>"0"));
-//        foreach($response as $return){
-//            foreach ($return as $page){
-//                if($page->page_url == $page_url && $page->page_url != ""){
-//                    $page_exist = true;
-//                }
-//            }
-//        }
-//        
-//        if(!$page_exist){
-//            createPageDirectory($page_url);
-//
-//            $result = array();
-//            global $wsdl;
-//            set_time_limit(0);
-//            $response = $wsdl->addPage(array("page_parent_id"=> $page_parent_id,"page_name"=>$page_name, 
-//                "page_url"=>$page_url, "page_acl"=>  $page_acl,
-//                "page_in_menu"=>$page_in_menu, "page_order"=>$page_order));
-//
-//            $result["msg"] = $response->return;
-//            echo(json_encode($result));        
-//
-//            exit;
-//        }
-//        else{
-//            echo(json_encode(array("msg"=>"0")));
-//
-//            exit;
-//        }
-//    }
-//}
+function addUser(){    
+    if (isset($_POST['user_name'])) {
+        
+        $user_role_id = mysql_escape_mimic($_POST['user_role_id']);
+        $user_name = mysql_escape_mimic($_POST['user_name']);
+        $user_username = mysql_escape_mimic($_POST['user_username']);
+        $user_password = mysql_escape_mimic($_POST['user_password']);
+        $user_email = mysql_escape_mimic($_POST['user_email']);
+        $user_status = mysql_escape_mimic($_POST['user_status']);
+        $result = array();
+        
+        $res = aeObj(
+            "User", 
+            array(
+                "user_id" => "-1",
+                "user_role_id"=> $user_role_id,
+                "user_name"=>$user_name, 
+                "user_username"=>$user_username, 
+                "user_password"=>  md5($user_password),
+                "user_email"=>$user_email, 
+                "user_status"=>$user_status
+            )
+        );     
+        
+        $result["msg"] = $res;
+        echo(json_encode($result));
+        exit;
+    }
+}
+
+function checkUserNameValidity(){
+    if (isset($_POST['user_username'])) {
+        
+        $user_username = mysql_escape_mimic($_POST['user_username']);
+        $result = array();
+        global $wsdl;
+        set_time_limit(0);
+        $response = $wsdl->checkUserNameValidity(array("user_username"=>$user_username));            
+        
+        if($response->return == true){
+            $result["err"] = "0";
+            $result["msg"] = "Username accepted";
+        }
+        else{
+            $result["err"] = "1";
+            $result["msg"] = "Username already exists";
+        }
+        echo json_encode($result);
+        exit;
+    }
+}
+
+function checkUserEmailValidity(){
+    if (isset($_POST['user_email'])) {
+        $user_email = mysql_escape_mimic($_POST['user_email']);
+        $result = array();
+        global $wsdl;
+        set_time_limit(0);
+        
+        $response = $wsdl->checkUserEmailValidity(array("user_email"=>$user_email));            
+        
+        if($response->return == true){
+            $result["err"] = "0";
+            $result["msg"] = "Email accepted";
+        }
+        else{
+            $result["err"] = "1";
+            $result["msg"] = "Email already exists";
+        }
+        
+        echo json_encode($result);
+        exit;
+    }
+}
+
+function addPage(){
+    if (isset($_POST['page_name'])) {
+        
+        $page_parent_id = mysql_escape_mimic($_POST['page_parent_id']);
+        $page_name = mysql_escape_mimic($_POST['page_name']);
+        $page_url = mysql_escape_mimic($_POST['page_url']);
+        $page_acl = mysql_escape_mimic($_POST['page_acl']);
+        $page_in_menu = mysql_escape_mimic($_POST['page_in_menu']);
+        $page_order = mysql_escape_mimic($_POST['page_order']);
+        
+        global $wsdl;
+        set_time_limit(0);
+        $page_exist = false;
+        $response = $wsdl->getPages(array("user_role_id"=>"0"));
+        foreach($response as $return){
+            foreach ($return as $page){
+                if($page->page_url == $page_url && $page->page_url != ""){
+                    $page_exist = true;
+                }
+            }
+        }
+        
+        if(!$page_exist){
+            createPageDirectory($page_url);
+
+            $result = array();
+            $res = aeObj(
+                "Page",
+                array(
+                    "page_id"=>"-1",
+                    "page_parent_id"=> $page_parent_id,
+                    "page_name"=>$page_name, 
+                    "page_url"=>$page_url, 
+                    "page_acl"=>  $page_acl,
+                    "page_in_menu"=>$page_in_menu, 
+                    "page_order"=>$page_order
+                )
+            );
+
+            $result["msg"] = $res;
+            logToFile(json_encode($result));
+            echo(json_encode($result));        
+
+            exit;
+        }
+        else{
+            echo(json_encode(array("msg"=>"0")));
+
+            exit;
+        }
+    }
+}
+
+function editUser(){
+    if (isset($_POST['user_name'])) {
+        $user_id = mysql_escape_mimic($_POST['user_id']);
+        $user_role_id = mysql_escape_mimic($_POST['user_role_id']);
+        $user_name = mysql_escape_mimic($_POST['user_name']);
+        $user_username = mysql_escape_mimic($_POST['user_username']);
+        $user_password = mysql_escape_mimic($_POST['user_password']);
+        if($user_password==""){
+            $user_password = "-1";
+        }
+        $user_password = md5($user_password);
+        logToFile($user_password);
+        $user_email = mysql_escape_mimic($_POST['user_email']);
+        $user_status = mysql_escape_mimic($_POST['user_status']);
+        $result = array();
+        
+        $res = aeObj(
+            "User", 
+            array(
+                "user_id" => $user_id,
+                "user_role_id"=>$user_role_id, 
+                "user_name"=>$user_name, 
+                "user_username"=>$user_username, 
+                "user_password"=>$user_password,
+                "user_email"=>$user_email,
+                "user_status"=>$user_status
+            )
+        );
+        $result["msg"] = $res;
+        echo(json_encode($result));
+        exit;
+    }
+}
+function addCategory(){
+    if (isset($_POST['cat_name'])) {
+        $cat_name = mysql_escape_mimic($_POST['cat_name']);
+        $cat_desc = mysql_escape_mimic($_POST['cat_desc']);
+        logToFile($_POST);
+        $res = aeObj(
+            "Category", 
+            array(
+                "cat_id"=>"-1",
+                "cat_name"=>$cat_name,
+                "cat_desc"=>$cat_desc
+            )
+        );
+        $result = array();
+
+
+        $result["msg"] = $res;
+        echo(json_encode($result));        
+
+        exit;
+    }
+}
+
 //
 //function addBranch(){
 //    if (isset($_POST['bra_name'])) {
@@ -274,24 +332,7 @@ function getUserByUsername(){
 //    }
 //}
 //
-//function addCategory(){
-//    if (isset($_POST['cat_name'])) {
-//        $cat_name = mysql_escape_mimic($_POST['cat_name']);
-//        $cat_desc = mysql_escape_mimic($_POST['cat_desc']);
-//        $cat_pic = mysql_escape_mimic($_POST['cat_pic']);
-//        
-//        $result = array();
-//        global $wsdl;
-//        set_time_limit(0);
-//        $response = $wsdl->addCategory(array("cat_name"=>$cat_name,"cat_desc"=>$cat_desc,"cat_pic"=>$cat_pic));
-//
-//        $result["msg"] = $response->return;
-//        echo(json_encode($result));        
-//
-//        exit;
-//    }
-//}
-//
+
 //function getBranches($bra_id){
 //    global $wsdl;
 //    set_time_limit(0);

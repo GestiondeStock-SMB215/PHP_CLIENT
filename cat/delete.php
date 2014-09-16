@@ -4,7 +4,7 @@ require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 if(isset($_GET["cat_id"])){
     $msg = "Are you sure you want to delete selected category?";
     if(isset($_GET["action"]) && $_GET["action"]=="delete"){
-        deleteCategory($_GET["cat_id"]);
+        deleteObj("Category", "cat_id", $_GET["cat_id"]);
         header("location:show.php");
     }
 }

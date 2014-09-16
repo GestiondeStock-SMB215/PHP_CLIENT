@@ -22,13 +22,6 @@ $(document).ready(function(){
 
         <div class="lbl">Description:
             <input type="text" class="input" id="cat_desc" /></div>
-
-        <div class="lbl">Short Name:
-            <input type="text" class="input" id="shortname" readonly/></div>
-            
-        <div class="lbl">Pic:
-          <input type="file" class="input" id="cat_pic"/></div>
-
           
         <input id="btnRegister" class="btnRegister" name="submit" value="SAVE"  style="float:left;"/>    
         <input class="btnRegister" type="reset" value="RESET"   style="float:left;"/>
@@ -39,8 +32,6 @@ $(document).ready(function(){
     </div>
 </form>   
 
-<script>
-    $("#cat_desc").keyup(function(){
-    $("#shortname").val($(this).val().substring(0,10));
-});
-    </script>
+<?php
+require_once $_SERVER["DOCUMENT_ROOT"]."/resources/footer.inc.php";
+?>
