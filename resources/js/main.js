@@ -1,9 +1,9 @@
 function getUserByUsername() {
     user_username = $("#txtUsername").val();
     user_password = $("#txtPswd").val();
+
     if (user_password !== "" && user_password !== "") {
         wantedData = {user_username: user_username ,user_password: user_password };
-
         $.ajax({
             type         : "POST",
             url          : "/resources/ajax.php?func=getUserByUsername",

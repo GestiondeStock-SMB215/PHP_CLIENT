@@ -26,7 +26,7 @@ $(document).ready(function() {
     </thead>
     <tbody>
         <?php
-            $objs = getAllPages();
+            $objs = readObj("Page", "page_id", "-1");
             foreach($objs as $obj){
                 echo "<tr>";
                 echo "<td>".$obj["page_id"]."</td>";
@@ -34,11 +34,14 @@ $(document).ready(function() {
                     echo "<td>&nbsp;</td>"; 
                 }
                 else{
+                    $found = false;
                     foreach ($objs as $subObj){
                         if($obj["page_parent_id"] == $subObj["page_id"]){
                             echo "<td>".$subObj["page_name"]."&nbsp;</td>";
-                        }
+                            $found = true;
+                        }                       
                     }
+                    if(!$found){echo "<td>&nbsp;</td>";}
                 }
                 echo "<td>".$obj["page_name"]."</td>";
                 echo "<td>".$obj["page_url"]."</td>";

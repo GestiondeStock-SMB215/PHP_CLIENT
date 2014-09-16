@@ -24,7 +24,7 @@ $(document).ready(function() {
     </thead>
     <tbody>
         <?php
-            $objs = getCategories();
+            $objs = $cats = readObj("Category", "cat_id", "-1");
             
             foreach($objs as $obj){
                 echo "<tr>";

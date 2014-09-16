@@ -25,9 +25,9 @@ $(document).ready(function() {
     </thead>
     <tbody>
         <?php
-            $objs = getSuppliers(null);
-            $countries = getCountries();
-            
+            $objs = readObj("Supplier", "sup_id", "-1");
+            $countries = readObj("Country", "cnt_id", "-1");
+
             foreach($objs as $obj){
                 echo "<tr>";
                     echo "<td>".$obj["sup_id"]."</td>";

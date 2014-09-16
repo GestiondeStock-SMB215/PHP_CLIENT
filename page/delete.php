@@ -5,7 +5,7 @@ if(isset($_GET["page_id"])){
     $page_id = $_GET["page_id"];
     $msg = "Are you sure you want to delete selected page?";
     if(isset($_GET["action"]) && $_GET["action"]=="delete"){
-        deletePage($page_id);
+        deleteObj("Page", "page_id", $page_id);
         header("location:show.php");
     }
 }

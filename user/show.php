@@ -27,8 +27,9 @@ $(document).ready(function() {
     </thead>
     <tbody>
         <?php
-            $objs = getAllUsers();
-            $roles = getRoles();
+            $objs = readObj("User", "user_id", "-1");
+            $roles = readObj("Role", "role_id", "-1");
+
             foreach($objs as $obj){
                 echo "<tr>";
                 echo "<td>".$obj["user_id"]."</td>";

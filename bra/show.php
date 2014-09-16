@@ -24,8 +24,8 @@ $(document).ready(function() {
     </thead>
     <tbody>
         <?php
-            $objs = getBranches(null);
-            $countries = getCountries();
+            $objs = readObj("Branch", "bra_id", "-1");
+            $countries = readObj("Country", "cnt_id", "-1");
             
             foreach($objs as $obj){
                 echo "<tr>";

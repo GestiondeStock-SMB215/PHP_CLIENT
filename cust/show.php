@@ -25,8 +25,8 @@ $(document).ready(function() {
     </thead>
     <tbody>
         <?php
-            $objs = getCustomers(null);
-            $countries = getCountries();
+            $objs = readObj("Customer", "cust_id", "-1");
+            $countries = readObj("Country", "cnt_id", "-1");
             
             foreach($objs as $obj){
                 echo "<tr>";

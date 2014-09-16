@@ -28,8 +28,8 @@ $(document).ready(function() {
     </thead>
     <tbody>
         <?php
-            $objs = getProducts();
-            $cats = getCategories();
+            $objs = readObj("Product", "prod_id", "-1");
+            $cats = readObj("Category", "cat_id", "-1");
             foreach($objs as $obj){
                 echo "<tr title=\"".$obj["prod_desc"]."\">";
                 echo "<td>".$obj["prod_id"]."</td>";
