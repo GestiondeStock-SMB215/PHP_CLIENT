@@ -59,13 +59,12 @@ $(document).ready(function(){
         
         <input id="btnRegister" class="btnRegister" name="submit" value="SAVE"  style="float:left;"/>    
         <input class="btnRegister" type="reset" value="RESET"   style="float:left;"/>
-        <input class="btnRegister" type="reset" value="CANCEL" onclick="javascript:window.location.href='show.php'" style="float:left;"/>
-        
-
+        <input class="btnRegister" type="reset" value="CANCEL" onclick="javascript:window.location.href='show.php'" style="float:left;"/>     
         <div class="loader"></div>
         <div class="lblMsg" id="lblMsg"></div>
     </div>
-</form>
+</form>   
 <?php
+    
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/footer.inc.php";
 ?>

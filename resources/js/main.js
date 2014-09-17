@@ -287,8 +287,7 @@ function addPage(){
     }
 }
 
-function addBranch(){
-    
+function addBranch(){   
     bra_name        = $("#bra_name").val();
     bra_cnt_id      = $("#bra_cnt_id").val();
     bra_city        = $("#bra_city").val();
@@ -320,7 +319,7 @@ function addBranch(){
             success      : function(result){
                 
                 console.log(result.msg);
-                if(result.msg == "1"){
+                if(result.msg == "-1"){
                     $('#lblMsg').html("Branch has been added successfuly");
                 }
                 else{

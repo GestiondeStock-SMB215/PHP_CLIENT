@@ -26,7 +26,7 @@ $(document).ready(function() {
     <tbody>
         <?php
             $objs = readObj("Customer", "cust_id", "-1");
-            $countries = readObj("Country", "cnt_id", "-1");
+            $country = readObj("Country", "cnt_id", "-1");
             
             foreach($objs as $obj){
                 echo "<tr>";
@@ -34,9 +34,10 @@ $(document).ready(function() {
                     echo "<td>".$obj["cust_comp"]."</td>";
                     echo "<td>".$obj["cust_name"]."</td>";
                      echo "<td>".$obj["cust_city"]."</td>";
-                    foreach ($countries as $country){
-                        if($country["cnt_id"] == $obj["cust_cnt_id"]){
-                            echo "<td>".$country["cnt_nicename"]."</td>";
+                    foreach ($country as $cnt){
+                        if($cnt["cnt_id"] == $obj["cust_cnt_id"]){
+                            echo "<td>".$cnt["cnt_nicename"]."</td>";
+                            
                         }
                     }
                    

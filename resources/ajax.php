@@ -277,25 +277,23 @@ function addBranch(){
         $bra_tel_2 = mysql_escape_mimic($_POST['bra_tel_2']);
         $bra_fax = mysql_escape_mimic($_POST['bra_fax']);
         $bra_email = mysql_escape_mimic($_POST['bra_email']);
-        
-        $result = array();
-        
+      
          $res = aeObj(
             "Branch", 
             array(
                "bra_cat"    => "-1",
                "bra_name"   => $bra_name,
                "bra_cnt_id" => $bra_cnt_id,
-               "bra_city"   =>$bra_city, 
-               "bra_add_str"=>$bra_add_str,
+               "bra_city"   => $bra_city, 
+               "bra_add_str"=> $bra_add_str,
                "bra_add_1"  => $bra_add_1,
-               "bra_tel_1"  =>  $bra_tel_1,
-               "bra_tel_2"  =>$bra_tel_2, 
-               "bra_fax"    =>$bra_fax,
-               "bra_email"  =>$bra_email
+               "bra_tel_1"  => $bra_tel_1,
+               "bra_tel_2"  => $bra_tel_2, 
+               "bra_fax"    => $bra_fax,
+               "bra_email"  => $bra_email
             )
         );
-       
+        $result = array();
 
         $result["msg"] = $res;
         echo(json_encode($result));        
