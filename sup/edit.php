@@ -26,10 +26,7 @@ $(document).ready(function(){
         <div class="lbl">Company:
             <input type="text" class="input" id="sup_comp" value="<?= $supplier['sup_comp']?>"/></div>
             
-            <div class="lbl">Name:
-            <input type="text" class="input" id="sup_name" value="<?= $supplier['sup_name']?>"/></div>
-            
-            <div class="lbl">Title:
+             <div class="lbl">Title:
                 <select class="input" id="sup_title">
                     <?php
                         if($cust['sup_title'] == "Mr."){
@@ -42,6 +39,9 @@ $(document).ready(function(){
                         }
                     ?>
                 </select></div>
+        
+            <div class="lbl">Name:
+            <input type="text" class="input" id="sup_name" value="<?= $supplier['sup_name']?>"/></div>
 
         <div class="lbl">Address 1:
             <input type="text" class="input" id="sup_add_1" value="<?= $supplier['sup_add_1']?>"/></div>

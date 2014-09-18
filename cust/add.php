@@ -19,9 +19,6 @@ $(document).ready(function(){
         <h3>CUSTOMER</h3>
         <div class="lbl">Company:
             <input type="text" class="input" id="cust_comp"/></div>
-
-        <div class="lbl">Name:
-            <input type="text" class="input" id="cust_name" /></div>
             
             <div class="lbl">Title:
                 <select class="input" id="cust_title" required>
@@ -30,6 +27,11 @@ $(document).ready(function(){
                     <option value="Ms.">Ms.</option>
                 </select>
             </div>
+
+        <div class="lbl">Name:
+            <input type="text" class="input" id="cust_name" /></div>
+            
+            
 
         <div class="lbl">Address 1:
             <input type="text" class="input" id="cust_add_1" /></div>
