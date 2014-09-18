@@ -467,7 +467,50 @@ function addProduct(){
         exit;
     }
 }
+function editProduct(){
+//    logToFile(json_encode($_POST));
+    if (isset($_POST['prod_id'])) {
+        $prod_id = mysql_escape_mimic($_POST['prod_id']);
+        $prod_cat_id = mysql_escape_mimic($_POST['prod_cat_id']);
+        $prod_sku = mysql_escape_mimic($_POST['prod_sku']);
+        $prod_upc = mysql_escape_mimic($_POST['prod_upc']);
+        $prod_name = mysql_escape_mimic($_POST['prod_name']);
+        $prod_desc = mysql_escape_mimic($_POST['prod_desc']);
+//      $prod_qty = mysql_escape_mimic($_POST['prod_qty']);
+        $prod_color = mysql_escape_mimic($_POST['prod_color']);
+        $prod_size = mysql_escape_mimic($_POST['prod_size']);
+        $prod_weight = mysql_escape_mimic($_POST['prod_weight']);
+        $prod_sup_id = mysql_escape_mimic($_POST['prod_sup_id']);
+        $prod_status = mysql_escape_mimic($_POST['prod_status']);
+        
+        $res = aeObj(
+            "Product", 
+            array(
+                "prod_id" =>$prod_id,
+                "prod_cat_id"=>$prod_cat_id,
+                "prod_sku"=>$prod_sku,
+                "prod_upc"=>$prod_upc, 
+                "prod_name"=>$prod_name,
+                "prod_desc"=>$prod_desc,
+                "prod_qty"=>"0",
+                "prod_color"=>$prod_color,
+                "prod_size"=>$prod_size,
+                "prod_weight"=>$prod_weight,
+                "prod_sup_id"=>$prod_sup_id,
+                "prod_status"=>$prod_status,
+                "prod_pic"=>"none", 
+                "prod_vend_id"=>"0"
+            )
+        );
+        
+        $result["msg"] = "$res";
+        
+//        logToFile(json_encode($result));
+        echo(json_encode($result));        
 
+        exit;
+    }
+}
 //function addSupplier(){
 //    if (isset($_POST['sup_comp'])) {
 //        $sup_comp = mysql_escape_mimic($_POST['sup_comp']);

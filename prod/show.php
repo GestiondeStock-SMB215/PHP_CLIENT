@@ -45,8 +45,8 @@ $(document).ready(function() {
                 echo "<td>".$obj["prod_color"]."</td>";
                 echo "<td>".$obj["prod_size"]."</td>";
                 echo "<td>".$obj["prod_time_stamp"]."</td>";
-                echo "<td><a href=\"edit.php?id=".$obj["prod_id"].""."\">Edit</a></td>";
-                echo "<td><a href=\"delete.php?id=".$obj["prod_id"]."\">Delete</a></td>";
+                echo "<td><a href=\"edit.php?prod_id=".$obj["prod_id"].""."\">Edit</a></td>";
+                echo "<td><a href=\"delete.php?prod_id=".$obj["prod_id"]."\">Delete</a></td>";
                 echo "</tr>";
             }
         ?>

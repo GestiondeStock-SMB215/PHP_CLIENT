@@ -686,3 +686,61 @@ function addProduct(){
         $('#lblMsg').html("Please fill in all required fields");
     }
 }
+function editProduct(){
+    prod_id           = $("#prod_id").val();
+    prod_cat_id       = $("#prod_cat_id").val();
+    prod_sku          = $("#prod_sku").val();
+    prod_upc          = $("#prod_upc").val();
+    prod_name         = $("#prod_name").val();
+    prod_desc         = $("#prod_desc").val();
+//  prod_qty          = $("#prod_qty").val();
+    prod_color        = $("#prod_color").val();
+    prod_size         = $("#prod_size").val();
+    prod_weight       = $("#prod_weight").val();
+    prod_sup_id       = $("#prod_sup_id").val();
+    prod_status       = $("#prod_status").val();
+
+    wantedData = {
+        prod_id:prod_id,
+        prod_cat_id:prod_cat_id,
+        prod_sku:prod_sku,
+        prod_upc:prod_upc,
+        prod_name:prod_name,
+        prod_desc:prod_desc,
+//      prod_qty:prod_qty,
+        prod_color:prod_color,
+        prod_size:prod_size,
+        prod_weight:prod_weight,
+        prod_sup_id:prod_sup_id,
+        prod_status:prod_status};
+        
+    if(prod_cat_id != "" && prod_name != "" && prod_sup_id != ""){
+        $.ajax({
+            type         : "POST",
+            url          : "/resources/ajax.php?func=editProduct",
+            data         : wantedData,
+            cache        : false,
+            dataType     : "json",
+            beforeSend   : function () {
+                $('#lblMsg').html("");
+                $('#loader').show();
+            },
+            complete: function () {
+                $('#loader').hide();
+            },
+            success      : function(result){
+                console.log(result.msg);
+                if(result.msg == "1"){
+                    $('#lblMsg').html("Supplier has been edited successfuly");
+                }
+                else{
+                    $('#lblMsg').html("Supplier has not been edited.");
+                }
+                
+            }
+        });
+    }
+    else{
+        $('#lblMsg').html("Please fill in all required fields");
+    }
+}
