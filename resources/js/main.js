@@ -494,7 +494,7 @@ function addCustomer(){
                   cust_cnt_id:cust_cnt_id, cust_tel_1:cust_tel_1, cust_tel_2:cust_tel_2,
                   cust_fax:cust_fax, cust_email:cust_email, cust_site:cust_site };
         
-    if(cust_comp != "" && cust_name != "" && cust_add_1 != "" && cust_cnt_id != "" && cust_tel_1 != "" && cust_email != ""){
+    if(cust_comp != "" && cust_title != "" && cust_name != "" && cust_add_1 != "" && cust_cnt_id != "" && cust_tel_1 != "" && cust_email != ""){
        $.ajax({
             type         : "POST",
             url          : "/resources/ajax.php?func=addCustomer",
@@ -525,7 +525,58 @@ function addCustomer(){
         $('#lblMsg').html("Please fill in all required fields");
     }
 }
+function editCustomer(){
+    cust_id            = $("#cust_id").val();
+    cust_comp          = $("#cust_comp").val();
+    cust_name          = $("#cust_name").val();
+    cust_title         = $("#cust_title").val();
+    cust_add_1         = $("#cust_add_1").val();
+    cust_add_2         = $("#cust_add_2").val();
+    cust_city          = $("#cust_city").val();
+    cust_cnt_id        = $("#cust_cnt_id").val();
+    cust_tel_1         = $("#cust_tel_1").val();
+    cust_tel_2         = $("#cust_tel_2").val();
+    cust_fax           = $("#cust_fax").val();
+    cust_email         = $("#cust_email").val();
+    cust_site          = $("#cust_site").val();
+ 
 
+    wantedData = {cust_id:cust_id,cust_comp:cust_comp, cust_name:cust_name, cust_title:cust_title,
+                  cust_add_1:cust_add_1, cust_add_2:cust_add_2, cust_city:cust_city,
+                  cust_cnt_id:cust_cnt_id, cust_tel_1:cust_tel_1, cust_tel_2:cust_tel_2,
+                  cust_fax:cust_fax, cust_email:cust_email, cust_site:cust_site };
+        
+    if(cust_comp != "" && cust_name != "" && cust_add_1 != "" && cust_cnt_id != "" && cust_tel_1 != "" && cust_email != ""){
+       $.ajax({
+            type         : "POST",
+            url          : "/resources/ajax.php?func=editCustomer",
+            data         : wantedData,
+            cache        : false,
+            dataType     : "json",
+            beforeSend   : function () {
+                $('#lblMsg').html("");
+                $('#loader').show();
+            },
+            complete: function () {
+                $('#loader').hide();
+            },
+            success      : function(result){
+                
+                console.log(result.msg);
+                if(result.msg == "1"){
+                    $('#lblMsg').html("Customer has been edited successfuly");
+                }
+                else{
+                    $('#lblMsg').html("Customer has not been edited.");
+                }
+                
+            }
+        });
+    }
+    else{
+        $('#lblMsg').html("Please fill in all required fields");
+    }
+}
 function addSupplier(){
     sup_comp          = $("#sup_comp").val();
     sup_name          = $("#sup_name").val();
@@ -585,26 +636,30 @@ function addProduct(){
     prod_upc          = $("#prod_upc").val();
     prod_name         = $("#prod_name").val();
     prod_desc         = $("#prod_desc").val();
-    prod_qty          = $("#prod_qty").val();
-    prod_qty_per_unit = $("#prod_qty_per_unit").val();
+//  prod_qty          = $("#prod_qty").val();
     prod_color        = $("#prod_color").val();
     prod_size         = $("#prod_size").val();
     prod_weight       = $("#prod_weight").val();
     prod_sup_id       = $("#prod_sup_id").val();
     prod_status       = $("#prod_status").val();
-    prod_pic          = $("#prod_pic").val();
 
-    wantedData = {sup_comp:sup_comp, sup_name:sup_name, sup_title:sup_title,
-                  sup_add_1:sup_add_1, sup_add_2:sup_add_2, sup_city:sup_city,
-                  sup_cnt_id:sup_cnt_id, sup_tel_1:sup_tel_1, sup_tel_2:sup_tel_2,
-                  sup_fax:sup_fax, sup_email:sup_email, sup_site:sup_site, sup_logo:sup_logo };
+    wantedData = {
+        prod_cat_id:prod_cat_id,
+        prod_sku:prod_sku,
+        prod_upc:prod_upc,
+        prod_name:prod_name,
+        prod_desc:prod_desc,
+//      prod_qty:prod_qty,
+        prod_color:prod_color,
+        prod_size:prod_size,
+        prod_weight:prod_weight,
+        prod_sup_id:prod_sup_id,
+        prod_status:prod_status};
         
-    if(sup_comp != "" && sup_name != "" && sup_add_1 != ""
-       && sup_cnt_id != "" && sup_tel_1 != "" && sup_fax != ""
-       && sup_email != "" && sup_site != ""){
+    if(prod_cat_id != "" && prod_name != "" && prod_sup_id != ""){
         $.ajax({
             type         : "POST",
-            url          : "/resources/ajax.php?func=addSupplier",
+            url          : "/resources/ajax.php?func=addProduct",
             data         : wantedData,
             cache        : false,
             dataType     : "json",
@@ -616,7 +671,6 @@ function addProduct(){
                 $('#loader').hide();
             },
             success      : function(result){
-                
                 console.log(result.msg);
                 if(result.msg == "1"){
                     $('#lblMsg').html("Supplier has been added successfuly");

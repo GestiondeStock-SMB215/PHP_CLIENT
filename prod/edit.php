@@ -1,21 +1,23 @@
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
-    $cat = readObj("Category", "cat_id", "-1");
-    $sup = readObj("Supplier", "sup_id", "-1");
+    if(!isset($_GET["prod_id"])){
+        header("location:show.php");
+    }
+    
+    $prod = readObj("Prodcut", "prod_id", $_GET["prod_id"])[0];
 ?>
 <script>
 $(document).ready(function(){
     $("#btnRegister").click(function () {
-        addProduct();
+        editProduct();
     });
     $("#registerForm").keypress(function (event) {
         if(event.which === 13){
-            addProduct();
+            editProduct();
         }
     });
 });
 </script>
-
 <form id="registerForm" >
     <div class="registerContainer">
         <h3>PRODUCT</h3>
@@ -46,8 +48,11 @@ $(document).ready(function(){
         <div class="lbl">Description:
             <input type="text" class="input" id="prod_desc" /></div>
 
-<!--        <div class="lbl">Quantity:
-            <input type="text" class="input" id="prod_qty" /></div>-->
+        <div class="lbl">Quantity:
+            <input type="text" class="input" id="prod_qty" /></div>
+
+        <div class="lbl">Unit
+            <input type="text" class="input" id="prod_qty_per_unit" /></div>
          
         <div class="lbl">Color:
             <input type="text" class="input" id="prod_color" /></div>
@@ -86,7 +91,7 @@ $(document).ready(function(){
         <div class="lblMsg" id="lblMsg"></div>
    </div>
 </form>
-<?php
-    require_once $_SERVER["DOCUMENT_ROOT"]."/resources/footer.inc.php";
-?>
 
+<?php
+require_once $_SERVER["DOCUMENT_ROOT"]."/resources/footer.inc.php";
+?>

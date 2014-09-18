@@ -24,7 +24,12 @@ $(document).ready(function(){
             <input type="text" class="input" id="cust_name" /></div>
             
             <div class="lbl">Title:
-            <input type="text" class="input" id="cust_title" /></div>
+                <select class="input" id="cust_title" required>
+                    <option value="">Please choose</option>
+                    <option value="Mr.">Mr.</option>
+                    <option value="Ms.">Ms.</option>
+                </select>
+            </div>
 
         <div class="lbl">Address 1:
             <input type="text" class="input" id="cust_add_1" /></div>

@@ -1,14 +1,7 @@
-2014-09-18 19:33:04 - "{\"msg\":1}"
-2014-09-18 19:56:26 - "{\"cust_comp\":\"gfde\",\"cust_name\":\"vfdbf\",\"cust_title\":\"vfdb\",\"cust_add_1\":\"vbfdb\",\"cust_add_2\":\"bvfdbf\",\"cust_city\":\"vfdbf\",\"cust_tel_1\":\"bgdnbg\",\"cust_tel_2\":\"bfdb\",\"cust_fax\":\"bvfdb\",\"cust_email\":\" bfgdngdfn@hotmail.com\",\"cust_site\":\"vbfdbn\"}"
-2014-09-18 19:57:58 - "
-{\"cust_comp\":\"klhn\",
-\"cust_name\":\"mblk\",
-\"cust_title\":\"bl\",
-\"cust_add_1\":\"qq\",
-\"cust_add_2\":\"qq\",
-\"cust_city\":\"q\",
-\"cust_tel_1\":\"q\",
-\"cust_tel_2\":\"q\",
-\"cust_fax\":\"q\",
-\"cust_email\":\"q
-cust_site\":\"q\"}"
+2014-09-18 21:04:13 - "{\"prod_cat_id\":\"2\",\"prod_sku\":\"qw12\",\"prod_upc\":\"qw12\",\"prod_name\":\"1\",\"prod_desc\":\"1\",\"prod_qty\":\"1\",\"prod_qty_per_unit\":\"1\",\"prod_color\":\"1\",\"prod_size\":\"1\",\"prod_weight\":\"1\",\"prod_sup_id\":\"1\",\"prod_status\":\"1\"}"
+2014-09-18 21:04:14 - "{\"msg\":1}"
+2014-09-18 21:05:35 - "{\"prod_cat_id\":\"2\",\"prod_sku\":\"qwqw\",\"prod_upc\":\"qwqw\",\"prod_name\":\"1\",\"prod_desc\":\"1\",\"prod_qty\":\"1\",\"prod_qty_per_unit\":\"1\",\"prod_color\":\"1\",\"prod_size\":\"1\",\"prod_weight\":\"1\",\"prod_sup_id\":\"1\",\"prod_status\":\"1\"}"
+2014-09-18 21:09:21 - "{\"prod_cat_id\":\"1\",\"prod_sku\":\"12\",\"prod_upc\":\"121\",\"prod_name\":\"121\",\"prod_desc\":\"12\",\"prod_qty\":\"12\",\"prod_qty_per_unit\":\"12\",\"prod_color\":\"12\",\"prod_size\":\"12\",\"prod_weight\":\"121\",\"prod_sup_id\":\"1\",\"prod_status\":\"0\"}"
+2014-09-18 21:10:24 - "{\"prod_cat_id\":\"1\",\"prod_sku\":\"aejhdf\",\"prod_upc\":\"esfhd\",\"prod_name\":\"7\",\"prod_desc\":\"7\",\"prod_qty\":\"7\",\"prod_qty_per_unit\":\"7\",\"prod_color\":\"7\",\"prod_size\":\"7\",\"prod_weight\":\"7\",\"prod_sup_id\":\"1\",\"prod_status\":\"0\"}"
+2014-09-18 21:16:15 - "{\"msg\":1}"
+2014-09-18 21:18:37 - "{\"msg\":1}"

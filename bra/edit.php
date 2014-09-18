@@ -74,3 +74,6 @@ $(document).ready(function(){
     </div>
     <input type="text" id="bra_id" value="<?=$_GET['bra_id']?>" style="display:none" />
 </form>
+<?php
+    require_once $_SERVER["DOCUMENT_ROOT"]."/resources/footer.inc.php";
+?>

@@ -41,7 +41,7 @@ $(document).ready(function() {
                 echo "<td>".$obj["prod_sku"]."</td>";
                 echo "<td>".$obj["prod_upc"]."</td>";
                 echo "<td>".$obj["prod_name"]."</td>";
-                echo "<td>".$obj["prod_qty"]*$obj["prod_qty_per_unit"]."</td>";
+                echo "<td>".$obj["prod_qty"]."</td>";
                 echo "<td>".$obj["prod_color"]."</td>";
                 echo "<td>".$obj["prod_size"]."</td>";
                 echo "<td>".$obj["prod_time_stamp"]."</td>";
