@@ -65,10 +65,6 @@ $(document).ready(function(){
              <div class="lbl">Site:
              <input type="text" class="input" id="sup_site" /></div>
              
-             <div class="lbl">Logo:
-             <input type="file" class="input" id="sup_logo"/></div>
-            
-            
             <input id="btnRegister" class="btnRegister" type="button" name="submit" value="SAVE"  style="float:left;"/>    
             <input class="btnRegister" type="reset" value="RESET"   style="float:left;"/>
             <input class="btnRegister" type="button" value="CANCEL" onclick="javascript:window.location.href='show.php'" style="float:left;"/>
