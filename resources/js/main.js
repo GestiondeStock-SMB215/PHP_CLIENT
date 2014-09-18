@@ -380,7 +380,6 @@ function editBranch(){
                 $('#loader').hide();
             },
             success      : function(result){
-                
                 console.log(result.msg);
                 if(result.msg == "1"){
                     $('#lblMsg').html("Branch has been edited successfuly");

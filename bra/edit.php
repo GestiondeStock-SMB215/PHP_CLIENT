@@ -69,9 +69,8 @@ $(document).ready(function(){
         
         <input id="btnRegister" class="btnRegister" type="button" value="SAVE"  style="float:left;"/>    
         <input class="btnRegister" type="button" value="CANCEL" onclick="javascript:window.location.href='show.php'" style="float:left;"/>
-        <input type="text" id="bra_id" value="<?=$_GET['bra_id']?>" style="display:none" />
-
         <div class="loader"></div>
         <div class="lblMsg" id="lblMsg"></div>
     </div>
+    <input type="text" id="bra_id" value="<?=$_GET['bra_id']?>" style="display:none" />
 </form>
