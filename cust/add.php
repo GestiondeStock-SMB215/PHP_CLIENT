@@ -71,7 +71,7 @@ $(document).ready(function(){
             
             <input id="btnRegister" class="btnRegister" type="button" name="submit" value="SAVE"  style="float:left;"/>    
             <input class="btnRegister" type="reset" value="RESET"   style="float:left;"/>
-            <input class="btnRegister" type="reset" value="CANCEL" onclick="javascript:window.location.href='show.php'" style="float:left;"/>
+            <input class="btnRegister" type="button" value="CANCEL" onclick="javascript:window.location.href='show.php'" style="float:left;"/>
            
            
            

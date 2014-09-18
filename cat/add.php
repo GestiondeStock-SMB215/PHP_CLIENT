@@ -23,9 +23,9 @@ $(document).ready(function(){
         <div class="lbl">Description:
             <input type="text" class="input" id="cat_desc" /></div>
           
-        <input id="btnRegister" class="btnRegister" name="submit" value="SAVE"  style="float:left;"/>    
+        <input id="btnRegister" class="btnRegister" type="button" value="SAVE"  style="float:left;"/>    
         <input class="btnRegister" type="reset" value="RESET"   style="float:left;"/>
-        <input class="btnRegister" type="reset" value="CANCEL" onclick="javascript:window.location.href='show.php'" style="float:left;"/>
+        <input class="btnRegister" type="button" value="CANCEL" onclick="javascript:window.location.href='show.php'" style="float:left;"/>
         
         <div class="loader"></div>
         <div class="lblMsg" id="lblMsg"></div>

@@ -22,14 +22,13 @@ $(document).ready(function(){
 
         <div class="lbl">Country:
             <select class="input" id="bra_cnt_id">
-            <option value="">Please choose</option>
             <?php
                 $countries = readObj("Country", "cnt_id", "-1");
                 foreach($countries as $cnt){
-                     if($countries["cnt_nicename"] == "Lebanon"){
-                            echo "<option value=\"".$cnt["cnt_id"]."\">".$cnt["cnt_nicename"]."</option>";
+                    if($cnt["cnt_nicename"] == "Lebanon"){
+                            echo "<option value=\"".$cnt["cnt_id"]."\" selected>".$cnt["cnt_nicename"]."</option>";
                         }
-                         echo "<option value=\"".$cnt["cnt_id"]."\">".$cnt["cnt_nicename"]."</option>";
+                    echo "<option value=\"".$cnt["cnt_id"]."\">".$cnt["cnt_nicename"]."</option>";
                 }
                 ?>
             </select>
@@ -57,9 +56,9 @@ $(document).ready(function(){
         <div class="lbl">Email:
             <input type="text" class="input" id="bra_email" /></div>
         
-        <input id="btnRegister" class="btnRegister" name="submit" value="SAVE"  style="float:left;"/>    
+        <input id="btnRegister" class="btnRegister" type="button" value="SAVE"  style="float:left;"/>    
         <input class="btnRegister" type="reset" value="RESET"   style="float:left;"/>
-        <input class="btnRegister" type="reset" value="CANCEL" onclick="javascript:window.location.href='show.php'" style="float:left;"/>     
+        <input class="btnRegister" type="button" value="CANCEL" onclick="javascript:window.location.href='show.php'" style="float:left;"/>     
         <div class="loader"></div>
         <div class="lblMsg" id="lblMsg"></div>
     </div>

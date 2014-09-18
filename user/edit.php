@@ -78,7 +78,7 @@ $(document).ready(function(){
             </div>
         </div>
         <input type="text" id="user_id" value="<?=$_GET["user_id"]?>" style="display:none" />
-        <input id="btnRegister" class="btnRegister" name="submit" type="button" value="Register" />
+        <input id="btnRegister" class="btnRegister" type="button" type="button" value="Register" />
         <input id="" class="btnRegister" name="Back" type="button" value="Cancel" onclick="javascript=window.location.href='show.php'" />                
         <div class="loader"></div>
         <div class="lblMsg" id="lblMsg"></div>

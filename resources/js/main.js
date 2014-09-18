@@ -297,10 +297,18 @@ function addBranch(){
     bra_tel_2       = $("#bra_tel_2").val();
     bra_fax         = $("#bra_fax").val();
     bra_email       = $("#bra_email").val();
-
-    wantedData = {bra_name:bra_name, bra_cnt_id:bra_cnt_id, bra_city:bra_city,
-                  bra_add_str:bra_add_str, bra_add_1:bra_add_1, bra_tel_1:bra_tel_1,
-                  bra_tel_2:bra_tel_2, bra_fax:bra_fax, bra_email:bra_email};
+    
+    wantedData = {
+        bra_name:bra_name, 
+        bra_cnt_id:bra_cnt_id, 
+        bra_city:bra_city,
+        bra_add_str:bra_add_str, 
+        bra_add_1:bra_add_1, 
+        bra_tel_1:bra_tel_1,
+        bra_tel_2:bra_tel_2, 
+        bra_fax:bra_fax, 
+        bra_email:bra_email
+    };
         
     if(bra_name != "" && bra_cnt_id != "" && bra_city != "" && bra_add_1 != "" && bra_tel_1 != ""){
         $.ajax({
@@ -314,12 +322,11 @@ function addBranch(){
                 $('#loader').show();
             },
             complete: function () {
-                $('#loader').hide();
+                    $('#loader').hide();
             },
             success      : function(result){
-                
                 console.log(result.msg);
-                if(result.msg == "-1"){
+                if(result.msg == "1"){
                     $('#lblMsg').html("Branch has been added successfuly");
                 }
                 else{
@@ -338,17 +345,26 @@ function editBranch(){
     bra_name        = $("#bra_name").val();
     bra_cnt_id      = $("#bra_cnt_id").val();
     bra_city        = $("#bra_city").val();
-    bra_add_srt     = $("#bra_add_srt").val();
+    bra_add_str     = $("#bra_add_str").val();
     bra_add_1       = $("#bra_add_1").val();
     bra_tel_1       = $("#bra_tel_1").val();
     bra_tel_2       = $("#bra_tel_2").val();
     bra_fax         = $("#bra_fax").val();
     bra_email       = $("#bra_email").val();
 
-    wantedData = {bra_id:bra_id,bra_name:bra_name, bra_cnt_id:bra_cnt_id, bra_city:bra_city,
-                  bra_add_str:bra_add_str, bra_add_1:bra_add_1, bra_tel_1:bra_tel_1,
-                  bra_tel_2:bra_tel_2, bra_fax:bra_fax, bra_email:bra_email};
-        
+    wantedData = {
+        bra_id:bra_id,
+        bra_name:bra_name, 
+        bra_cnt_id:bra_cnt_id, 
+        bra_city:bra_city,
+        bra_add_str:bra_add_str, 
+        bra_add_1:bra_add_1, 
+        bra_tel_1:bra_tel_1,
+        bra_tel_2:bra_tel_2, 
+        bra_fax:bra_fax, 
+        bra_email:bra_email
+    };
+
     if(bra_name != "" && bra_cnt_id != "" && bra_city != "" && bra_add_1 != "" && bra_tel_1 != ""){
         $.ajax({
             type         : "POST",

@@ -1,6 +1,5 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"]."/resources/lib.inc.php";
-
 if(isset($_GET["func"])){
     
     if(function_exists($_GET["func"])){
@@ -187,6 +186,7 @@ function addUser(){
         exit;
     }
 }
+
 function editUser(){
     if (isset($_POST['user_name'])) {
         $user_id = mysql_escape_mimic($_POST['user_id']);
@@ -243,6 +243,7 @@ function addCategory(){
         exit;
     }
 }
+
 function editCategory(){
     if (isset($_POST['cat_id'])) {
         $cat_id = mysql_escape_mimic($_POST['cat_id']);
@@ -277,11 +278,10 @@ function addBranch(){
         $bra_tel_2 = mysql_escape_mimic($_POST['bra_tel_2']);
         $bra_fax = mysql_escape_mimic($_POST['bra_fax']);
         $bra_email = mysql_escape_mimic($_POST['bra_email']);
-      
-         $res = aeObj(
+        $res = aeObj(
             "Branch", 
             array(
-               "bra_cat"    => "-1",
+               "bra_id"    => "-1",
                "bra_name"   => $bra_name,
                "bra_cnt_id" => $bra_cnt_id,
                "bra_city"   => $bra_city, 
@@ -294,13 +294,14 @@ function addBranch(){
             )
         );
         $result = array();
-
+        logToFile($res);
         $result["msg"] = $res;
         echo(json_encode($result));        
 
         exit;
     }
 }
+
 function editBranch(){
     if (isset($_POST['bra_id'])) {
         $bra_id = mysql_escape_mimic($_POST['bra_id']);
@@ -313,7 +314,7 @@ function editBranch(){
         $bra_tel_2 = mysql_escape_mimic($_POST['bra_tel_2']);
         $bra_fax = mysql_escape_mimic($_POST['bra_fax']);
         $bra_email = mysql_escape_mimic($_POST['bra_email']);
-         $res = aeObj(
+        $res = aeObj(
             "Branch", 
             array(
                "bra_id"=> $bra_id,

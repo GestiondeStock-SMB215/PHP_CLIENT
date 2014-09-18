@@ -12,7 +12,7 @@ if(isset($_GET["page_id"])){
 ?>
 <div align="center">
     <h3><?=$msg?></h3>
-    <input class="myButton" value="No" onclick="javasctipt:window.location.href='show.php'" />
+    <input class="myButton" type="button" value="No" onclick="javasctipt:window.location.href='show.php'" />
     &nbsp;&nbsp;&nbsp;
-    <input class="myButton" value="Yes" onclick="javasctipt:window.location.href='delete.php?page_id=<?=$page_id?>&action=delete'" />
+    <input class="myButton" type="button" value="Yes" onclick="javasctipt:window.location.href='delete.php?page_id=<?=$page_id?>&action=delete'" />
 </div>

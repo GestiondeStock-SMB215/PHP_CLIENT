@@ -11,7 +11,7 @@ if(isset($_GET["prod_id"])){
 ?>
 <div align="center">
     <h3><?=$msg?></h3>
-    <input class="myButton" value="No" onclick="javascript:window.location.href='show.php'" />
+    <input class="myButton" type="button" value="No" onclick="javascript:window.location.href='show.php'" />
     &nbsp;&nbsp;&nbsp;
-    <input class="myButton" value="Yes" onclick="javascript:window.location.href='delete.php?prod_id=<?=$_GET["prod_id"]?>&action=delete'" />
+    <input class="myButton" type="button" value="Yes" onclick="javascript:window.location.href='delete.php?prod_id=<?=$_GET["prod_id"]?>&action=delete'" />
 </div>

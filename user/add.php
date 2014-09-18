@@ -59,7 +59,8 @@ $(document).ready(function(){
                 </select>
             </div>
         </div>        
-        <input id="btnRegister" class="btnRegister" name="submit" type="button" value="Register" />
+        <input id="btnRegister" class="btnRegister" type="button" type="button" value="Register" style="float:left;"/>    
+        <input class="btnRegister" type="reset" value="RESET"   style="float:left;"/>
         <input id="" class="btnRegister" name="Back" type="button" value="Cancel" onclick="javascript=window.location.href='show.php'" />                
         <div class="loader"></div>
         <div class="lblMsg" id="lblMsg"></div>
