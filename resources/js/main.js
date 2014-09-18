@@ -487,14 +487,14 @@ function addCustomer(){
     cust_fax           = $("#cust_fax").val();
     cust_email         = $("#cust_email").val();
     cust_site          = $("#cust_site").val();
-    cust_logo          = $("#cust_logo").val();
+ 
 
     wantedData = {cust_comp:cust_comp, cust_name:cust_name, cust_title:cust_title,
                   cust_add_1:cust_add_1, cust_add_2:cust_add_2, cust_city:cust_city,
                   cust_cnt_id:cust_cnt_id, cust_tel_1:cust_tel_1, cust_tel_2:cust_tel_2,
-                  cust_fax:cust_fax, cust_email:cust_email, cust_site:cust_site, cust_logo:cust_logo };
+                  cust_fax:cust_fax, cust_email:cust_email, cust_site:cust_site };
         
-    if(cust_comp != "" && cust_name != "" && cust_add_1 != ""&& cust_cnt_id != "" && cust_tel_1 != "" && cust_fax != "" && cust_email != "" && cust_site != ""){
+    if(cust_comp != "" && cust_name != "" && cust_add_1 != "" && cust_cnt_id != "" && cust_tel_1 != "" && cust_email != ""){
        $.ajax({
             type         : "POST",
             url          : "/resources/ajax.php?func=addCustomer",

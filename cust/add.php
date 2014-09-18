@@ -36,13 +36,13 @@ $(document).ready(function(){
             <input type="text" class="input" id="cust_city" /></div>
 
         <div class="lbl">Country:
-            <select class="input" id="bra_cnt_id">
+            <select class="input" id="cust_cnt_id">
             <option value="">Please choose</option>
             <?php
                 $countries = readObj("Country", "cnt_id", "-1");
                 foreach($countries as $cnt){
-                     if($countries["cnt_nicename"] == "Lebanon"){
-                            echo "<option value=\"".$cnt["cnt_id"]."\">".$cnt["cnt_nicename"]."</option>";
+                     if($cnt["cnt_nicename"] == "Lebanon"){
+                            echo "<option value=\"".$cnt["cnt_id"]."\" selected>".$cnt["cnt_nicename"]."</option>";
                         }
                          echo "<option value=\"".$cnt["cnt_id"]."\">".$cnt["cnt_nicename"]."</option>";
                 }
@@ -65,8 +65,6 @@ $(document).ready(function(){
              <div class="lbl">Site:
              <input type="text" class="input" id="cust_site" /></div>
              
-             <div class="lbl">Logo:
-             <input type="file" class="input" id="cust_logo"/></div>
             
             
             <input id="btnRegister" class="btnRegister" type="button" name="submit" value="SAVE"  style="float:left;"/>    

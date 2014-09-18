@@ -337,6 +337,51 @@ function editBranch(){
 
 }
 
+function addCustomer(){
+    logToFile(json_encode($_POST));
+    if (isset($_POST['cust_comp'])) {
+        $cust_comp = mysql_escape_mimic($_POST['cust_comp']);
+        $cust_name = mysql_escape_mimic($_POST['cust_name']);
+        $cust_title = mysql_escape_mimic($_POST['cust_title']);
+        $cust_add_1 = mysql_escape_mimic($_POST['cust_add_1']);
+        $cust_add_2 = mysql_escape_mimic($_POST['cust_add_2']);
+        $cust_city = mysql_escape_mimic($_POST['cust_city']);
+        $cust_cnt_id = mysql_escape_mimic($_POST['cust_cnt_id']);
+        $cust_tel_1 = mysql_escape_mimic($_POST['cust_tel_1']);
+        $cust_tel_2 = mysql_escape_mimic($_POST['cust_tel_2']);
+        $cust_fax = mysql_escape_mimic($_POST['cust_fax']);
+        $cust_email = mysql_escape_mimic($_POST['cust_email']);
+        $cust_site = mysql_escape_mimic($_POST['cust_site']);
+       
+        
+        $res = aeObj(
+            "Customer", 
+        array(
+            "cust_id"=>"-1",
+            "cust_comp"=>$cust_comp,
+            "cust_name"=>$cust_name,
+            "cust_title"=>$cust_title, 
+            "cust_add_1"=>$cust_add_1,
+            "cust_add_2"=>$cust_add_2,
+            "cust_city"=>$cust_city,
+            "cust_cnt_id"=>$cust_cnt_id,
+            "cust_tel_1"=>$cust_tel_1,
+            "cust_tel_2"=>$cust_tel_2,
+            "cust_fax"=>$cust_fax,
+            "cust_email"=>$cust_email,
+            "cust_site"=>$cust_site,
+            "cust_logo"=>"none"
+        )
+    );
+
+        $result["msg"] = $res;
+        echo(json_encode($result));        
+        
+        exit;
+    }
+}
+
+
 //function addSupplier(){
 //    if (isset($_POST['sup_comp'])) {
 //        $sup_comp = mysql_escape_mimic($_POST['sup_comp']);
@@ -368,37 +413,7 @@ function editBranch(){
 //    }
 //}
 //
-//function addCustomer(){
-//    if (isset($_POST['cust_comp'])) {
-//        $cust_comp = mysql_escape_mimic($_POST['cust_comp']);
-//        $cust_name = mysql_escape_mimic($_POST['cust_name']);
-//        $cust_title = mysql_escape_mimic($_POST['cust_title']);
-//        $cust_add_1 = mysql_escape_mimic($_POST['cust_add_1']);
-//        $cust_add_2 = mysql_escape_mimic($_POST['cust_add_2']);
-//        $cust_city = mysql_escape_mimic($_POST['cust_city']);
-//        $cust_cnt_id = mysql_escape_mimic($_POST['cust_cnt_id']);
-//        $cust_tel_1 = mysql_escape_mimic($_POST['cust_tel_1']);
-//        $cust_tel_2 = mysql_escape_mimic($_POST['cust_tel_2']);
-//        $cust_fax = mysql_escape_mimic($_POST['cust_fax']);
-//        $cust_email = mysql_escape_mimic($_POST['cust_email']);
-//        $cust_site = mysql_escape_mimic($_POST['cust_site']);
-//        $cust_logo = mysql_escape_mimic($_POST['cust_logo']);
-//        
-//        $result = array();
-//        global $wsdl;
-//        set_time_limit(0);
-//        $response = $wsdl->addCustomer(array("cust_comp"=>$cust_comp,"cust_name"=>$cust_name,"cust_title"=>$cust_title, 
-//            "cust_add_1"=>$cust_add_1,"cust_add_2"=>$cust_add_2,"cust_city"=>$cust_city,
-//            "cust_cnt_id"=>$cust_cnt_id,"cust_tel_1"=>$cust_tel_1,"cust_tel_2"=>$cust_tel_2,
-//            "cust_fax"=>$cust_fax,"cust_email"=>$cust_email,"cust_site"=>$cust_site,"cust_logo"=>$cust_logo));
-//
-//        $result["msg"] = $response->return;
-//        echo(json_encode($result));        
-//
-//        exit;
-//    }
-//}
-//
+
 
 //function getBranches($bra_id){
 //    global $wsdl;
