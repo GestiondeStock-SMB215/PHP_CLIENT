@@ -75,10 +75,8 @@ $(document).ready(function(){
             <input class="btnRegister" type="reset" value="RESET"   style="float:left;"/>
             <input class="btnRegister" type="button" value="CANCEL" onclick="javascript:window.location.href='show.php'" style="float:left;"/>
            
-           
-           
-        <div class="loader"></div>
-        <div class="lblMsg" id="lblMsg"></div>
+            <div class="loader"></div>
+            <div class="lblMsg" id="lblMsg"></div>
    </div>
 </form>
 <?php
