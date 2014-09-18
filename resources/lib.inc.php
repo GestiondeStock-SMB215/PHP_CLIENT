@@ -105,15 +105,16 @@
         
         foreach($fullPages as $page){
             if($page["page_parent_id"] == 0 && $page["page_in_menu"] == 1){
-                echo "<ul class=\"topMenu\">";
-                    echo "<li class=\"title\">".$page["page_name"]."</li>";
-                    echo "<ul id=\"".$page["page_name"]."\" class=\"sub\">";
+                    echo "<div class=\"topMenu\">";
+                    echo "<div class=\"title\">".$page["page_name"]."</div>";
+                    echo "<div id=\"".$page["page_name"]."\" class=\"sub\">";
                     foreach($fullPages as $subpage){
                         if(($subpage["page_parent_id"] == $page["page_id"]) && ($subpage["page_in_menu"] == 1)){
-                            echo "<li class=\"ttlSub\"><a href=\"".$subpage["page_url"]."\">".$subpage["page_name"]."</a></li>";     
+                            echo "<div class=\"ttlSub\"><a href=\"".$subpage["page_url"]."\">".$subpage["page_name"]."</a></div>";     
                         }
                     }
-                echo "</ul></ul>";
+                echo "</div>";
+                echo "</div>";
             }
         }
     }

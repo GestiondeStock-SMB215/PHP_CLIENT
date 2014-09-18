@@ -28,9 +28,9 @@ ul{margin:0;padding:0;list-style:none;}
 .header .innerHead .logo{width:125px;height:105px;margin:20px 0;background-image:url('../img/logo.png');background-repeat:no-repeat;float: left;}
 .header .innerHead .leftHeader{float: right;}
 .header .innerHead .leftHeader .welcome{cursor:pointer;padding-top:20px;font-size:18px;}
-.header .innerHead .menu{width:815px;float:left;margin-top:48px;margin-left:15px;position: relative;z-index: 555;}
+.header .innerHead .menu{width:815px;height:30px;float:left;margin-top:48px;margin-left:15px;position: relative;z-index: 555;}
 .header .innerHead .menu .topMenu{float:left;position: relative;z-index: 555;}
-.header .innerHead .menu .topMenu .title{width:160px;height:24px;cursor: pointer;text-align: center;float: left;}
+.header .innerHead .menu .topMenu .title{width:160px;height:24px;cursor: pointer;text-align: center;}
 .header .innerHead .menu .topMenu .title:hover{background-color:#eee;}
 .header .innerHead .menu .topMenu .sub{width:160px;height:auto;background-color:#bbb;display:none;text-align: center;}
 .header .innerHead .menu .topMenu .sub .ttlSub{cursor: pointer;height:25px;display: inline-block;}
