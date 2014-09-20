@@ -114,7 +114,7 @@ function addUser() {
                                             },
                                             success      : function(result){
                                                 console.log(result.msg);
-                                                if(result.msg == "1"){
+                                                if(result.msg != "0"){
                                                     $('#lblMsg').html("User has been added successfuly");
                                                 }
                                                 else{
@@ -272,7 +272,7 @@ function addPage(){
             success      : function(result){
                 
                 console.log(result.msg);
-                if(result.msg == "1"){
+                if(result.msg != "0"){
                     $('#lblMsg').html("Page has been added successfuly");
                 }
                 else{
@@ -326,7 +326,7 @@ function addBranch(){
             },
             success      : function(result){
                 console.log(result.msg);
-                if(result.msg == "1"){
+                if(result.msg != "0"){
                     $('#lblMsg').html("Branch has been added successfuly");
                 }
                 else{
@@ -420,7 +420,7 @@ function addCategory(){
             success      : function(result){
                 
                 console.log(result.msg);
-                if(result.msg == "1"){
+                if(result.msg != "0"){
                     $('#lblMsg').html("Category has been added successfuly");
                 }
                 else{
@@ -511,7 +511,7 @@ function addCustomer(){
             success      : function(result){
                 
                 console.log(result.msg);
-                if(result.msg == "1"){
+                if(result.msg != "0"){
                     $('#lblMsg').html("Customer has been added successfuly");
                 }
                 else{
@@ -619,7 +619,7 @@ function addProduct(){
             },
             success      : function(result){
                 console.log(result.msg);
-                if(result.msg == "1"){
+                if(result.msg != "0"){
                     $('#lblMsg').html("Supplier has been added successfuly");
                 }
                 else{
@@ -730,7 +730,7 @@ function addSupplier(){
             success      : function(result){
                 
                 console.log(result.msg);
-                if(result.msg == "1"){
+                if(result.msg != "0"){
                     $('#lblMsg').html("Supplier has been added successfuly");
                 }
                 else{
@@ -788,6 +788,189 @@ function editSupplier(){
                 }
                 else{
                     $('#lblMsg').html("Supplier has not been edited.");
+                }                
+            }
+        });
+    }
+    else{
+        $('#lblMsg').html("Please fill in all required fields");
+    }
+}
+function addOrderOut(){
+   
+    order_out_sup_id      = $("#order_out_sup_id").val();
+    order_out_date        = $("#order_out_date").val();
+    order_out_del_date    = $("#order_out_del_date").val();
+    order_status          = $("#order_status").val();
+    
+
+    wantedData = {order_out_sup_id:order_out_sup_id, order_out_date:order_out_date,
+                  order_out_del_date:order_out_del_date,order_status:order_status };
+        
+    if(order_out_sup_id != ""){
+        $.ajax({
+            type         : "POST",
+            url          : "/resources/ajax.php?func=addOrderOut",
+            data         : wantedData,
+            cache        : false,
+            dataType     : "json",
+            beforeSend   : function () {
+                $('#lblMsg').html("");
+                $('#loader').show();
+            },
+            complete: function () {
+                $('#loader').hide();
+            },
+            success      : function(result){
+                
+                console.log(result.msg);
+                if(result.msg != "0"){
+                    $('#lblMsg').html("Order has been added successfuly");
+                }
+                else{
+                    $('#lblMsg').html("Order has not been added.");
+                }                
+            }
+        });
+    }
+    else{
+        $('#lblMsg').html("Please fill in all required fields");
+    }
+}
+
+function editOrderOut(){
+   
+    order_out_id          = $("#order_out_id").val();
+    order_out_sup_id      = $("#order_out_sup_id").val();
+    order_out_date        = $("#order_out_date").val();
+    order_out_del_date    = $("#order_out_del_date").val();
+    order_status          = $("#order_status").val();
+    
+
+    wantedData = {order_out_id:order_out_id,order_out_sup_id:order_out_sup_id, order_out_date:order_out_date,
+                  order_out_del_date:order_out_del_date,order_status:order_status };
+        
+    if(order_out_id != "" && order_out_sup_id != ""){
+        $.ajax({
+            type         : "POST",
+            url          : "/resources/ajax.php?func=editOrderOut",
+            data         : wantedData,
+            cache        : false,
+            dataType     : "json",
+            beforeSend   : function () {
+                $('#lblMsg').html("");
+                $('#loader').show();
+            },
+            complete: function () {
+                $('#loader').hide();
+            },
+            success      : function(result){
+                
+                console.log(result.msg);
+                if(result.msg == "1"){
+                    $('#lblMsg').html("Order has been edited successfuly");
+                }
+                else{
+                    $('#lblMsg').html("Order has not been edited.");
+                }                
+            }
+        });
+    }
+    else{
+        $('#lblMsg').html("Please fill in all required fields");
+    }
+}
+function addShipper(){
+    ship_name         = $("#ship_name").val();
+    ship_type         = $("#ship_type").val();
+    ship_add_1        = $("#ship_add_1").val();
+    ship_add_2        = $("#ship_add_2").val();
+    ship_tel_1        = $("#ship_tel_1").val();
+    ship_tel_2        = $("#ship_tel_2").val();
+    ship_fax          = $("#ship_fax").val();
+    ship_email        = $("#ship_email").val();
+    ship_taxable      = $("#ship_taxable").val();
+    if(ship_taxable =='on'){
+        ship_taxable='1';
+    }else{
+        ship_taxable='0';
+    }
+    wantedData = {ship_name:ship_name, ship_type:ship_type, ship_add_1:ship_add_1,
+                  ship_add_2:ship_add_2, ship_tel_1:ship_tel_1, ship_tel_2:ship_tel_2,
+                  ship_fax:ship_fax, ship_email:ship_email,ship_taxable:ship_taxable};
+        
+    if(ship_name != "" && ship_type != ""){
+        $.ajax({
+            type         : "POST",
+            url          : "/resources/ajax.php?func=addShipper",
+            data         : wantedData,
+            cache        : false,
+            dataType     : "json",
+            beforeSend   : function () {
+                $('#lblMsg').html("");
+                $('#loader').show();
+            },
+            complete: function () {
+                $('#loader').hide();
+            },
+            success      : function(result){
+                
+                console.log(result.msg);
+                if(result.msg != "0"){
+                    $('#lblMsg').html("Shipper has been added successfuly");
+                }
+                else{
+                    $('#lblMsg').html("Shipper has not been added.");
+                }                
+            }
+        });
+    }
+    else{
+        $('#lblMsg').html("Please fill in all required fields");
+    }
+}
+function editShipper(){
+    ship_id           = $("#ship_id").val();
+    ship_name         = $("#ship_name").val();
+    ship_type         = $("#ship_type").val();
+    ship_add_1        = $("#ship_add_1").val();
+    ship_add_2        = $("#ship_add_2").val();
+    ship_tel_1        = $("#ship_tel_1").val();
+    ship_tel_2        = $("#ship_tel_2").val();
+    ship_fax          = $("#ship_fax").val();
+    ship_email        = $("#ship_email").val();
+    ship_taxable      = $("#ship_taxable").val();
+    if(ship_taxable =='on'){
+        ship_taxable='1';
+    }else{
+        ship_taxable='0';
+    }
+    wantedData = {ship_id:ship_id,ship_name:ship_name, ship_type:ship_type, ship_add_1:ship_add_1,
+                  ship_add_2:ship_add_2, ship_tel_1:ship_tel_1, ship_tel_2:ship_tel_2,
+                  ship_fax:ship_fax, ship_email:ship_email,ship_taxable:ship_taxable};
+        
+    if(ship_name != "" && ship_type != ""){
+        $.ajax({
+            type         : "POST",
+            url          : "/resources/ajax.php?func=editShipper",
+            data         : wantedData,
+            cache        : false,
+            dataType     : "json",
+            beforeSend   : function () {
+                $('#lblMsg').html("");
+                $('#loader').show();
+            },
+            complete: function () {
+                $('#loader').hide();
+            },
+            success      : function(result){
+                
+                console.log(result.msg);
+                if(result.msg == "1"){
+                    $('#lblMsg').html("Shipper has been edited successfuly");
+                }
+                else{
+                    $('#lblMsg').html("Shipper has not been edited.");
                 }                
             }
         });

@@ -16,8 +16,6 @@ $(document).ready(function() {
             <th>ID</th>
             <th>Source Branch</th>
             <th>Destination Branch</th>
-            <th>Send Date</th>
-            <th>Delete Date</th>
             <th>Status</th>
             <th>Time Stamp</th>
             <th>Edit</th>
@@ -33,7 +31,6 @@ $(document).ready(function() {
                     echo "<td>".$obj["trans_id"]."</td>";
                     echo "<td>".$obj["trans_src_bra_id"]."</td>";
                     echo "<td>".$obj["trans_dest_bra_id"]."</td>";
-                    echo "<td>".$obj["trans_del_date"]."</td>";
                     echo "<td>".$obj["trans_status"]."</td>";
                     echo "<td>".$obj["trans_time_stamp"]."</td>";
                 echo "<td><a href=\"edit.php?trans_id=".$obj["trans_id"].""."\">Edit</a></td>";
@@ -47,8 +44,6 @@ $(document).ready(function() {
             <th>ID</th>
             <th>Source Branch</th>
             <th>Destination Branch</th>
-            <th>Send Date</th>
-            <th>Delete Date</th>
             <th>Status</th>
             <th>Time Stamp</th>
             <th>Edit</th>
