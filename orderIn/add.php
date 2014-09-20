@@ -8,13 +8,15 @@ require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 <div class="orderInContainer">
     <div class="txtInputDate">
         <div class="lbl">Date Time</div>  
-        <div class="calendarTxt lblInput" ></div>         
-        <div class="infoHolder dateTime" style="display:none;">
+        <input tye="text" class="inputDate" id="orderInDate" />   
+        <div class="clear"></div>
+        <div class="infoHolder dateTime" style="display:none;float:right;">
             <div class="infoHolderContent">
                 <div id="datepicker"></div>
                 <div class="calendarInfoBox"></div>
             </div>                       
         </div>
+        <div class="calendarTxt" style="display: none;"></div>  
     </div>
     <div class="clear"></div>
     <div class="txtInput">
@@ -37,15 +39,19 @@ require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
         <div class="lbl">Total</div>
         <input id="" class="lblInput" type="text" />
     </div>
-    <input id="btnRegister" class="btnRegister" type="button" type="button" value="Register" />
-    <input id="" class="btnRegister" name="Back" type="button" value="Cancel" onclick="javascript=window.location.href='show.php'" />        
-    <div class="loader"></div>
-    <div class="lblMsg" id="lblMsg"></div>
+    <div class="txtInput" style="height:100px;">
+        <input id="btnAdd" class="btnRegister" type="button" type="button" value="Add Product" />
+        <input id="btnRegister" class="btnRegister" type="button" type="button" value="Register" />
+        <input id="" class="btnRegister" name="Back" type="button" value="Cancel" onclick="javascript=window.location.href='show.php'" />        
+        <div class="loader"></div>
+        <div class="lblMsg" id="lblMsg"></div>
+    </div>
 </div>
 
 <script type="text/javascript">
     $(document).ready(function (){
         $(".calendarTxt").html($.datepicker.formatDate('dd/MM/yy', new Date()));
+        $("#orderInDate").val($.datepicker.formatDate("dd/MM/yy", new Date()));
 
         $("#datepicker").datepicker({ prevText: '<', nextText: '>', minDate: 0, autoSize: true, onChangeMonthYear: function () { $(".calendarInfoBox").hide() }, onSelect: function (dateText, inst) {
             dd = dateText;
@@ -60,9 +66,14 @@ require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
             d.css("position", 'absolute');
             var position = $(".ui-state-active").parent().position();
             $(".calendarTxt").html($.datepicker.formatDate("dd/MM/yy", new Date(dd)));
+             $("#orderInDate").val($.datepicker.formatDate("dd/MM/yy", new Date(dd)));
             $(".calendarInfoBox").css("left", (position.left + 35) + 'px');
             $(".calendarInfoBox").css("top", (position.top - 7) + 'px');
             $("#dateLanguage").html(ddd);
+        });
+        
+        $("#orderInDate").click(function(){
+            $(".infoHolder").slideToggle();
         });
         
     });
