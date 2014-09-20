@@ -9,8 +9,8 @@
         <script src="/resources/js/jquery-2.1.1.min.js"></script>   
         <script src="/resources/js/datatables.js"></script>   
         <script src="/resources/js/tabetools.js"></script>   
-        <script src="/resources/js/main.js"></script>   
-        
+        <script src="/resources/js/main.js"></script> 
+                 
         <link type="text/css" rel="stylesheet" href="/resources/css/style.css" />
         <link type="text/css" rel="stylesheet" href="/resources/css/datatables.css" />
         <link type="text/css" rel="stylesheet" href="/resources/css/tabletools.css" />

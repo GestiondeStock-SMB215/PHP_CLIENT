@@ -4,7 +4,7 @@
 <script>
 $(document).ready(function(){
     $("#btnRegister").click(function () {
-        addPage()();
+        addPage();
     });
     $("#registerForm").keypress(function (event) {
         if(event.which === 13){
