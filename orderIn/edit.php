@@ -40,9 +40,8 @@ require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
         <input id="" class="lblInput" type="text" />
     </div>
     <div class="txtInput" style="height:100px;">
-        <input id="btnAdd" class="btnRegister" type="button" type="button" value="Add Product" />
-        <input id="btnRegister" class="btnRegister" type="button" type="button" value="Register" />
-        <input id="" class="btnRegister" name="Back" type="button" value="Cancel" onclick="javascript=window.location.href='show.php'" />        
+        <input id="btnEdit" class="btnRegister" type="button" type="button" value="Edit Product" />
+        <input id="btnCancel" class="btnRegister" name="Back" type="button" value="Cancel" onclick="javascript=window.location.href='show.php'" />        
         <div class="loader"></div>
         <div class="lblMsg" id="lblMsg"></div>
     </div>
@@ -74,6 +73,10 @@ require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
         
         $("#orderInDate").click(function(){
             $(".infoHolder").slideToggle();
+        });
+        
+        $("#btnEdit").click(function(){
+            
         });
         
     });
