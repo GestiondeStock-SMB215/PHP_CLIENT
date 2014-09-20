@@ -577,6 +577,120 @@ function editCustomer(){
         $('#lblMsg').html("Please fill in all required fields");
     }
 }
+function addProduct(){
+    prod_cat_id       = $("#prod_cat_id").val();
+    prod_sku          = $("#prod_sku").val();
+    prod_upc          = $("#prod_upc").val();
+    prod_name         = $("#prod_name").val();
+    prod_desc         = $("#prod_desc").val();
+//  prod_qty          = $("#prod_qty").val();
+    prod_color        = $("#prod_color").val();
+    prod_size         = $("#prod_size").val();
+    prod_weight       = $("#prod_weight").val();
+    prod_sup_id       = $("#prod_sup_id").val();
+    prod_status       = $("#prod_status").val();
+
+    wantedData = {
+        prod_cat_id:prod_cat_id,
+        prod_sku:prod_sku,
+        prod_upc:prod_upc,
+        prod_name:prod_name,
+        prod_desc:prod_desc,
+//      prod_qty:prod_qty,
+        prod_color:prod_color,
+        prod_size:prod_size,
+        prod_weight:prod_weight,
+        prod_sup_id:prod_sup_id,
+        prod_status:prod_status};
+        
+    if(prod_cat_id != "" && prod_name != "" && prod_sup_id != ""){
+        $.ajax({
+            type         : "POST",
+            url          : "/resources/ajax.php?func=addProduct",
+            data         : wantedData,
+            cache        : false,
+            dataType     : "json",
+            beforeSend   : function () {
+                $('#lblMsg').html("");
+                $('#loader').show();
+            },
+            complete: function () {
+                $('#loader').hide();
+            },
+            success      : function(result){
+                console.log(result.msg);
+                if(result.msg == "1"){
+                    $('#lblMsg').html("Supplier has been added successfuly");
+                }
+                else{
+                    $('#lblMsg').html("Supplier has not been added.");
+                }
+                
+            }
+        });
+    }
+    else{
+        $('#lblMsg').html("Please fill in all required fields");
+    }
+}
+function editProduct(){
+    prod_id           = $("#prod_id").val();
+    prod_cat_id       = $("#prod_cat_id").val();
+    prod_sku          = $("#prod_sku").val();
+    prod_upc          = $("#prod_upc").val();
+    prod_name         = $("#prod_name").val();
+    prod_desc         = $("#prod_desc").val();
+//  prod_qty          = $("#prod_qty").val();
+    prod_color        = $("#prod_color").val();
+    prod_size         = $("#prod_size").val();
+    prod_weight       = $("#prod_weight").val();
+    prod_sup_id       = $("#prod_sup_id").val();
+    prod_status       = $("#prod_status").val();
+
+    wantedData = {
+        prod_id:prod_id,
+        prod_cat_id:prod_cat_id,
+        prod_sku:prod_sku,
+        prod_upc:prod_upc,
+        prod_name:prod_name,
+        prod_desc:prod_desc,
+//      prod_qty:prod_qty,
+        prod_color:prod_color,
+        prod_size:prod_size,
+        prod_weight:prod_weight,
+        prod_sup_id:prod_sup_id,
+        prod_status:prod_status};
+        
+    if(prod_cat_id != "" && prod_name != "" && prod_sup_id != ""){
+        $.ajax({
+            type         : "POST",
+            url          : "/resources/ajax.php?func=editProduct",
+            data         : wantedData,
+            cache        : false,
+            dataType     : "json",
+            beforeSend   : function () {
+                $('#lblMsg').html("");
+                $('#loader').show();
+            },
+            complete: function () {
+                $('#loader').hide();
+            },
+            success      : function(result){
+                console.log(result.msg);
+                if(result.msg == "1"){
+                    $('#lblMsg').html("Supplier has been edited successfuly");
+                }
+                else{
+                    $('#lblMsg').html("Supplier has not been edited.");
+                }
+                
+            }
+        });
+    }
+    else{
+        $('#lblMsg').html("Please fill in all required fields");
+    }
+}
 function addSupplier(){
     sup_comp          = $("#sup_comp").val();
     sup_name          = $("#sup_name").val();
@@ -629,37 +743,33 @@ function addSupplier(){
         $('#lblMsg').html("Please fill in all required fields");
     }
 }
+function editSupplier(){
+    sup_id            = $("#sup_id").val();
+    sup_comp          = $("#sup_comp").val();
+    sup_name          = $("#sup_name").val();
+    sup_title         = $("#sup_title").val();
+    sup_add_1         = $("#sup_add_1").val();
+    sup_add_2         = $("#sup_add_2").val();
+    sup_city          = $("#sup_city").val();
+    sup_cnt_id        = $("#sup_cnt_id").val();
+    sup_tel_1         = $("#sup_tel_1").val();
+    sup_tel_2         = $("#sup_tel_2").val();
+    sup_fax           = $("#sup_fax").val();
+    sup_email         = $("#sup_email").val();
+    sup_site          = $("#sup_site").val();
+    sup_logo          = $("#sup_logo").val();
 
-function addProduct(){
-    prod_cat_id       = $("#prod_cat_id").val();
-    prod_sku          = $("#prod_sku").val();
-    prod_upc          = $("#prod_upc").val();
-    prod_name         = $("#prod_name").val();
-    prod_desc         = $("#prod_desc").val();
-//  prod_qty          = $("#prod_qty").val();
-    prod_color        = $("#prod_color").val();
-    prod_size         = $("#prod_size").val();
-    prod_weight       = $("#prod_weight").val();
-    prod_sup_id       = $("#prod_sup_id").val();
-    prod_status       = $("#prod_status").val();
-
-    wantedData = {
-        prod_cat_id:prod_cat_id,
-        prod_sku:prod_sku,
-        prod_upc:prod_upc,
-        prod_name:prod_name,
-        prod_desc:prod_desc,
-//      prod_qty:prod_qty,
-        prod_color:prod_color,
-        prod_size:prod_size,
-        prod_weight:prod_weight,
-        prod_sup_id:prod_sup_id,
-        prod_status:prod_status};
+    wantedData = {sup_id:sup_id,sup_comp:sup_comp, sup_name:sup_name, sup_title:sup_title,
+                  sup_add_1:sup_add_1, sup_add_2:sup_add_2, sup_city:sup_city,
+                  sup_cnt_id:sup_cnt_id, sup_tel_1:sup_tel_1, sup_tel_2:sup_tel_2,
+                  sup_fax:sup_fax, sup_email:sup_email, sup_site:sup_site, sup_logo:sup_logo };
         
-    if(prod_cat_id != "" && prod_name != "" && prod_sup_id != ""){
+    if(sup_comp != "" && sup_name != "" && sup_add_1 != ""
+       && sup_cnt_id != "" && sup_tel_1 != "" && sup_fax != ""
+       && sup_email != "" && sup_site != ""){
         $.ajax({
             type         : "POST",
-            url          : "/resources/ajax.php?func=addProduct",
+            url          : "/resources/ajax.php?func=editSupplier",
             data         : wantedData,
             cache        : false,
             dataType     : "json",
@@ -671,14 +781,14 @@ function addProduct(){
                 $('#loader').hide();
             },
             success      : function(result){
+                
                 console.log(result.msg);
                 if(result.msg == "1"){
-                    $('#lblMsg').html("Supplier has been added successfuly");
+                    $('#lblMsg').html("Supplier has been edited successfuly");
                 }
                 else{
-                    $('#lblMsg').html("Supplier has not been added.");
-                }
-                
+                    $('#lblMsg').html("Supplier has not been edited.");
+                }                
             }
         });
     }

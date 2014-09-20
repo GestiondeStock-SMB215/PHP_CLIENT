@@ -467,38 +467,140 @@ function addProduct(){
         exit;
     }
 }
+function editProduct(){
+//    logToFile(json_encode($_POST));
+    if (isset($_POST['prod_id'])) {
+        $prod_id = mysql_escape_mimic($_POST['prod_id']);
+        $prod_cat_id = mysql_escape_mimic($_POST['prod_cat_id']);
+        $prod_sku = mysql_escape_mimic($_POST['prod_sku']);
+        $prod_upc = mysql_escape_mimic($_POST['prod_upc']);
+        $prod_name = mysql_escape_mimic($_POST['prod_name']);
+        $prod_desc = mysql_escape_mimic($_POST['prod_desc']);
+//      $prod_qty = mysql_escape_mimic($_POST['prod_qty']);
+        $prod_color = mysql_escape_mimic($_POST['prod_color']);
+        $prod_size = mysql_escape_mimic($_POST['prod_size']);
+        $prod_weight = mysql_escape_mimic($_POST['prod_weight']);
+        $prod_sup_id = mysql_escape_mimic($_POST['prod_sup_id']);
+        $prod_status = mysql_escape_mimic($_POST['prod_status']);
+        
+        $res = aeObj(
+            "Product", 
+            array(
+                "prod_id" =>$prod_id,
+                "prod_cat_id"=>$prod_cat_id,
+                "prod_sku"=>$prod_sku,
+                "prod_upc"=>$prod_upc, 
+                "prod_name"=>$prod_name,
+                "prod_desc"=>$prod_desc,
+                "prod_qty"=>"0",
+                "prod_color"=>$prod_color,
+                "prod_size"=>$prod_size,
+                "prod_weight"=>$prod_weight,
+                "prod_sup_id"=>$prod_sup_id,
+                "prod_status"=>$prod_status,
+                "prod_pic"=>"none", 
+                "prod_vend_id"=>"0"
+            )
+        );
+        
+        $result["msg"] = "$res";
+        
+//        logToFile(json_encode($result));
+        echo(json_encode($result));        
 
-//function addSupplier(){
-//    if (isset($_POST['sup_comp'])) {
-//        $sup_comp = mysql_escape_mimic($_POST['sup_comp']);
-//        $sup_name = mysql_escape_mimic($_POST['sup_name']);
-//        $sup_title = mysql_escape_mimic($_POST['sup_title']);
-//        $sup_add_1 = mysql_escape_mimic($_POST['sup_add_1']);
-//        $sup_add_2 = mysql_escape_mimic($_POST['sup_add_2']);
-//        $sup_city = mysql_escape_mimic($_POST['sup_city']);
-//        $sup_cnt_id = mysql_escape_mimic($_POST['sup_cnt_id']);
-//        $sup_tel_1 = mysql_escape_mimic($_POST['sup_tel_1']);
-//        $sup_tel_2 = mysql_escape_mimic($_POST['sup_tel_2']);
-//        $sup_fax = mysql_escape_mimic($_POST['sup_fax']);
-//        $sup_email = mysql_escape_mimic($_POST['sup_email']);
-//        $sup_site = mysql_escape_mimic($_POST['sup_site']);
-//        $sup_logo = mysql_escape_mimic($_POST['sup_logo']);
-//        
-//        $result = array();
-//        global $wsdl;
-//        set_time_limit(0);
-//        $response = $wsdl->addSupplier(array("sup_comp"=>$sup_comp,"sup_name"=>$sup_name,"sup_title"=>$sup_title, 
-//            "sup_add_1"=>$sup_add_1,"sup_add_2"=>$sup_add_2,"sup_city"=>$sup_city,
-//            "sup_cnt_id"=>$sup_cnt_id,"sup_tel_1"=>$sup_tel_1,"sup_tel_2"=>$sup_tel_2,
-//            "sup_fax"=>$sup_fax,"sup_email"=>$sup_email,"sup_site"=>$sup_site,"sup_logo"=>$sup_logo));
-//
-//        $result["msg"] = $response->return;
-//        echo(json_encode($result));        
-//
-//        exit;
-//    }
-//}
-//
+        exit;
+    }
+}
+function addSupplier(){
+    if (isset($_POST['sup_comp'])) {
+        
+        $sup_comp = mysql_escape_mimic($_POST['sup_comp']);
+        $sup_name = mysql_escape_mimic($_POST['sup_name']);
+        $sup_title = mysql_escape_mimic($_POST['sup_title']);
+        $sup_add_1 = mysql_escape_mimic($_POST['sup_add_1']);
+        $sup_add_2 = mysql_escape_mimic($_POST['sup_add_2']);
+        $sup_city = mysql_escape_mimic($_POST['sup_city']);
+        $sup_cnt_id = mysql_escape_mimic($_POST['sup_cnt_id']);
+        $sup_tel_1 = mysql_escape_mimic($_POST['sup_tel_1']);
+        $sup_tel_2 = mysql_escape_mimic($_POST['sup_tel_2']);
+        $sup_fax = mysql_escape_mimic($_POST['sup_fax']);
+        $sup_email = mysql_escape_mimic($_POST['sup_email']);
+        $sup_site = mysql_escape_mimic($_POST['sup_site']);
+        
+        $res = aeObj(
+            "Supplier", 
+            array(
+                "sup_id" => "-1",
+                "sup_comp"=>$sup_comp,
+                "sup_name"=>$sup_name,
+                "sup_title"=>$sup_title, 
+                "sup_add_1"=>$sup_add_1,
+                "sup_add_2"=>$sup_add_2,
+                "sup_city"=>$sup_city,
+                "sup_cnt_id"=>$sup_cnt_id,
+                "sup_tel_1"=>$sup_tel_1,
+                "sup_tel_2"=>$sup_tel_2,
+                "sup_fax"=>$sup_fax,
+                "sup_email"=>$sup_email,
+                "sup_site"=>$sup_site,
+                "sup_logo"=>"0"
+                )
+             );
+
+        $result["msg"] = "$res";
+        
+//        logToFile(json_encode($result));
+        echo(json_encode($result));        
+
+        exit;
+    }
+}
+function editSupplier(){
+    if (isset($_POST['sup_comp'])) {
+        
+        $sup_id = mysql_escape_mimic($_POST['sup_id']);
+        $sup_comp = mysql_escape_mimic($_POST['sup_comp']);
+        $sup_name = mysql_escape_mimic($_POST['sup_name']);
+        $sup_title = mysql_escape_mimic($_POST['sup_title']);
+        $sup_add_1 = mysql_escape_mimic($_POST['sup_add_1']);
+        $sup_add_2 = mysql_escape_mimic($_POST['sup_add_2']);
+        $sup_city = mysql_escape_mimic($_POST['sup_city']);
+        $sup_cnt_id = mysql_escape_mimic($_POST['sup_cnt_id']);
+        $sup_tel_1 = mysql_escape_mimic($_POST['sup_tel_1']);
+        $sup_tel_2 = mysql_escape_mimic($_POST['sup_tel_2']);
+        $sup_fax = mysql_escape_mimic($_POST['sup_fax']);
+        $sup_email = mysql_escape_mimic($_POST['sup_email']);
+        $sup_site = mysql_escape_mimic($_POST['sup_site']);
+        
+        $res = aeObj(
+            "Supplier", 
+            array(
+                "sup_id" =>$sup_id,
+                "sup_comp"=>$sup_comp,
+                "sup_name"=>$sup_name,
+                "sup_title"=>$sup_title, 
+                "sup_add_1"=>$sup_add_1,
+                "sup_add_2"=>$sup_add_2,
+                "sup_city"=>$sup_city,
+                "sup_cnt_id"=>$sup_cnt_id,
+                "sup_tel_1"=>$sup_tel_1,
+                "sup_tel_2"=>$sup_tel_2,
+                "sup_fax"=>$sup_fax,
+                "sup_email"=>$sup_email,
+                "sup_site"=>$sup_site,
+                "sup_logo"=>"none"
+                )
+             );
+
+        $result["msg"] = "$res";
+        
+//        logToFile(json_encode($result));
+        echo(json_encode($result));        
+
+        exit;
+    }
+}
+
 
 
 //function getBranches($bra_id){

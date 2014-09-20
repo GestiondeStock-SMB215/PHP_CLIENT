@@ -19,12 +19,17 @@ $(document).ready(function(){
         <h3>SUPPLIER</h3>
         <div class="lbl">Company:
             <input type="text" class="input" id="sup_comp"/></div>
-
-        <div class="lbl">Name:
-            <input type="text" class="input" id="sup_name" /></div>
             
             <div class="lbl">Title:
-            <input type="text" class="input" id="sup_title" /></div>
+                <select class="input" id="sup_title" required>
+                    <option value="">Please choose</option>
+                    <option value="Mr.">Mr.</option>
+                    <option value="Ms.">Ms.</option>
+                </select>
+            </div>
+        
+        <div class="lbl">Name:
+            <input type="text" class="input" id="sup_name" /></div>
 
         <div class="lbl">Address 1:
             <input type="text" class="input" id="sup_add_1" /></div>
@@ -36,16 +41,16 @@ $(document).ready(function(){
             <input type="text" class="input" id="sup_city" /></div>
 
         <div class="lbl">Country:
-            <select class="input" id="sup_cnt_id" value="<?= $sup['sup_cnt_id']?>">
-                <?php
-                    foreach($country as $cnt){
-                        if($sup["sup_cnt_id"] == $cnt["cnt_id"]){
-                            echo "<option selected value=\"".$cnt["cnt_id"]."\">".$cnt["cnt_name"]."</option>";
+            <select class="input" id="sup_cnt_id">
+            <option value="">Please choose</option>
+            <?php
+                $countries = readObj("Country", "cnt_id", "-1");
+                foreach($countries as $cnt){
+                     if($cnt["cnt_nicename"] == "Lebanon"){
+                            echo "<option value=\"".$cnt["cnt_id"]."\" selected>".$cnt["cnt_nicename"]."</option>";
                         }
-                        else{
-                            echo "<option value=\"".$cnt["cnt_id"]."\">".$cnt["cnt_name"]."</option>";
-                        }
-                    }
+                         echo "<option value=\"".$cnt["cnt_id"]."\">".$cnt["cnt_nicename"]."</option>";
+                }
                 ?>
             </select>
         </div>

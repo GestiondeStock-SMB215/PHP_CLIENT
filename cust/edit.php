@@ -22,9 +22,6 @@ $(document).ready(function(){
         <h3>CUSTOMER</h3>
         <div class="lbl">Company:
             <input type="text" class="input" id="cust_comp" value="<?= $cust['cust_comp']?>"/></div>
-
-        <div class="lbl">Name:
-            <input type="text" class="input" id="cust_name" value="<?= $cust['cust_name']?>"/></div>
             
             <div class="lbl">Title:
                 <select class="input" id="cust_title">
@@ -39,6 +36,9 @@ $(document).ready(function(){
                         }
                     ?>
                 </select></div>
+        
+        <div class="lbl">Name:
+            <input type="text" class="input" id="cust_name" value="<?= $cust['cust_name']?>"/></div>
 
         <div class="lbl">Address 1:
             <input type="text" class="input" id="cust_add_1" value="<?= $cust['cust_add_1']?>"/></div>
