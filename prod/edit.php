@@ -77,6 +77,9 @@ $(document).ready(function(){
             ?>
             </select>
             </div>
+            
+            <div class="lbl">Price IN USD:
+            <input type="text" class="input" id="prod_up" value="<?= $prod['prod_up']?>"/></div>
         
             <div class="lbl">Status:
                 <select class="input" id="prod_status" value="<?= $prod['prod_status']?>" selected>

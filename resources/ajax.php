@@ -368,8 +368,8 @@ function addCustomer(){
             "cust_tel_2"=>$cust_tel_2,
             "cust_fax"=>$cust_fax,
             "cust_email"=>$cust_email,
-            "cust_site"=>$cust_site,
-            "cust_logo"=>"none"
+            "cust_site"=>$cust_site
+            
         )
     );
 
@@ -412,8 +412,7 @@ function editCustomer(){
             "cust_tel_2"=>$cust_tel_2,
             "cust_fax"=>$cust_fax,
             "cust_email"=>$cust_email,
-            "cust_site"=>$cust_site,
-            "cust_logo"=>"none"
+            "cust_site"=>$cust_site
         )
     );
 
@@ -454,7 +453,7 @@ function addProduct(){
                 "prod_weight"=>$prod_weight,
                 "prod_sup_id"=>$prod_sup_id,
                 "prod_status"=>$prod_status,
-                "prod_pic"=>"none", 
+                "prod_up"=>"0", 
                 "prod_vend_id"=>"0"
             )
         );
@@ -481,6 +480,7 @@ function editProduct(){
         $prod_size = mysql_escape_mimic($_POST['prod_size']);
         $prod_weight = mysql_escape_mimic($_POST['prod_weight']);
         $prod_sup_id = mysql_escape_mimic($_POST['prod_sup_id']);
+        $prod_prod_up = mysql_escape_mimic($_POST['prod_prod_up']);
         $prod_status = mysql_escape_mimic($_POST['prod_status']);
         
         $res = aeObj(
@@ -498,7 +498,7 @@ function editProduct(){
                 "prod_weight"=>$prod_weight,
                 "prod_sup_id"=>$prod_sup_id,
                 "prod_status"=>$prod_status,
-                "prod_pic"=>"none", 
+                "prod_up"=>$prod_up, 
                 "prod_vend_id"=>"0"
             )
         );
@@ -542,8 +542,7 @@ function addSupplier(){
                 "sup_tel_2"=>$sup_tel_2,
                 "sup_fax"=>$sup_fax,
                 "sup_email"=>$sup_email,
-                "sup_site"=>$sup_site,
-                "sup_logo"=>"0"
+                "sup_site"=>$sup_site
                 )
              );
 
@@ -587,8 +586,66 @@ function editSupplier(){
                 "sup_tel_2"=>$sup_tel_2,
                 "sup_fax"=>$sup_fax,
                 "sup_email"=>$sup_email,
-                "sup_site"=>$sup_site,
-                "sup_logo"=>"none"
+                "sup_site"=>$sup_site
+                )
+             );
+
+        $result["msg"] = "$res";
+        
+//        logToFile(json_encode($result));
+        echo(json_encode($result));        
+
+        exit;
+    }
+}
+
+function addOrderOut(){
+    if (isset($_POST['order_out_sup_id'])) {
+        
+        $order_out_sup_id = mysql_escape_mimic($_POST['order_out_sup_id']);
+        $order_out_date = mysql_escape_mimic($_POST['order_out_date']);
+        $order_out_del_date = mysql_escape_mimic($_POST['order_out_del_date']);
+        $order_status = mysql_escape_mimic($_POST['order_status']);
+       
+       
+        
+        $res = aeObj(
+            "OrderOut", 
+            array(
+                "order_out_id" => "-1",
+                "order_out_sup_id"=>$order_out_sup_id,
+                "order_out_date"=>$order_out_date,
+                "order_out_del_date"=>$order_out_del_date, 
+                "order_status"=>$order_status
+                )
+             );
+
+        $result["msg"] = "$res";
+        
+//        logToFile(json_encode($result));
+        echo(json_encode($result));        
+
+        exit;
+    }
+}
+function editOrderOut(){
+    if (isset($_POST['order_out_id'])) {
+        
+        $order_out_id = mysql_escape_mimic($_POST['order_out_id']);
+        $order_out_sup_id = mysql_escape_mimic($_POST['order_out_sup_id']);
+        $order_out_date = mysql_escape_mimic($_POST['order_out_date']);
+        $order_out_del_date = mysql_escape_mimic($_POST['order_out_del_date']);
+        $order_status = mysql_escape_mimic($_POST['order_status']);
+       
+        
+        $res = aeObj(
+            "OrderOut", 
+            array(
+                "order_out_id" => $order_out_id,
+                "order_out_sup_id"=>$order_out_sup_id,
+                "order_out_date"=>$order_out_date,
+                "order_out_del_date"=>$order_out_del_date, 
+                "order_status"=>$order_status
                 )
              );
 
@@ -602,24 +659,132 @@ function editSupplier(){
 }
 
 
+function addOrderOutDet(){
+    if (isset($_POST['order_out_det_order_id'])) {
+        
+        $order_out_det_order_id = mysql_escape_mimic($_POST['order_out_det_order_id']);
+        $order_out_det_prod_id = mysql_escape_mimic($_POST['order_out_det_prod_id']);
+        $order_out_det_qty = mysql_escape_mimic($_POST['order_out_det_qty']);
+       
+       
+        
+        $res = aeObj(
+            "OrderOutDet", 
+            array(
+                "order_out_det_id" => "-1",
+                "order_out_det_order_id"=>$order_out_det_order_id,
+                "order_out_det_prod_id"=>$order_out_det_prod_id,
+                "order_out_det_qty"=>$order_out_det_qty
+                )
+             );
 
-//function getBranches($bra_id){
-//    global $wsdl;
-//    set_time_limit(0);
-//    $objs = array();
-//    $response = $wsdl->getBranches(array("bra_id"=>$bra_id));
-//
-//    foreach($response->return as $item){
-//        $objs["bra_id"] = $item->bra_id;
-//        $objs["bra_name"] = $item->bra_name;
-//        $objs["bra_city"] = $item->bra_city; 
-//        $objs["bra_add_str"] = $item->bra_add_str; 
-//        $objs["bra_add_1"] = $item->bra_add_1;
-//        $objs["bra_tel_1"] = $item->bra_tel_1; 
-//        $objs["bra_tel_2"] = $item->bra_tel_2; 
-//        $objs["bra_fax"] = $item->bra_fax;
-//        $objs["bra_email"] = $item->bra_email;
-//        $objs["bra_time_stamp"] = $item->bra_time_stamp; 
-//    }       
-//    die (json_encode($objs));    
-//}
+        $result["msg"] = "$res";
+        
+//        logToFile(json_encode($result));
+        echo(json_encode($result));        
+
+        exit;
+    }
+}
+function editOrderOutDet(){
+    if (isset($_POST['order_out_det_id'])) {
+        
+        $order_out_det_id = mysql_escape_mimic($_POST['order_out_det_id']);
+        $order_out_det_order_id = mysql_escape_mimic($_POST['order_out_det_order_id']);
+        $order_out_det_prod_id = mysql_escape_mimic($_POST['order_out_det_prod_id']);
+        $order_out_det_qty = mysql_escape_mimic($_POST['order_out_det_qty']);
+       
+        
+        $res = aeObj(
+            "OrderOutDet", 
+            array(
+                "order_out_det_id" => $order_out_det_id,
+                "order_out_det_order_id"=>$order_out_det_order_id,
+                "order_out_det_prod_id"=>$order_out_det_prod_id,
+                "order_out_det_qty"=>$order_out_det_qty
+                )
+             );
+
+        $result["msg"] = "$res";
+        
+//        logToFile(json_encode($result));
+        echo(json_encode($result));        
+
+        exit;
+    }
+}
+function addShipper(){
+    if (isset($_POST['ship_name'])) {
+        
+        $ship_name = mysql_escape_mimic($_POST['ship_name']);
+        $ship_type = mysql_escape_mimic($_POST['ship_type']);
+        $ship_add_1 = mysql_escape_mimic($_POST['ship_add_1']);
+        $ship_add_2 = mysql_escape_mimic($_POST['ship_add_2']);
+        $ship_tel_1 = mysql_escape_mimic($_POST['ship_tel_1']);
+        $ship_tel_2 = mysql_escape_mimic($_POST['ship_tel_2']);
+        $ship_fax = mysql_escape_mimic($_POST['ship_fax']);
+        $ship_email = mysql_escape_mimic($_POST['ship_email']);
+        $ship_taxable = mysql_escape_mimic($_POST['ship_taxable']);
+        
+        $res = aeObj(
+            "Shipper", 
+            array(
+                "ship_id" => "-1",
+                "ship_name"=>$ship_name,
+                "ship_type"=>$ship_type,
+                "ship_add_1"=>$ship_add_1, 
+                "ship_add_2"=>$ship_add_2,
+                "ship_tel_1"=>$ship_tel_1,
+                "ship_tel_2"=>$ship_tel_2,
+                "ship_fax"=>$ship_fax,
+                "ship_email"=>$ship_email,
+                "ship_taxable"=>$ship_taxable
+                )
+             );
+
+        $result["msg"] = "$res";
+        
+//        logToFile(json_encode($result));
+        echo(json_encode($result));        
+
+        exit;
+    }
+}
+function editShipper(){
+    if (isset($_POST['ship_id'])) {
+        
+        $ship_id   = mysql_escape_mimic($_POST['ship_id']);
+        $ship_name = mysql_escape_mimic($_POST['ship_name']);
+        $ship_type = mysql_escape_mimic($_POST['ship_type']);
+        $ship_add_1 = mysql_escape_mimic($_POST['ship_add_1']);
+        $ship_add_2 = mysql_escape_mimic($_POST['ship_add_2']);
+        $ship_tel_1 = mysql_escape_mimic($_POST['ship_tel_1']);
+        $ship_tel_2 = mysql_escape_mimic($_POST['ship_tel_2']);
+        $ship_fax = mysql_escape_mimic($_POST['ship_fax']);
+        $ship_email = mysql_escape_mimic($_POST['ship_email']);
+        $ship_taxable = mysql_escape_mimic($_POST['ship_taxable']);
+        
+        $res = aeObj(
+            "Shipper", 
+            array(
+                "ship_id" => $ship_id,
+                "ship_name"=>$ship_name,
+                "ship_type"=>$ship_type,
+                "ship_add_1"=>$ship_add_1, 
+                "ship_add_2"=>$ship_add_2,
+                "ship_tel_1"=>$ship_tel_1,
+                "ship_tel_2"=>$ship_tel_2,
+                "ship_fax"=>$ship_fax,
+                "ship_email"=>$ship_email,
+                "ship_taxable"=>$ship_taxable
+                )
+             );
+
+        $result["msg"] = "$res";
+        
+//        logToFile(json_encode($result));
+        echo(json_encode($result));        
+
+        exit;
+    }
+}
