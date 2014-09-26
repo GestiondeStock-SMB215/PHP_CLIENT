@@ -76,11 +76,11 @@ ul{margin:0;padding:0;list-style:none;}
 /*OrderIn*/
 .orderInContainer{width:960px;margin: auto;margin-top:10px;}
 .orderInContainer .title{font-size:24px;font-weight:bold;margin-bottom:15px;}
-.orderInContainer .headOrderIn{width:960px;height:30px;}
-.orderInContainer .headOrderIn .lbl{width:150px;height:30px;float: left;text-align: center;}
-.orderInContainer .orderInContent{width:960px;height:40px;}
-.orderInContainer .orderInContent .lblInput{width:150px;height:40px;float:left;padding-left:5px;}
-.orderInContainer .orderInContent .inputDate{width:150px;height:40px;float:left;padding-left:5px;}
+.orderInContainer .tab{width:960px;height:auto;margin-top:20px;}
+.orderInContainer .tab .lbl{width:150px;height:30px;text-align: center;}
+.orderInContainer .tab{width:960px;height:40px;}
+.orderInContainer .tab .lblInput{width:150px;height:40px;float:left;padding-left:5px;}
+.orderInContainer .tab .inputDate{width:150px;height:40px;padding-left:5px;}
 
 .orderInContainer .btnRegister{width:150px;text-align:center;margin-left:10px;color:#fff;float:right;background-color:#5c5c5c;padding:1%;font-size:18px;cursor:pointer;}
 .orderInContainer .lblMsg{padding-left:10%;color:red;padding-bottom:10px;margin-top:30px;}
