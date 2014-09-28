@@ -1,18 +1,33 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 $product = readObj("Product", "prod_id", "-1"); 
+    $sup = readObj("Supplier", "sup_id", "-1");
 ?>
 <script type="text/javascript" src="../resources/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="../resources/js/jquery.ui.datepicker.js"></script>
 <link href="../resources/css/jquery.ui.datepicker.css" rel="stylesheet" /> 
 <script type="text/javascript">
+    var q;
     $(document).ready(function (){
         
-        $("#prod_id").blur(function(){
-        getDesc();
-        });
-        $("#prod_id").blur(function(){
-        getPrice();
+         $("#prod_id").blur(function(){
+            $.ajax({
+                url:"add.php",
+                type:"POST",
+                beforeSend : function(){},
+                complete : function(){
+                    getDesc();
+                    getPrice();                    
+                },
+                data:{
+                    prod_id: $("#prod_id").val(),
+                },
+                success:function(jsonStr){
+                        $("#prod_desc").val(jsonStr);
+                         $("#total").val("0.00"); 
+                         $("#order_out_det_qty").val("0"); 
+                }
+            });
         });
         $(".calendarTxt").html($.datepicker.formatDate('yy-MM-dd', new Date()));
         $("#orderInDate").val($.datepicker.formatDate("yy-MM-dd", new Date()));
@@ -40,84 +55,91 @@ $product = readObj("Product", "prod_id", "-1");
             $(".infoHolder").slideToggle();
         });
         
-         $("#btnAdd").click(function(){
+        $("#order_out_det_qty").blur(function(){
+            var qty = $("#order_out_det_qty").val();  
+            q = parseInt(qty,10);
+            $("#total").val(Calc(q));  
+        });
+        
+        $("#btnAdd").click(function(){
           
         }); 
         
     });
     
-
-</script> 
-<script type="text/javascript">
     function Calc(q) {
-         price = document.getElementById('prod_vend_id');
+        price = document.getElementById('prod_vend_id');
         if (price.value !== "" && !isNaN(price.value))
         {
-         p = parseFloat(price.value);
-         
-         return q*p;
+             p = parseFloat(price.value);
+             return q*p;
         }
-       
-     return q*price;
- }
-</script>
+        return q*price;        
+    }
+</script> 
 
-<div class="orderInContainer">
+<div class="orderInContainer">   
     <div class="title">Order Out </div>
-    <div class="headOrderIn">
+    <div class="chooseDate">
         <div class="lbl">Date Time</div> 
-        <div class="lbl">Product</div> 
-        <div class="lbl">Description</div>
-        <div class="lbl">Quantity</div>
-        <div class="lbl">Price</div>
-        <div class="lbl">Total</div>
-    </div>
-    <div class="clear"></div>
-    
-    <div class="orderInContent">
         <input type="text" class="inputDate" id="orderInDate" />
-        <div class="calendarTxt" style="display: none;"></div>  
-        <select id="prod_id" class="lblInput" type="text" >
-            
-                                                <?php
-                                                    foreach($product as $prod){
-                                                        if($prod["prod_name"] == ""){
-                                                            echo "<option value=\"".$prod["prod_id"]."\" selected>".$prod["prod_name"]."</option>";
-                                                        }
-                                                        else{
-                                                            echo "<option value=\"".$prod["prod_id"]."\">".$prod["prod_name"]."</option>";
-                                                        }
-                                                    }                
-                                                ?>
-        </select>
-        <input id="prod_desc" class="lblInput" type="text" readonly />
-        <form name="calcul">
-        <input id="order_out_det_qty" class="lblInput" type="text" onblur="document.calcul.total.value=Calc(this.value);" />
-        <input id="prod_vend_id" class="lblInput" type="text" readonly >
-            
-                                                <?php
-                                                    foreach($product as $prod){
-                                                        if($prod["prod_name"] == ""){
-                                                            echo "<option value=\"".$prod["prod_id"]."\" selected>".$prod["prod_vend_id"]."</option>";
-                                                        }
-                                                        else{
-                                                            echo "<option value=\"".$prod["prod_id"]."\">".$prod["prod_vend_id"]."</option>";
-                                                        }
-                                                    }                
-                                                ?>
-        
-        <input id="total" class="lblInput" type="text" value="0.00" readonly/>
-        </form>
-        <div class="infoHolder dateTime" style="display:none;float:left;">
+        <div class="infoHolder dateTime" style="display:none;">
             <div class="infoHolderContent">
                 <div id="datepicker"></div>
                 <div class="calendarInfoBox"></div>
             </div>                       
         </div>
-        
-         
+        <div class="calendarTxt" style="display: none;"></div>  
     </div>
-    
+    <div class="ref">
+        <div class="lbl">Reference  </div>
+        <input id="ord_out_id" type="text" class="refInput" />
+    </div>
+    <div class="divSup">
+        <div class="lbl">Supplier  </div>
+        <select class="input" id="prod_sup_id">
+        <option value="">Select your supplier</option>
+        <?php
+            foreach($sup as $item){
+                echo "<option value=\"".$item["sup_id"]."\">".$item["sup_name"]."</option>";
+            }                
+        ?>
+        </select>
+    </div>
+    <div class="clear"></div>
+    <table class="tab">
+        <tr>
+            <td class="lbl">Product</td> 
+            <td class="lbl" style="width:330px;">Description</td>
+            <td class="lbl">Quantity</td>
+            <td class="lbl">Price</td>
+            <td class="lbl">Total</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <select id="prod_id" class="lblInput" type="text" >
+                    <option>Select Product</option>
+                    <?php
+                        foreach($product as $prod){
+                            if($prod["prod_name"] == ""){
+                                echo "<option value=\"".$prod["prod_id"]."\" selected>".$prod["prod_name"]."</option>";
+                            }
+                            else{
+                                echo "<option value=\"".$prod["prod_id"]."\">".$prod["prod_name"]."</option>";
+                            }
+                        }                
+                    ?>
+                </select>
+            </td>
+            <td><input id="prod_desc" class="lblInput" type="text" style="width:330px;" readonly /></td>
+            <td><input id="order_out_det_qty" class="lblInput" type="text" /></td>
+            <td><input id="prod_vend_id" class="lblInput" type="text" readonly /></td>
+            <td>
+                <input id="total" class="lblInput" type="text" value="0.00" readonly/>
+            </td>
+        </tr>
+    </table>
     
     
     <div class="txtInput" style="height:100px;">
@@ -129,10 +151,6 @@ $product = readObj("Product", "prod_id", "-1");
 </div>
 
 <div id="order"></div>
-
-
-
-
 
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"]."/resources/footer.inc.php";
