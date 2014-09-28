@@ -437,6 +437,7 @@ function addProduct(){
         $prod_weight = mysql_escape_mimic($_POST['prod_weight']);
         $prod_sup_id = mysql_escape_mimic($_POST['prod_sup_id']);
         $prod_status = mysql_escape_mimic($_POST['prod_status']);
+        $prod_vend_id = mysql_escape_mimic($_POST['prod_vend_id']);
         
         $res = aeObj(
             "Product", 
@@ -453,8 +454,7 @@ function addProduct(){
                 "prod_weight"=>$prod_weight,
                 "prod_sup_id"=>$prod_sup_id,
                 "prod_status"=>$prod_status,
-                "prod_up"=>"0", 
-                "prod_vend_id"=>"0"
+                "prod_vend_id"=>$prod_vend_id
             )
         );
         
@@ -480,7 +480,7 @@ function editProduct(){
         $prod_size = mysql_escape_mimic($_POST['prod_size']);
         $prod_weight = mysql_escape_mimic($_POST['prod_weight']);
         $prod_sup_id = mysql_escape_mimic($_POST['prod_sup_id']);
-        $prod_prod_up = mysql_escape_mimic($_POST['prod_prod_up']);
+        $prod_vend_id = mysql_escape_mimic($_POST['prod_vend_id']);
         $prod_status = mysql_escape_mimic($_POST['prod_status']);
         
         $res = aeObj(
@@ -497,9 +497,8 @@ function editProduct(){
                 "prod_size"=>$prod_size,
                 "prod_weight"=>$prod_weight,
                 "prod_sup_id"=>$prod_sup_id,
-                "prod_status"=>$prod_status,
-                "prod_up"=>$prod_up, 
-                "prod_vend_id"=>"0"
+                "prod_status"=>$prod_status, 
+                "prod_vend_id"=>$prod_vend_id
             )
         );
         
@@ -786,5 +785,47 @@ function editShipper(){
         echo(json_encode($result));        
 
         exit;
+    }
+}
+function getDesc(){
+    if(isset($_POST['prod_id'])){
+        
+        $prod_id   = mysql_escape_mimic($_POST['prod_id']);
+//        $prod_id=1;
+        $res = readObj("Product","prod_id", $prod_id);
+        
+//        logToFile(json_encode($result));
+        echo(json_encode($res[0]['prod_desc']));        
+
+        exit;
+                
+    }
+}
+ function getPrice(){
+    if(isset($_POST['prod_id'])){
+        
+        $prod_id   = mysql_escape_mimic($_POST['prod_id']);
+//        $prod_id=1;
+        $res = readObj("Product","prod_id", $prod_id);
+        
+//        logToFile(json_encode($result));
+        echo(json_encode($res[0]['prod_vend_id']));        
+
+        exit;
+                
+    }
+}
+function orderTotal(){
+    if(isset($_POST['prod_id'])){
+        
+        $qty  = mysql_escape_mimic($_POST['order_out_det_qty']);
+//        $prod_id=1;
+       $res = readObj("Product","prod_id", $prod_id);
+        
+//        logToFile(json_encode($result));
+        $price = json_encode($res[0]['prod_vend_id']); 
+        echo($qty*$price);
+        exit;
+                
     }
 }

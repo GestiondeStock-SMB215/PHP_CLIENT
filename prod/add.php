@@ -70,7 +70,7 @@ $(document).ready(function(){
             </div>
 
         <div class="lbl">Price IN USD:
-            <input type="text" class="input" id="prod_up"/></div>
+            <input type="text" class="input" id="prod_vend_id"/></div>
             
             <div class="lbl">Status:
                 <select class="input" id="prod_status">
