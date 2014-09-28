@@ -11,23 +11,32 @@ $product = readObj("Product", "prod_id", "-1");
     $(document).ready(function (){
         
          $("#prod_id").blur(function(){
-            $.ajax({
-                url:"add.php",
-                type:"POST",
-                beforeSend : function(){},
-                complete : function(){
-                    getDesc();
-                    getPrice();                    
-                },
-                data:{
-                    prod_id: $("#prod_id").val(),
-                },
-                success:function(jsonStr){
-                        $("#prod_desc").val(jsonStr);
-                         $("#total").val("0.00"); 
-                         $("#order_out_det_qty").val("0"); 
-                }
-            });
+             if ($("#prod_id").val() != "Select"){ 
+                $.ajax({
+                    url:"add.php",
+                    type:"POST",
+                    beforeSend : function(){},
+                    complete : function(){
+                        getDesc();
+                        getPrice();                    
+                    },
+                    data:{
+                        prod_id: $("#prod_id").val(),
+                    },
+                    success:function(jsonStr){
+                            $("#prod_desc").val(jsonStr);
+                             $("#total").val("0.00"); 
+                             $("#order_out_det_qty").val("0"); 
+                    }
+                });
+             }
+             else
+             {
+                 $("#prod_vend_id").val("");
+                 $("#prod_desc").val(""); 
+                 $("#total").val("0.00"); 
+                 $("#order_out_det_qty").val("0"); 
+             }
         });
         $(".calendarTxt").html($.datepicker.formatDate('yy-MM-dd', new Date()));
         $("#orderInDate").val($.datepicker.formatDate("yy-MM-dd", new Date()));
@@ -119,7 +128,7 @@ $product = readObj("Product", "prod_id", "-1");
         <tr>
             <td>
                 <select id="prod_id" class="lblInput" type="text" >
-                    <option>Select Product</option>
+                    <option value="Select">Select Product</option>
                     <?php
                         foreach($product as $prod){
                             if($prod["prod_name"] == ""){
