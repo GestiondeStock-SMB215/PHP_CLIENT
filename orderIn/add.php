@@ -1,7 +1,6 @@
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
     
-    //$branch = readObj("Branch", "bra_id", "-1");
     $prod = readObj("Product", "prod_id", "-1"); 
 ?>
 <script type="text/javascript" src="../resources/js/jquery-1.8.3.min.js"></script>
