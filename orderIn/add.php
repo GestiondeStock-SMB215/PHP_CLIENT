@@ -1,7 +1,7 @@
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
     
-    $prod = readObj("Product", "prod_id", "-1"); 
+    $product = readObj("Product", "prod_id", "-1"); 
 ?>
 <script type="text/javascript" src="../resources/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="../resources/js/jquery.ui.datepicker.js"></script>
@@ -18,11 +18,17 @@ $(document).ready(function(){
     });
 
     $("#prod_id").blur(function(){
-        getDesc();
-        getPrice();
+        
         $.ajax({
             url:"add.php",
             type:"POST",
+            beforeSend:function(){
+                
+            },
+            complete:function(){
+               getDesc();
+               getPrice(); 
+            },
             data:{
                     prod_id: $("#prod_id").val(),
             },
@@ -33,6 +39,19 @@ $(document).ready(function(){
     });
 });
 			
+</script>
+<script type="text/javascript">
+    function Calc(q) {
+         price = document.getElementById('prod_vend_id');
+        if (price.value !== "" && !isNaN(price.value))
+        {
+         p = parseFloat(price.value);
+         
+         return q*p;
+        }
+       
+     return q*price;
+ }
 </script>
 <div class="orderInContainer">
     <div class="title">Order In </div>
@@ -59,24 +78,36 @@ $(document).ready(function(){
         </tr>
         <tr>
             <td>
-                <select id="" class="lblInput" type="text" >
+                <select id="prod_id" class="lblInput" type="text" >
                     <option>Select Product</option>
                     <?php
                         foreach($product as $prod){
-                            if($bra["prod_name"] == ""){
-                                echo "<option value=\"".$bra["prod_id"]."\" selected>".$bra["prod_name"]."</option>";
+                            if($prod["prod_name"] == ""){
+                                echo "<option value=\"".$prod["prod_id"]."\" selected>".$prod["prod_name"]."</option>";
                             }
                             else{
-                                echo "<option value=\"".$bra["prod_id"]."\">".$bra["prod_name"]."</option>";
+                                echo "<option value=\"".$prod["prod_id"]."\">".$prod["prod_name"]."</option>";
                             }
                         }                
                     ?>
                 </select>
             </td>
-            <td><input id="" class="lblInput" type="text" disabled="disabled" /></td>
-            <td><input id="" class="lblInput" type="text" /></td>
-            <td><input id="" class="lblInput" type="text" disabled="disabled" /></td>
-            <td><input id="" class="lblInput" type="text" disabled="disabled" /></td>
+            <td><input id="prod_desc" class="lblInput" type="text" readonly/></td>
+            <form name="calcul">
+            <td><input id="order_in_det_qty" class="lblInput" type="text" onblur="document.calcul.total.value=Calc(this.value);"/></td>
+            <td><input id="prod_vend_id" class="lblInput" type="text" readonly />
+            <?php
+                                                    foreach($product as $prod){
+                                                        if($prod["prod_name"] == ""){
+                                                            echo "<option value=\"".$prod["prod_id"]."\" selected>".$prod["prod_vend_id"]."</option>";
+                                                        }
+                                                        else{
+                                                            echo "<option value=\"".$prod["prod_id"]."\">".$prod["prod_vend_id"]."</option>";
+                                                        }
+                                                    }                
+                                                ?>
+                </td>
+            <td><input id="total" class="lblInput" type="text" value="0.00" readonly/></td>
             <td><input type="button" id="addNewProduct" /></td>
         </tr>
     </table>
