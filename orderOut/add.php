@@ -39,7 +39,7 @@ $product = readObj("Product", "prod_id", "-1");
              }
         });
         $(".calendarTxt").html($.datepicker.formatDate('yy-MM-dd', new Date()));
-        $("#orderInDate").val($.datepicker.formatDate("yy-MM-dd", new Date()));
+        $("#ord_out_date").val($.datepicker.formatDate("yy-MM-dd", new Date()));
 
         $("#datepicker").datepicker({ prevText: '<', nextText: '>', minDate: 0, autoSize: true, onChangeMonthYear: function () { $(".calendarInfoBox").hide() }, onSelect: function (dateText, inst) {
             dd = dateText;
@@ -54,13 +54,13 @@ $product = readObj("Product", "prod_id", "-1");
             d.css("position", 'absolute');
             var position = $(".ui-state-active").parent().position();
             $(".calendarTxt").html($.datepicker.formatDate("yy-MM-dd", new Date(dd)));
-            $("#orderInDate").val($.datepicker.formatDate("yy-MM-dd", new Date(dd)));
+            $("#ord_out_date").val($.datepicker.formatDate("yy-MM-dd", new Date(dd)));
             $(".calendarInfoBox").css("left", (position.left + 35) + 'px');
             $(".calendarInfoBox").css("top", (position.top - 7) + 'px');
             $("#dateLanguage").html(ddd);
         });
         
-        $("#orderInDate").click(function(){
+        $("#ord_out_date").click(function(){
             $(".infoHolder").slideToggle();
         });
         
@@ -91,7 +91,7 @@ $product = readObj("Product", "prod_id", "-1");
     <div class="title">Order Out </div>
     <div class="chooseDate">
         <div class="lbl">Date Time</div> 
-        <input type="text" class="inputDate" id="orderInDate" />
+        <input type="text" class="inputDate" id="ord_out_date" />
         <div class="infoHolder dateTime" style="display:none;">
             <div class="infoHolderContent">
                 <div id="datepicker"></div>
