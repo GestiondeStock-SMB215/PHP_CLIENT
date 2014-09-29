@@ -6,6 +6,78 @@ $product = readObj("Product", "prod_id", "-1");
 <script type="text/javascript" src="../resources/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="../resources/js/jquery.ui.datepicker.js"></script>
 <link href="../resources/css/jquery.ui.datepicker.css" rel="stylesheet" /> 
+
+<!--<script>
+    $(document).ready(function(){
+        
+    });
+   
+</script>-->
+<div class="orderInContainer">   
+    <div class="title">Order In </div>
+    <div class="chooseDate">
+        <div class="lbl">Date Time</div> 
+        <input type="text" class="inputDate" id="ord_in_date" />
+        <div class="infoHolder dateTime" style="display:none;">
+            <div class="infoHolderContent">
+                <div id="datepicker"></div>
+                <div class="calendarInfoBox"></div>
+            </div>                       
+        </div>
+        <div class="calendarTxt" style="display: none;"></div>  
+    </div>
+    <div class="ref">
+        <div class="lbl">Reference  </div>
+        <input id="ord_in_id" type="text" class="refInput" readonly value="<?=getNextId("product", "prod_id")?>"/>
+    </div>
+    <div class="divSup">
+        <div class="lbl">Customer  </div>
+        <input id="cust_name" type="text" />
+        <input id="order_in_cust_id" type="text" />
+<!--        <select class="input" id="prod_cust_id">
+        <option value="">Select your supplier</option>
+        <?php
+//            foreach($customer as $cust){
+//                echo "<option value=\"".$cust["cust_id"]."\">".$cust["cust_name"]."</option>";
+//            }                
+        ?>
+        </select>-->
+    </div>
+    <div class="clear"></div>
+    <table class="tab">
+        <tr>
+            <td class="lbl">Product</td> 
+            <td class="lbl" style="width:330px;">Description</td>
+            <td class="lbl">Quantity</td>
+            <td class="lbl">Price</td>
+            <td class="lbl">Total</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <input id="prod_id" class="lblInput" type="text" >
+                    
+            </td>
+            <td><input id="prod_desc" class="lblInput" type="text" style="width:330px;" readonly /></td>
+            <td><input id="order_in_det_qty" class="lblInput" type="text" /></td>
+            <td><input id="prod_vend_id" class="lblInput" type="text" readonly /></td>
+            <td>
+                <input id="total" class="lblInput" type="text" value="0.00" readonly/>
+            </td>
+        </tr>
+    </table>
+    
+    
+    <div class="txtInput" style="height:100px;">
+        <input id="" class="btnRegister" name="Back" type="button" value="Cancel" onclick="javascript=window.location.href='show.php'" />        
+        
+        <div class="loader"></div>
+        <div class="lblMsg" id="lblMsg"></div>
+    </div>
+</div>
+
+<div id="order"></div>
+
 <script type="text/javascript">
     var q;
     $(document).ready(function (){
@@ -73,20 +145,7 @@ $product = readObj("Product", "prod_id", "-1");
         $("#btnAdd").click(function(){
           
         }); 
-    });
-    
-    function Calc(q) {
-        price = document.getElementById('prod_vend_id');
-        if (price.value !== "" && !isNaN(price.value))
-        {
-             p = parseFloat(price.value);
-             return q*p;
-        }
-        return q*price;        
-    }
-</script> 
-<script>
-    $(document).ready(function(){
+        
         $("#cust_name").keyup(function(){
             var cust_name = $("#cust_name").val();
             wantedData = {cust_name: cust_name};
@@ -103,71 +162,17 @@ $product = readObj("Product", "prod_id", "-1");
             });
         });
     });
-</script>
-<div class="orderInContainer">   
-    <div class="title">Order In </div>
-    <div class="chooseDate">
-        <div class="lbl">Date Time</div> 
-        <input type="text" class="inputDate" id="ord_in_date" />
-        <div class="infoHolder dateTime" style="display:none;">
-            <div class="infoHolderContent">
-                <div id="datepicker"></div>
-                <div class="calendarInfoBox"></div>
-            </div>                       
-        </div>
-        <div class="calendarTxt" style="display: none;"></div>  
-    </div>
-    <div class="ref">
-        <div class="lbl">Reference  </div>
-        <input id="ord_in_id" type="text" class="refInput" readonly value="<?=getNextId("product", "prod_id")?>"/>
-    </div>
-    <div class="divSup">
-        <div class="lbl">Customer  </div>
-        <input id="cust_name" type="text"/>
-        <input id="order_in_cust_id" type="text"/>
-<!--        <select class="input" id="prod_cust_id">
-        <option value="">Select your supplier</option>
-        <?php
-//            foreach($customer as $cust){
-//                echo "<option value=\"".$cust["cust_id"]."\">".$cust["cust_name"]."</option>";
-//            }                
-        ?>
-        </select>-->
-    </div>
-    <div class="clear"></div>
-    <table class="tab">
-        <tr>
-            <td class="lbl">Product</td> 
-            <td class="lbl" style="width:330px;">Description</td>
-            <td class="lbl">Quantity</td>
-            <td class="lbl">Price</td>
-            <td class="lbl">Total</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>
-                <input id="prod_id" class="lblInput" type="text" >
-                    
-            </td>
-            <td><input id="prod_desc" class="lblInput" type="text" style="width:330px;" readonly /></td>
-            <td><input id="order_in_det_qty" class="lblInput" type="text" /></td>
-            <td><input id="prod_vend_id" class="lblInput" type="text" readonly /></td>
-            <td>
-                <input id="total" class="lblInput" type="text" value="0.00" readonly/>
-            </td>
-        </tr>
-    </table>
     
-    
-    <div class="txtInput" style="height:100px;">
-        <input id="" class="btnRegister" name="Back" type="button" value="Cancel" onclick="javascript=window.location.href='show.php'" />        
-        
-        <div class="loader"></div>
-        <div class="lblMsg" id="lblMsg"></div>
-    </div>
-</div>
-
-<div id="order"></div>
+    function Calc(q) {
+        price = document.getElementById('prod_vend_id');
+        if (price.value !== "" && !isNaN(price.value))
+        {
+             p = parseFloat(price.value);
+             return q*p;
+        }
+        return q*price;        
+    }
+</script> 
 
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"]."/resources/footer.inc.php";

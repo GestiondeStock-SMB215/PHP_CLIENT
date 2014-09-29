@@ -816,31 +816,34 @@ function getDesc(){
     }
 }
 function getCustIdByName(){
+
     $cust_name = mysql_escape_mimic($_POST['cust_name']);
     $result = array();
     global $wsdl;
     set_time_limit(0);
     $response = $wsdl->getCustIdByName(array("cust_name"=>$cust_name));               
     $response = $response->return;
-    foreach($response as $item){
+    if(sizeof($response) > 1){
+        foreach($response as $custItem){
+
+            array_push(
+                $result, 
+                array(
+                    "cust_name"=>$custItem->cust_name,
+                    "cust_id"=>$custItem->cust_id
+                )
+            );
+        }        
+    }
+    else{
         array_push(
             $result, 
             array(
-                "cust_name"=>$response->cust_name,
-                "cust_id"=>$response->cust_id
+                "cust_name" => $response->cust_name,
+                "cust_id" => $response->cust_id
             )
         );
-    }
+    }   
     echo(json_encode($result));
-//    foreach ($response as $item->return){
-//        if($item->cust_id == 0){
-//            $result["cust_name"] = "No result found";
-//        }
-//        else{
-//            $result["cust_name"] = $item->cust_name;
-//            $result["cust_id"] = $item->cust_id;
-//        }
-//        echo(json_encode($result));
-//        exit;        
-//    }
+    exit;
 }
