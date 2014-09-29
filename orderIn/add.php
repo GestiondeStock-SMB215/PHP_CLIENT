@@ -98,6 +98,7 @@ $product = readObj("Product", "prod_id", "-1");
                 dataType     : "json",
                 success      : function(result){
                     console.log(result.cust_name);
+                    
                     $("#order_in_cust_id").val(result.cust_name+" - "+result.cust_id);
                 }
             });
