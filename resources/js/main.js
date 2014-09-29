@@ -1041,34 +1041,3 @@ function getPrice(){
         $('#lblMsg').html("Please fill in all required fields");
     }
 }
-function orderTotal(){
-    prod_id = $("#prod_id").val();
-    
-    wantedData = {prod_id:prod_id};
-        
-    if(prod_id != ""){
-        $.ajax({
-            type         : "POST",
-            url          : "/resources/ajax.php?func=orderTotal",
-            data         : wantedData,
-            cache        : false,
-            dataType     : "json",
-            beforeSend   : function () {
-                $('#lblMsg').html("");
-                $('#loader').show();
-            },
-            complete: function () {
-                $('#loader').hide();
-            },
-            success: function(result){
-                $("#total").val(result);
-            }			            
-            
-        });
-    }
-    else{
-        $('#lblMsg').html("Please fill in all required fields");
-    }
-}
-    
-    

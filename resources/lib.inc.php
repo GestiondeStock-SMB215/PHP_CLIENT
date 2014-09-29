@@ -182,3 +182,10 @@
         $_SESSION["pages"]      = $pages;
         $_SESSION["fullPages"]  = $fullPages;
     }
+    
+    function getNextId($tableName, $idName){
+        global $wsdl;
+        set_time_limit(0);
+        $response = $wsdl->getNextId(array("tableName"=>$tableName, "idName"=> $idName));        
+        return $response->return;
+    }
