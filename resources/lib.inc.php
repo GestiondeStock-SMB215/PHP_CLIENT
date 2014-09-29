@@ -59,7 +59,7 @@
         echo "</pre>";
     }
     
-    function readObj($obj_type, $obj_id_field, $obj_id){
+    function  readObj($obj_type, $obj_id_field, $obj_id){
         global $wsdl;
         set_time_limit(0);
         
@@ -188,4 +188,23 @@
         set_time_limit(0);
         $response = $wsdl->getNextId(array("tableName"=>$tableName, "idName"=> $idName));        
         return $response->return;
+    }
+    
+    function getOrderOutDetailByOrdOutId($ord_out_det_ord_out_id){
+        global $wsdl;
+        $objs = array();
+        set_time_limit(0);
+        $response = $wsdl->getOrderOutDetailByOrdOutId(array("ord_out_det_ord_out_id"=>$ord_out_det_ord_out_id));        
+        if(gettype($response->return) == "array"){
+            foreach ($response->return as $obj){
+                $obj = get_object_vars($obj);
+                array_push($objs,$obj);
+            }
+        }
+        else{
+            if(gettype($response->return) == "object"){
+                array_push($objs,get_object_vars($response->return));
+            }
+        }
+        return $objs;
     }
