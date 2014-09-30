@@ -128,7 +128,7 @@ else{
                 $customers = $_SESSION["customers"];
                 foreach($customers as $customer){
                     if($customer["cust_id"] == $order["ord_in_cust_id"]){
-                        echo $cust["cust_name"];
+                        echo $customer["cust_name"];
                     }
                 }
             ?>

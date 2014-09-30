@@ -10,7 +10,7 @@ $(document).ready(function() {
 });
 </script>
 <div class="clear"></div>
-<table width="100%"><tr><td><h3>Purchases Orders</h3></td><td align="right"><input type="button" value="Create" class="myButton" onclick="javascript:window.location.href='add.php'"/></td></tr></table>
+<table width="100%"><tr><td><h3>Sales Orders</h3></td><td align="right"><input type="button" value="Create" class="myButton" onclick="javascript:window.location.href='add.php'"/></td></tr></table>
 <table id="example" class="display cell-border">
     <thead>
         <tr>
@@ -32,7 +32,7 @@ $(document).ready(function() {
                     echo "<td>";
                     foreach($customers as $customer){
                         if($customer["cust_id"] == $obj["ord_in_cust_id"]){
-                            echo $cust["cust_name"];
+                            echo $customer["cust_name"];
                         }
                     }
                     echo "</td>";
