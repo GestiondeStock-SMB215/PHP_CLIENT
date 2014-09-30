@@ -78,7 +78,7 @@ if(!isset($_GET["ord_in_id"])){
                     }
                 ?>
             </datalist>
-            <input type="hidden" id="ord_cust_in_id" name="ord_in_cust_id" required readonly style="width:45px;"/>
+            <input type="hidden" id="ord_in_cust_id" name="ord_in_cust_id" required readonly style="width:45px;"/>
         </td>
         <td><input id="btnAdd" type="submit" class="myButton" value="Add Order In"  tabindex="4"/></td>
     </tr>
