@@ -10,7 +10,9 @@
         <script src="/resources/js/datatables.js"></script>   
         <script src="/resources/js/tabetools.js"></script>   
         <script src="/resources/js/main.js"></script> 
+        <script type="text/javascript" src="/resources/js/jquery.ui.datepicker.js"></script>
 
+        <link href="/resources/css/jquery.ui.datepicker.css" rel="stylesheet" /> 
         <link type="text/css" rel="stylesheet" href="/resources/css/style.css" />
         <link type="text/css" rel="stylesheet" href="/resources/css/datatables.css" />
         <link type="text/css" rel="stylesheet" href="/resources/css/tabletools.css" />
@@ -19,6 +21,7 @@
     <body>
         <script>
         $(document).ready(function(){  
+            
             $('.welcome').click(function () {
                 $('.pnlLogin').slideToggle("slide");
             });

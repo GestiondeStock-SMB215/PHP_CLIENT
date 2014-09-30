@@ -105,3 +105,10 @@ ul{margin:0;padding:0;list-style:none;}
 .footer .footerInfo{width: 960px;margin: auto;}
 .footer .footerInfo .left{}
 .footer .footerInfo .right{}
+
+
+.autoCompleteVals:hover{
+    cursor: pointer;
+    background-color: #bbb;
+}
+

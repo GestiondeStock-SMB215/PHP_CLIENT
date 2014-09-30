@@ -194,7 +194,7 @@
         global $wsdl;
         $objs = array();
         set_time_limit(0);
-        $response = $wsdl->getOrderOutDetailByOrdOutId(array("ord_out_det_ord_out_id"=>$ord_out_det_ord_out_id));        
+        $response = $wsdl->getOrderOutDetailByOrdOutId(array("ord_out_det_ord_out_id"=>$ord_out_det_ord_out_id));
         if(gettype($response->return) == "array"){
             foreach ($response->return as $obj){
                 $obj = get_object_vars($obj);
@@ -203,7 +203,10 @@
         }
         else{
             if(gettype($response->return) == "object"){
-                array_push($objs,get_object_vars($response->return));
+                if($response->return->ord_out_det_id != "-1"){
+                    array_push($objs,get_object_vars($response->return));
+                }
+                
             }
         }
         return $objs;

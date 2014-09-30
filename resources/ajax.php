@@ -816,7 +816,6 @@ function getDesc(){
     }
 }
 function getCustIdByName(){
-
     $cust_name = mysql_escape_mimic($_POST['cust_name']);
     $result = array();
     global $wsdl;
@@ -841,6 +840,37 @@ function getCustIdByName(){
             array(
                 "cust_name" => $response->cust_name,
                 "cust_id" => $response->cust_id
+            )
+        );
+    }   
+    echo(json_encode($result));
+    exit;
+}
+function getSupIdByName(){
+    $sup_name = mysql_escape_mimic($_POST['sup_name']);
+    $result = array();
+    global $wsdl;
+    set_time_limit(0);
+    $response = $wsdl->getSupIdByName(array("sup_name"=>$sup_name));               
+    $response = $response->return;
+    if(sizeof($response) > 1){
+        foreach($response as $supItem){
+
+            array_push(
+                $result, 
+                array(
+                    "sup_name"=>$supItem->sup_name,
+                    "sup_id"=>$supItem->sup_id
+                )
+            );
+        }        
+    }
+    else{
+        array_push(
+            $result, 
+            array(
+                "sup_name" => $response->sup_name,
+                "sup_id" => $response->sup_id
             )
         );
     }   
