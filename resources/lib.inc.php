@@ -211,6 +211,27 @@
         }
         return $objs;
     }
+    function getOrderInDetailByOrdInId($ord_in_det_ord_in_id){
+        global $wsdl;
+        $objs = array();
+        set_time_limit(0);
+        $response = $wsdl->getOrderInDetailByOrdInId(array("ord_in_det_ord_in_id"=>$ord_in_det_ord_in_id));
+        if(gettype($response->return) == "array"){
+            foreach ($response->return as $obj){
+                $obj = get_object_vars($obj);
+                array_push($objs,$obj);
+            }
+        }
+        else{
+            if(gettype($response->return) == "object"){
+                if($response->return->ord_in_det_id != "-1"){
+                    array_push($objs,get_object_vars($response->return));
+                }
+                
+            }
+        }
+        return $objs;
+    }
     function getSupSession(){
     if(!isset($_SESSION["suppliers"])){
     $suppliers = array();
@@ -265,5 +286,33 @@ if(!isset($_SESSION["products"])){
                     ));
     }
     $_SESSION["products"] = $products;
+}
+    }
+    function getCustSession(){
+    if(!isset($_SESSION["customers"])){
+    $customers = array();
+    $objs = readObj("Customer", "cust_id", "-1");
+    foreach($objs as $obj){
+        array_push(
+                $customers,
+                array(
+                    "cust_id"=>$obj["cust_id"],
+                    "cust_comp"=>$obj["cust_comp"],
+                    "cust_name"=>$obj["cust_name"],
+                    "cust_title"=>$obj["cust_title"],
+                    "cust_add_1"=>$obj["cust_add_1"],
+                    "cust_add_2"=>$obj["cust_add_2"],
+                    "cust_city"=>$obj["cust_city"],
+                    "cust_cnt_id"=>$obj["cust_cnt_id"],
+                    "cust_tel_1"=>$obj["cust_tel_1"],
+                    "cust_tel_2"=>$obj["cust_tel_2"],
+                    "cust_fax"=>$obj["cust_fax"],
+                    "cust_email"=>$obj["cust_email"],
+                    "cust_site"=>$obj["cust_site"],
+                    "cust_time_stamp"=>$obj["cust_time_stamp"]
+                    
+                ));
+    }
+    $_SESSION["customers"] = $customers;
 }
     }

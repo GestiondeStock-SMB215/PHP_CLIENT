@@ -1,5 +1,6 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
+getCustSession();
 ?>
 <script>
 $(document).ready(function() {
@@ -13,9 +14,8 @@ $(document).ready(function() {
 <table id="example" class="display cell-border">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Source Branch</th>
-            <th>Destination Branch</th>
+            <th>Reference</th>
+            <th>Customers</th>
             <th>Status</th>
             <th>Time Stamp</th>
             <th>Edit</th>
@@ -24,26 +24,30 @@ $(document).ready(function() {
     </thead>
     <tbody>
         <?php
-            $objs = readObj("OrderIn", "order_in_id", "-1");
-
+            $customers = $_SESSION["customers"];
+            $objs = readObj("OrderIn", "ord_in_id", "-1");
             foreach($objs as $obj){
                 echo "<tr>";
-                    echo "<td>".$obj["order_out_id"]."</td>";
-                    echo "<td>".$obj["trans_src_bra_id"]."</td>";
-                    echo "<td>".$obj["trans_dest_bra_id"]."</td>";
-                    echo "<td>".$obj["trans_status"]."</td>";
-                    echo "<td>".$obj["trans_time_stamp"]."</td>";
-                echo "<td><a href=\"edit.php?trans_id=".$obj["trans_id"].""."\">Edit</a></td>";
-                echo "<td><a href=\"delete.php?trans_id=".$obj["trans_id"]."\">Delete</a></td>";
+                    echo "<td>".$obj["ord_in_id"]."</td>";
+                    echo "<td>";
+                    foreach($customers as $customer){
+                        if($customer["cust_id"] == $obj["ord_in_cust_id"]){
+                            echo $cust["cust_name"];
+                        }
+                    }
+                    echo "</td>";
+                    echo "<td>".$obj["ord_in_status"]."</td>";
+                    echo "<td>".$obj["ord_in_time_stamp"]."</td>";
+                echo "<td><a href=\"edit.php?ord_in_id=".$obj["ord_in_id"].""."\">Edit</a></td>";
+                echo "<td><a href=\"delete.php?ord_in_id=".$obj["ord_in_id"]."\">Delete</a></td>";
                 echo "</tr>";
             }
         ?>
     </tbody>
     <tfoot>
-        <tr>
-            <th>ID</th>
-            <th>Source Branch</th>
-            <th>Destination Branch</th>
+         <tr>
+            <th>Reference</th>
+            <th>Customer</th>
             <th>Status</th>
             <th>Time Stamp</th>
             <th>Edit</th>
