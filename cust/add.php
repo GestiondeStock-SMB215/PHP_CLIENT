@@ -1,5 +1,8 @@
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
+    if(isset($_SESSION["customer"])){
+        unset($_SESSION["customer"]);
+    }
 ?>
 <script>
 $(document).ready(function(){

@@ -2,6 +2,9 @@
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
     $cat = readObj("Category", "cat_id", "-1");
     $sup = readObj("Supplier", "sup_id", "-1");
+    if(isset($_SESSION["products"])){
+        unset($_SESSION["products"]);
+    }
 ?>
 <script>
 $(document).ready(function(){

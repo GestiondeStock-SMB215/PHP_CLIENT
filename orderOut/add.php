@@ -1,18 +1,22 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 
-$suppliers = array();
-$objs = readObj("Supplier", "sup_id", "-1");
-foreach($objs as $obj){
-    array_push($suppliers, array("sup_id"=>$obj["sup_id"],"sup_name"=>$obj["sup_name"]));
+if(!isset($_SESSION["suppliers"])){
+    $suppliers = array();
+    $objs = readObj("Supplier", "sup_id", "-1");
+    foreach($objs as $obj){
+        array_push($suppliers, array("sup_id"=>$obj["sup_id"],"sup_name"=>$obj["sup_name"]));
+    }
+    $_SESSION["suppliers"] = $suppliers;
 }
-
-$products = array();
-$objs = readObj("Product", "prod_id", "-1");
-foreach($objs as $obj){
-    array_push($products, array("prod_id"=>$obj["prod_id"],"prod_name"=>$obj["prod_name"], "prod_up"=>$obj["prod_up"]));
+if(!isset($_SESSION["products"])){
+    $products = array();
+    $objs = readObj("Product", "prod_id", "-1");
+    foreach($objs as $obj){
+        array_push($products, array("prod_id"=>$obj["prod_id"],"prod_name"=>$obj["prod_name"], "prod_up"=>$obj["prod_up"]));
+    }
+    $_SESSION["products"] = $products;
 }
-
 if(isset($_POST["ord_out_date"])){
     $ord_out_date   = $_POST["ord_out_date"];
     $ord_out_sup_id = $_POST["ord_out_sup_id"];
@@ -81,6 +85,7 @@ if(!isset($_GET["ord_out_id"])){
             <input list="suppliers" id="supInput" required autocomplete="off"  tabindex="3"/>
             <datalist id="suppliers">
                 <?php
+                    $suppliers = $_SESSION["suppliers"];
                     foreach($suppliers as $sup){
                         echo "<option sup_id = \"".$sup["sup_id"]."\" value=\"".$sup["sup_name"]." | ".$sup["sup_id"]."\" />";
                     }
@@ -133,6 +138,7 @@ else{
             <td width="33%"><b>Order Date:</b> <?=$order["ord_out_date"]?></td>
             <td width="33%"><b>Supplier:</b> 
             <?php
+                $suppliers = $_SESSION["suppliers"];
                 foreach($suppliers as $supplier){
                     if($supplier["sup_id"] == $order["ord_out_sup_id"]){
                         echo $supplier["sup_name"];
@@ -158,6 +164,7 @@ else{
                 <input list="products" id="prodInput" required autocomplete="off"/>
                 <datalist id="products">
                     <?php
+                        $products = $_SESSION["products"];
                         foreach($products as $prod){
                             echo "<option prod_id = \"".$prod["prod_id"]."\" value=\"".$prod["prod_name"]." | ".$prod["prod_id"]." | ".$prod["prod_up"]."\" />";
                         }
@@ -189,6 +196,7 @@ else{
                     foreach($orderDetails as $od){
                         echo "<tr>";
                         echo "<td>";
+                        $products = $_SESSION["products"];
                         foreach($products as $product){
                             if($od["ord_out_det_prod_id"] == $product["prod_id"]){
                                 echo $product["prod_name"];
