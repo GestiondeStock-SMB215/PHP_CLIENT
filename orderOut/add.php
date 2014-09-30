@@ -1,22 +1,9 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 
-if(!isset($_SESSION["suppliers"])){
-    $suppliers = array();
-    $objs = readObj("Supplier", "sup_id", "-1");
-    foreach($objs as $obj){
-        array_push($suppliers, array("sup_id"=>$obj["sup_id"],"sup_name"=>$obj["sup_name"]));
-    }
-    $_SESSION["suppliers"] = $suppliers;
-}
-if(!isset($_SESSION["products"])){
-    $products = array();
-    $objs = readObj("Product", "prod_id", "-1");
-    foreach($objs as $obj){
-        array_push($products, array("prod_id"=>$obj["prod_id"],"prod_name"=>$obj["prod_name"], "prod_up"=>$obj["prod_up"]));
-    }
-    $_SESSION["products"] = $products;
-}
+getProdSession();
+getSupSession();
+
 if(isset($_POST["ord_out_date"])){
     $ord_out_date   = $_POST["ord_out_date"];
     $ord_out_sup_id = $_POST["ord_out_sup_id"];
@@ -191,6 +178,7 @@ else{
         <tbody>
             <?php
                 $orderDetails = getOrderOutDetailByOrdOutId($ord_out_id);
+                $ord_out_total=0;
                 if($orderDetails != null){
                     $qty = 0; $up = 0;
                     foreach($orderDetails as $od){
@@ -204,6 +192,7 @@ else{
                         }
                         echo "</td>";
                         echo "<td>";
+                        
                         foreach($products as $product){
                             if($od["ord_out_det_prod_id"] == $product["prod_id"]){
                                 echo $product["prod_up"]." USD";
@@ -213,7 +202,9 @@ else{
                         echo "</td>";
                         $qty = $od["ord_out_det_qty"];
                         echo "<td>$qty</td>";
-                        echo "<td>".($qty * $up)." USD</td>";
+                        $ord_out_det_total=($qty * $up);
+                        $ord_out_total += $ord_out_det_total;
+                        echo "<td>$ord_out_det_total USD</td>";
                         echo "<td><a href=\"editOrderOutDetail.php?ord_out_det_id=".$od["ord_out_det_id"]."\">Edit</a></td>";
                         echo "<td><a href=\"DeleteOrderOutDetail.php?ord_out_det_id=".$od["ord_out_det_id"]."\">Delete</a></td>";
                         echo "</tr>";
@@ -230,8 +221,9 @@ else{
             <th>Delete</th>            
         </tfoot>        
     </table>
-    <div align="right">
-        <input type="button" value="Save" class="myButton" />
+    <div align="right" style="font-weight: bold;">
+        TOTAL PREVU <input type='text' id='ord_out_total' readonly value='<?=$ord_out_total?> USD'>
+        <input type="button" value="Save" onclick= "window.location.href ='show.php'" class="myButton" />
     </div>
     <?php
 }

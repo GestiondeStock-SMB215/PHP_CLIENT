@@ -211,3 +211,59 @@
         }
         return $objs;
     }
+    function getSupSession(){
+    if(!isset($_SESSION["suppliers"])){
+    $suppliers = array();
+    $objs = readObj("Supplier", "sup_id", "-1");
+    foreach($objs as $obj){
+        array_push(
+                $suppliers,
+                array(
+                    "sup_id"=>$obj["sup_id"],
+                    "sup_comp"=>$obj["sup_comp"],
+                    "sup_name"=>$obj["sup_name"],
+                    "sup_title"=>$obj["sup_title"],
+                    "sup_add_1"=>$obj["sup_add_1"],
+                    "sup_add_2"=>$obj["sup_add_2"],
+                    "sup_city"=>$obj["sup_city"],
+                    "sup_cnt_id"=>$obj["sup_cnt_id"],
+                    "sup_tel_1"=>$obj["sup_tel_1"],
+                    "sup_tel_2"=>$obj["sup_tel_2"],
+                    "sup_fax"=>$obj["sup_fax"],
+                    "sup_email"=>$obj["sup_email"],
+                    "sup_site"=>$obj["sup_site"],
+                    "sup_time_stamp"=>$obj["sup_time_stamp"]
+                    
+                ));
+    }
+    $_SESSION["suppliers"] = $suppliers;
+}
+    }
+    function getProdSession(){
+if(!isset($_SESSION["products"])){
+    $products = array();
+    $objs = readObj("Product", "prod_id", "-1");
+    foreach($objs as $obj){
+        array_push(
+                $products, 
+                array(
+                    "prod_id"=>$obj["prod_id"],
+                    "prod_cat_id"=>$obj["prod_cat_id"],
+                    "prod_sku"=>$obj["prod_sku"],
+                    "prod_upc"=>$obj["prod_upc"],
+                    "prod_name"=>$obj["prod_name"],
+                    "prod_desc"=>$obj["prod_desc"],
+                    "prod_qty"=>$obj["prod_qty"],
+                    "prod_color"=>$obj["prod_color"],
+                    "prod_size"=>$obj["prod_size"],
+                    "prod_weight"=>$obj["prod_weight"],
+                    "prod_sup_id"=>$obj["prod_sup_id"],
+                    "prod_up"=>$obj["prod_up"],
+                    "prod_status"=>$obj["prod_status"],
+                    "prod_vend_id"=>$obj["prod_vend_id"],
+                    "prod_time_stamp"=>$obj["prod_time_stamp"]
+                    ));
+    }
+    $_SESSION["products"] = $products;
+}
+    }
