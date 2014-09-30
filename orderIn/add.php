@@ -12,7 +12,7 @@ if(isset($_POST["ord_in_date"])){
         "orderIn", 
         array(
             "ord_in_id"        =>"-1",
-            "ord_in_cust_id"    =>$ord_in_sup_id,
+            "ord_in_cust_id"    =>$ord_in_cust_id,
             "ord_in_date"      =>$ord_in_date, 
             "ord_in_del_date"  =>"0000-00-00 00:00:00",
             "ord_in_status"    =>"0"
@@ -123,7 +123,7 @@ else{
         <tr>
             <td width="33%"><b>Reference:</b> <?=$ord_in_id?></td>
             <td width="33%"><b>Order Date:</b> <?=$order["ord_in_date"]?></td>
-            <td width="33%"><b>Supplier:</b> 
+            <td width="33%"><b>Customer:</b> 
             <?php
                 $customers = $_SESSION["customers"];
                 foreach($customers as $customer){
