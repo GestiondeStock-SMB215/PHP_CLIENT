@@ -316,3 +316,51 @@ if(!isset($_SESSION["products"])){
     $_SESSION["customers"] = $customers;
 }
     }
+    
+     function getTransDetailByTransId($trans_det_trans_id){
+        global $wsdl;
+        $objs = array();
+        set_time_limit(0);
+        $response = $wsdl->getTransDetailByTransId(array("trans_det_trans_id"=>$trans_det_trans_id));
+        if(gettype($response->return) == "array"){
+            foreach ($response->return as $obj){
+                $obj = get_object_vars($obj);
+                array_push($objs,$obj);
+            }
+        }
+        else{
+            if(gettype($response->return) == "object"){
+                if($response->return->trans_det_id != "-1"){
+                    array_push($objs,get_object_vars($response->return));
+                }
+                
+            }
+        }
+        return $objs;
+    }
+    
+    
+      function getBranchSession(){
+if(!isset($_SESSION["branches"])){
+    $branches = array();
+    $objs = readObj("Branch", "bra_id", "-1");
+    foreach($objs as $obj){
+        array_push(
+                $branches, 
+                array(
+                    "bra_id"=>$obj["bra_id"],
+                    "bra_name"=>$obj["bra_name"],
+                    "bra_cnt_id"=>$obj["bra_cnt_id"],
+                    "bra_city"=>$obj["bra_city"],
+                    "bra_add_str"=>$obj["bra_add_str"],
+                    "bra_add_1"=>$obj["bra_add_1"],
+                    "bra_tel_1"=>$obj["bra_tel_1"],
+                    "bra_tel_2"=>$obj["bra_tel_2"],
+                    "bra_fax"=>$obj["bra_fax"],
+                    "bra_email"=>$obj["bra_email"],
+                    "bra_time_stamp"=>$obj["bra_time_stamp"]
+                    ));
+    }
+    $_SESSION["branches"] = $branches;
+}
+    }

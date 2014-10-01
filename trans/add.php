@@ -1,173 +1,257 @@
 <?php
-    require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
+require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
+getProdSession();
+getBranchSession();
+
+if(isset($_POST["trans_send_date"])){
+    $trans_send_date   = $_POST["trans_send_date"];
+    $trans_src_bra_id = $_POST["trans_src_bra_id"];
+    $trans_dest_bra_id = $_POST["trans_dest_bra_id"];
     
-    $branch = readObj("Branch", "bra_id", "-1");
-    $product = readObj("Product", "prod_id", "-1"); 
+    $trans_id = aeObj(
+        "transfert", 
+        array(
+            "trans_id"            =>"-1",
+            "trans_src_bra_id"    =>$trans_src_bra_id,
+            "trans_dest_bra_id"   =>$trans_dest_bra_id, 
+            "trans_send_date"     =>$trans_send_date,
+            "trans_del_date"      =>"0000-00-00 00:00:00",
+            "trans_status"        =>"0"
+        )
+    );
+    header("location:add.php?trans_id=$trans_id");
+    
+}
+
+if(isset($_POST["trans_det_id"])){
+    $trans_det_id         = "-1";
+    $trans_det_trans_id   = $_GET["trans_id"];
+    $trans_det_prod_id    = $_POST["trans_det_prod_id"];
+    $trans_det_qty        = $_POST["trans_det_qty"];
+    
+    $array = array(
+        "trans_det_id"            => $trans_det_id,
+        "trans_det_trans_id"      => $trans_det_trans_id,
+        "trans_det_prod_id"       => $trans_det_prod_id,
+        "trans_det_qty"           => $trans_det_qty
+    );
+    $trans_det_id = aeObj("TransDetail", $array);
+    header("location:add.php?trans_id=$trans_det_trans_id");
+}
+
+if(!isset($_GET["trans_id"])){
+
 ?>
-
-<script type="text/javascript" src="../resources/js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="../resources/js/jquery.ui.datepicker.js"></script>
-<link href="../resources/css/jquery.ui.datepicker.css" rel="stylesheet" /> 
 <script>
-$(document).ready(function(){
-    $("#btnRegister").click(function () {
-        addTransfert();
-    });
-    $("#registerForm").keypress(function (event) {
-        if(event.which === 13){
-            addTransfert();
-        }
-    });
-    $("#prod_id").blur(function(){
-        getDesc();
-    });
-});
-$(document).ready(function (){
-        $(".calendarTxt").html($.datepicker.formatDate('yy-MM-dd', new Date()));
-        $("#orderInDate").val($.datepicker.formatDate("yy-MM-dd", new Date()));
-
-        $("#datepicker").datepicker({ prevText: '<', nextText: '>', minDate: 0, autoSize: true, onChangeMonthYear: function () { $(".calendarInfoBox").hide() }, onSelect: function (dateText, inst) {
-            dd = dateText;
-            $(".timeContentTxt").css({ "background-color": "transparent", "color": "#656565" });
-            $(".calendarInfoBox").show();
-            $("#dateLanguage").html(ddd);
-        }
+    $(document).ready(function(){
+        $("#transForm").submit(function(){
+            if($("#trans_src_bra_id").val() == " " || $("#trans_src_bra_id").val() == "" || isNaN($("#trans_src_bra_id").val()) ){
+                alert("Please enter a valid source branch");
+                $("#srcInput").val("");
+                $("#srcInput").focus();
+                return false;
+            }
+            else{
+                return true;
+            }
+            
+             if($("#trans_dest_bra_id").val() == " " || $("#trans_dest_bra_id").val() == "" || isNaN($("#trans_dest_bra_id").val()) ){
+                alert("Please enter a valid destination branch");
+                $("#destInput").val("");
+                $("#destInput").focus();
+                return false;
+            }
+            else{
+                return true;
+            }
         });
-
-        $(".ui-datepicker-calendar td").live("click", function (e) {
-            var d = $(".calendarInfoBox");
-            d.css("position", 'absolute');
-            var position = $(".ui-state-active").parent().position();
-            $(".calendarTxt").html($.datepicker.formatDate("yy-MM-dd", new Date(dd)));
-             $("#orderInDate").val($.datepicker.formatDate("yy-MM-dd", new Date(dd)));
-            $(".calendarInfoBox").css("left", (position.left + 35) + 'px');
-            $(".calendarInfoBox").css("top", (position.top - 7) + 'px');
-            $("#dateLanguage").html(ddd);
-        });
+        $("#srcInput").blur(function(){
+            var src = $(this).val();
+            $("#trans_src_bra_id").val(src.split(" | ")[1]);
+        }); 
         
-        $("#orderInDate").click(function(){
-            $(".infoHolder").slideToggle();
-        });
-        
-         $("#btnAdd").click(function(){
-          
-        });
+        $("#destInput").blur(function(){
+            var src = $(this).val();
+            $("#trans_dest_bra_id").val(src.split(" | ")[1]);
+        }); 
     });
-     
-			
 </script>
-
-<form class="orderInContainer">
-    <div class="orderInContainer">
-    <div class="title"><h3>Transfert</h3></div>
-    <div class="headOrderIn">
-        <div class="lbl" style="width: 208px;height: 30px;float: left;text-align: center;">DATE:</div> 
-        <div class="lbl" style="width: 208px;height: 30px;float: left;text-align: center;">FROM:</div> 
-        <div class="lbl" style="width: 208px;height: 30px;float: left;text-align: center;">TO:</div>
+<br/>
+<form action="add.php" method="post" id="transForm">
+<table align="center">
+    <tr>
+        <td>Transfer Date</td>
+        <td><input type="date" id="trans_send_date" name="trans_send_date" required tabindex="1"/></td>
+        <td>Branch Source</td>
+        <td>
+            <input list="branches" id="srcInput" required autocomplete="off"  tabindex="3"/>
+            <datalist id="branches">
+                <?php
+                    $branches = $_SESSION["branches"];
+                    foreach($branches as $src){
+                        echo "<option bra_id = \"".$src["bra_id"]."\" value=\"".$src["bra_name"]." | ".$src["bra_id"]."\" />";
+                    }
+                ?>
+            </datalist>
+            <input type="hidden" id="trans_src_bra_id" name="trans_src_bra_id" required readonly style="width:45px;"/>
+        </td>
         
-    </div>
-    <div class="headOrderIn" style="width: 960px;height: 96px;padding-left: 37px;">
-       <div class="orderInContent" >
-           <input type="text" class="inputDate" id="orderInDate" readonly="1" style="width: 150px;height: 20px;float: left;padding-left: 5px;" />
-        <div class="lblInput" style="width: 150px;height: 22px; padding-left: 66px;">
-         <select class="input" id="trans_src_bra_id" >
-            <option value="">Please choose</option>
-            <?php
-                foreach($branch as $bra){
-                    if($bra["bra_name"] == ""){
-                        echo "<option value=\"".$bra["bra_id"]."\" selected>".$bra["bra_name"]."</option>";
+        <td>Branch Destination</td>
+        <td>
+            <input list="branches" id="destInput" required autocomplete="off"  tabindex="3"/>
+            <datalist id="branches">
+                <?php
+                    $branches = $_SESSION["branches"];
+                    foreach($branches as $dest){
+                        echo "<option bra_id = \"".$dest["bra_id"]."\" value=\"".$dest["bra_name"]." | ".$dest["bra_id"]."\" />";
                     }
-                    else{
-                        echo "<option value=\"".$bra["bra_id"]."\">".$bra["bra_name"]."</option>";
-                    }
-                }                
-            ?>
-            </select>
-         </div>
-        <div class="lblInput" style="width: 150px;height: 22px;padding-left: 66px;" >
-            <select class="input" id="trans_dest_bra_id" >
-            <option value="">Please choose</option>
-            <?php
-                foreach($branch as $bra){
-                    if($bra["bra_name"] == ""){
-                        echo "<option value=\"".$bra["bra_id"]."\" selected>".$bra["bra_name"]."</option>";
-                    }
-                    else{
-                        echo "<option value=\"".$bra["bra_id"]."\">".$bra["bra_name"]."</option>";
-                    }
-                }                
-            ?>
-            </select>
-            </div>
-         
-        </div>
-        </div>
-    </div>
-         
+                ?>
+            </datalist>
+            <input type="hidden" id="trans_dest_bra_id" name="trans_dest_bra_id" required readonly style="width:45px;"/>
+        </td>
         
-        <table cellpadding="5" cellspacing="0" border="1" id="t1">
-			<tr style="background-color:#a0a0a0;">
-                            <div class="headOrderIn">
-				<th>ITEM</th>
-				<th>DESCRIPTION</th>
-				<th>QUANTITY</th>
-                                <th>ADD</th>
-				<th>DELETE</th>
-			</tr>
-                        
-			<tr>
-				<form action="add.php" method="post">
-					<td>
-                                            <select class="input" id="prod_id" required tabindex="1"/>
-                                            <option value=""></option>
-                                                <?php
-                                                    foreach($product as $prod){
-                                                        if($prod["prod_name"] == ""){
-                                                            echo "<option value=\"".$prod["prod_id"]."\" selected>".$prod["prod_name"]."</option>";
-                                                        }
-                                                        else{
-                                                            echo "<option value=\"".$prod["prod_id"]."\">".$prod["prod_name"]."</option>";
-                                                        }
-                                                    }                
-                                                ?>
-                                                </select>
-                                        </td>
-                                        <td>
-                                            <input type="text" id="prod_desc" readonly>
-                                        </td>
-					<td>
-                                            <input type="text" name="trans_det_qty" value="0" required tabindex="4"/>
-                                        <td>
-                                            <input type="submit" value="Ok"/>
-                                        </td>
-                                       
-                                        
-                                        
-				</form>
-			</tr>
-			
-		</table>
-       
-             
-            
-            
-            <input id="btnRegister" class="btnRegister" type="button" name="submit" value="SAVE"  style="float:left;"/>    
-            <input class="btnRegister" type="reset" value="RESET"   style="float:left;"/>
-            <input class="btnRegister" type="button" value="CANCEL" onclick="javascript:window.location.href='show.php'" style="float:left;"/>
-           
-           
-           
-        <div class="loader"></div>
-        <div class="lblMsg" id="lblMsg"></div>
-   
+        <td><input id="btnAdd" type="submit" class="myButton" value="Add Transfert"  tabindex="4"/></td>
+    </tr>
+</table>
 </form>
+<?php
+}
+else{
+    $trans_id = $_GET["trans_id"];
+    $transfert = readObj("Transfert", "trans_id", $trans_id)[0];
+    ?>
+    <script>
+        $(document).ready(function(){
+            $("#transDetForm").submit(function(){
+                if($("#trans_det_prod_id").val() == " " || $("#trans_det_prod_id").val() == "" || isNaN($("#trans_det_prod_id").val()) ){
+                    alert("Please enter a valid product name");
+                    $("#prodInput").val("");
+                    $("#prodInput").focus();
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            });
+            $("#prodInput").blur(function(){
+                var prod = $(this).val();
+                $("#trans_det_prod_id").val(prod.split(" | ")[1]);
+                
+            }); 
+            $("#trans_det_qty").blur(function(){
+                var qty  = $("#trans_det_qty").val();
+                var desc = $("#prod_desc").val();
+            });
+            $('#example').dataTable({
+                "iDisplayLength":-1,
+                "dom": '<"top"f>rt<"bottom"><"clear">'
+            });
+        });        
+    </script>
+    <table align="center" width="100%"><h3>Transfert</h3>
+        <tr>
+            <td width="25%"><b>Reference:</b> <?=$trans_id?></td>
+            <td width="25%"><b>Date:</b> <?=$transfert["trans_send_date"]?></td>
+            <td width="25%"><b>FROM:</b> 
+            <?php
+                $branches = $_SESSION["branches"];
+                foreach($branches as $src){
+                    if($src["bra_id"] == $transfert["trans_src_bra_id"]){
+                        echo $src["bra_name"];
+                    }
+                }
+            ?>
+            </td>
+            <td width="25%"><b>TO:</b> 
+            <?php
+                $branches = $_SESSION["branches"];
+                foreach($branches as $dest){
+                    if($dest["bra_id"] == $transfert["trans_dest_bra_id"]){
+                        echo $dest["bra_name"];
+                    }
+                }
+            ?>
+            </td>
+        </tr>
+    </table>
+    <hr/>
+    <form id="transDetForm" method="post" action="add.php?trans_id=<?= $trans_id ?>">
+    <table width="100%" align="center">
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            
+        </tr>
+        <tr>
+            <td>
+                <input type="hidden" name="trans_det_prod_id" id="trans_det_prod_id" />
+                <input list="products" id="prodInput" required autocomplete="off"/>
+                <datalist id="products">
+                    <?php
+                        $products = $_SESSION["products"];
+                        foreach($products as $prod){
+                            echo "<option prod_id = \"".$prod["prod_id"]."\" value=\"".$prod["prod_name"]." | ".$prod["prod_id"]." \" />";
+                        }
+                    ?>
+                </datalist>                
+            </td>
+            
+            <td><input type="text" name="trans_det_qty" id="trans_det_qty"/></td>
+            <td><input type="submit" value="add" class="myButton"/></td>
+        </tr>
+    </table>
+    </form>
+    <hr/>
+    <table id="example" class="border cell-border">
+        <thead>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Edit</th>
+            <th>Delete</th>            
+        </thead>
+        <tbody>
+            <?php
+                $transDetails = getTransDetailByTransId($trans_id);
+                $trans_total=0;
+                if($transDetails != null){
+                    //$qty = 0; $up = 0;
+                    foreach($transDetails as $trans){
+                        echo "<tr>";
+                        echo "<td>";
+                        $products = $_SESSION["products"];
+                        foreach($products as $product){
+                            if($trans["trans_det_prod_id"] == $product["prod_id"]){
+                                echo $product["prod_name"];
+                            }
+                        }
+                        echo "</td>";
+                        echo "</td>";
+                        $qty = $trans["trans_det_qty"];
+                        echo "<td>$qty</td>";
+                       
+                        echo "<td><a href=\"editTranfertDetail.php?trans_det_id=".$trans["trans_det_id"]."\">Edit</a></td>";
+                        echo "<td><a href=\"DeleteTransfertDetail.php?trans_det_id=".$trans["trans_det_id"]."\">Delete</a></td>";
+                        echo "</tr>";
+                    }
+                }
+                
+            ?>
+        </tbody>
+        <tfoot>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Edit</th>
+            <th>Delete</th>            
+        </tfoot>        
+    </table>
+    <div align="right" style="font-weight: bold;">
+        TOTAL <input type='text' id='trans_total' readonly value='<?=$trans_total?>'>
+        <input type="button" value="Save" onclick= "window.location.href ='show.php'" class="myButton" />
+    </div>
+    <?php
+}
+?>
 
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"]."/resources/footer.inc.php";
 ?>
-
-<?php
-require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
-?>
-
-
