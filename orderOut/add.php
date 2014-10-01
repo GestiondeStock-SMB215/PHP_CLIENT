@@ -119,7 +119,7 @@ else{
             });
         });        
     </script>
-    <table align="center" width="100%">
+    <table align="center" width="100%"><h3>Purchase Order</h3>
         <tr>
             <td width="33%"><b>Reference:</b> <?=$ord_out_id?></td>
             <td width="33%"><b>Order Date:</b> <?=$order["ord_out_date"]?></td>
