@@ -23,20 +23,21 @@ if(isset($_POST["trans_send_date"])){
     
 }
 
-if(isset($_POST["trans_det_id"])){
+if(isset($_POST["trans_det_prod_id"])){ echo "asd";
     $trans_det_id         = "-1";
     $trans_det_trans_id   = $_GET["trans_id"];
     $trans_det_prod_id    = $_POST["trans_det_prod_id"];
     $trans_det_qty        = $_POST["trans_det_qty"];
-    
+       
     $array = array(
         "trans_det_id"            => $trans_det_id,
         "trans_det_trans_id"      => $trans_det_trans_id,
         "trans_det_prod_id"       => $trans_det_prod_id,
         "trans_det_qty"           => $trans_det_qty
     );
+    
     $trans_det_id = aeObj("TransDetail", $array);
-    header("location:add.php?trans_id=$trans_det_trans_id");
+    //header("location:add.php?trans_id=$trans_det_trans_id");
 }
 
 if(!isset($_GET["trans_id"])){
@@ -79,10 +80,11 @@ if(!isset($_GET["trans_id"])){
 <br/>
 <form action="add.php" method="post" id="transForm">
 <table align="center">
+    <h3>TRANSFERT</h3>
     <tr>
-        <td>Transfer Date</td>
+        <td>Date</td>
         <td><input type="date" id="trans_send_date" name="trans_send_date" required tabindex="1"/></td>
-        <td>Branch Source</td>
+        <td>FROM</td>
         <td>
             <input list="branches" id="srcInput" required autocomplete="off"  tabindex="3"/>
             <datalist id="branches">
@@ -96,7 +98,7 @@ if(!isset($_GET["trans_id"])){
             <input type="hidden" id="trans_src_bra_id" name="trans_src_bra_id" required readonly style="width:45px;"/>
         </td>
         
-        <td>Branch Destination</td>
+        <td>TO</td>
         <td>
             <input list="branches" id="destInput" required autocomplete="off"  tabindex="3"/>
             <datalist id="branches">
@@ -138,17 +140,13 @@ else{
                 $("#trans_det_prod_id").val(prod.split(" | ")[1]);
                 
             }); 
-            $("#trans_det_qty").blur(function(){
-                var qty  = $("#trans_det_qty").val();
-                var desc = $("#prod_desc").val();
-            });
             $('#example').dataTable({
                 "iDisplayLength":-1,
                 "dom": '<"top"f>rt<"bottom"><"clear">'
             });
         });        
     </script>
-    <table align="center" width="100%"><h3>Transfert</h3>
+    <table align="center" width="100%"><h3>TRANSFERT</h3>
         <tr>
             <td width="25%"><b>Reference:</b> <?=$trans_id?></td>
             <td width="25%"><b>Date:</b> <?=$transfert["trans_send_date"]?></td>
@@ -175,11 +173,12 @@ else{
         </tr>
     </table>
     <hr/>
-    <form id="transDetForm" method="post" action="add.php?trans_id=<?= $trans_id ?>">
+    <form id="transDetForm" method="post" action="add.php?trans_id=<?=$trans_id?>">
     <table width="100%" align="center">
         <tr>
             <th>Product</th>
             <th>Quantity</th>
+            <th></th>
             
         </tr>
         <tr>
