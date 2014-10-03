@@ -37,7 +37,7 @@ if(isset($_POST["trans_det_prod_id"])){ echo "asd";
     );
     
     $trans_det_id = aeObj("TransDetail", $array);
-    //header("location:add.php?trans_id=$trans_det_trans_id");
+    header("location:add.php?trans_id=$trans_det_trans_id");
 }
 
 if(!isset($_GET["trans_id"])){
@@ -136,10 +136,26 @@ else{
                 }
             });
             $("#prodInput").blur(function(){
-                var prod = $(this).val();
-                $("#trans_det_prod_id").val(prod.split(" | ")[1]);
+                //GET prod_id
+                var prod_id = $(this).val();
+                prod_id = prod_id.split(" | ")[1];
+                //Get trans_src_bra_id
+                var trans_src_bra_id = $("#trans_src_bra_id").val();
                 
-            }); 
+                //SEND PROD_ID AND TRANS_ID TO GET AVAILABLE 
+                checkProdQtyByBranch(prod_id, trans_src_bra_id);
+                $("#trans_det_prod_id").val(prod_id);
+                
+            });
+            $("#trans_det_qty").blur(function(){
+                var trans_det_qty = $("#trans_det_qty").val();
+                var prodBraQty = $("#prodBraQty").val();
+                if(parseInt(trans_det_qty) > parseInt(prodBraQty)){
+                    alert("Quantity is out of srock");
+                    $("#trans_det_qty").val("");
+                    $("#trans_det_qty").focus();
+                }
+            });            
             $('#example').dataTable({
                 "iDisplayLength":-1,
                 "dom": '<"top"f>rt<"bottom"><"clear">'
@@ -148,9 +164,10 @@ else{
     </script>
     <table align="center" width="100%"><h3>TRANSFERT</h3>
         <tr>
-            <td width="25%"><b>Reference:</b> <?=$trans_id?></td>
+            <td width="25%"><b>Reference:</b> <span id="ref_trans_id"><?=$trans_id?></span></td>
             <td width="25%"><b>Date:</b> <?=$transfert["trans_send_date"]?></td>
-            <td width="25%"><b>FROM:</b> 
+            <td width="25%"><b>FROM:</b>
+                <input type="hidden" value="<?= $transfert["trans_src_bra_id"] ?>" id="trans_src_bra_id"/>
             <?php
                 $branches = $_SESSION["branches"];
                 foreach($branches as $src){
@@ -177,12 +194,13 @@ else{
     <table width="100%" align="center">
         <tr>
             <th>Product</th>
+            <th>Available Quantity in source branch</th>
             <th>Quantity</th>
             <th></th>
             
         </tr>
         <tr>
-            <td>
+            <td align="center">
                 <input type="hidden" name="trans_det_prod_id" id="trans_det_prod_id" />
                 <input list="products" id="prodInput" required autocomplete="off"/>
                 <datalist id="products">
@@ -194,9 +212,9 @@ else{
                     ?>
                 </datalist>                
             </td>
-            
-            <td><input type="text" name="trans_det_qty" id="trans_det_qty"/></td>
-            <td><input type="submit" value="add" class="myButton"/></td>
+            <td align="center"><input type="text" name="prodBraQty" id="prodBraQty" readonly=""/></td>
+            <td align="center"><input type="number" min="1" name="trans_det_qty" id="trans_det_qty" required /></td>
+            <td align="center"><input type="submit" value="add" class="myButton"/></td>
         </tr>
     </table>
     </form>

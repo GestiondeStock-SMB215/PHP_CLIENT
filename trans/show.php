@@ -25,12 +25,20 @@ $(document).ready(function() {
     <tbody>
         <?php
             $objs = readObj("Transfert", "trans_id", "-1");
-
+            $bras = readObj("branch", "bra_id", "-1");
             foreach($objs as $obj){
                 echo "<tr>";
                     echo "<td>".$obj["trans_id"]."</td>";
-                    echo "<td>".$obj["trans_src_bra_id"]."</td>";
-                    echo "<td>".$obj["trans_dest_bra_id"]."</td>";
+                    echo "<td>";
+                    foreach($bras as $bra){
+                        if($bra["bra_id"] == $obj["trans_src_bra_id"]){echo $bra["bra_name"];}
+                    }
+                    echo "</td>";
+                    echo "<td>";
+                    foreach($bras as $bra){
+                        if($bra["bra_id"] == $obj["trans_dest_bra_id"]){echo $bra["bra_name"];}
+                    }
+                    echo "</td>";
                     echo "<td>".$obj["trans_status"]."</td>";
                     echo "<td>".$obj["trans_time_stamp"]."</td>";
                 echo "<td><a href=\"edit.php?trans_id=".$obj["trans_id"].""."\">Edit</a></td>";

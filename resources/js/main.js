@@ -1041,3 +1041,30 @@ function getPrice(){
         $('#lblMsg').html("Please fill in all required fields");
     }
 }
+
+function checkProdQtyByBranch(prod_id, trans_src_bra_id){
+    wantedData = {prod_id:prod_id,trans_src_bra_id:trans_src_bra_id};
+    $.ajax({
+        type         : "POST",
+        url          : "/resources/ajax.php?func=checkProdQtyByBranch",
+        data         : wantedData,
+        cache        : false,
+        dataType     : "json",
+        beforeSend   : function () {
+            $('#lblMsg').html("");
+            $('#loader').show();
+        },
+        complete: function () {
+            $('#loader').hide();
+        },
+        success: function(result){
+            if(result == "Out of Stock"){
+                alert("This item is out of your stock.");
+                $("#transDetForm")[0].reset();
+                $("#prodInput").focus();
+            }
+            $("#prodBraQty").val(result);
+        }			            
+
+    });
+}

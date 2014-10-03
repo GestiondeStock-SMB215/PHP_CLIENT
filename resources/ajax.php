@@ -877,3 +877,13 @@ function getSupIdByName(){
     echo(json_encode($result));
     exit;
 }
+function checkProdQtyByBranch(){
+    $result = array();
+    $array = array("prod_id"=>$_POST["prod_id"], "trans_src_bra_id"=>$_POST["trans_src_bra_id"]);
+    global $wsdl;
+    $res = $wsdl->checkProdQtyByBranch($array)->return;
+    logToFile($res);
+    array_push($result,$res);
+    echo(json_encode($result));
+    exit;
+}
