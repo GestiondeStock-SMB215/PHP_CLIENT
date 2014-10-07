@@ -115,7 +115,20 @@ else{
             });
             $('#example').dataTable({
                 "iDisplayLength":-1,
-                "dom": '<"top"f>rt<"bottom"><"clear">'
+                "dom": 'T<"top">rt<"bottom"><"clear">',
+                "tableTools": {
+                "sSwfPath": "/resources/copy_csv_xls_pdf.swf",
+                "aButtons":  [
+                        "copy",
+                        "print",
+                
+                {
+                    "sExtends":    "collection",
+                    "sButtonText": "Save As",
+                    "aButtons":    [ "csv", "pdf", { "sExtends": "xls","sButtonText": "Excel","sFileName": "*.xls"}]
+                }
+            ]
+        }
             });
         });        
     </script>
