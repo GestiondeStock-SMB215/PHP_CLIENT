@@ -223,7 +223,6 @@ else{
         <thead>
             <th>Product</th>
             <th>Quantity</th>
-            <th>Edit</th>
             <th>Delete</th>            
         </thead>
         <tbody>
@@ -246,9 +245,9 @@ else{
                         $qty = $trans["trans_det_qty"];
                         echo "<td>$qty</td>";
                        
-                        echo "<td><a href=\"editTranfertDetail.php?trans_det_id=".$trans["trans_det_id"]."\">Edit</a></td>";
-                        echo "<td><a href=\"DeleteTransfertDetail.php?trans_det_id=".$trans["trans_det_id"]."\">Delete</a></td>";
+                        echo "<td><a href=\"DeleteTransDetail.php?trans_det_id=".$trans["trans_det_id"]."&trans_id=".$trans["trans_det_trans_id"]."\">Delete</a></td>";
                         echo "</tr>";
+                        $trans_total=$trans_total+$qty;
                     }
                 }
                 
@@ -257,7 +256,6 @@ else{
         <tfoot>
             <th>Product</th>
             <th>Quantity</th>
-            <th>Edit</th>
             <th>Delete</th>            
         </tfoot>        
     </table>
