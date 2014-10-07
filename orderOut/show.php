@@ -38,7 +38,7 @@ $(document).ready(function() {
                     echo "</td>";
                     echo "<td>".$obj["ord_out_status"]."</td>";
                     echo "<td>".$obj["ord_out_time_stamp"]."</td>";
-                echo "<td><a href=\"edit.php?ord_out_id=".$obj["ord_out_id"].""."\">Edit</a></td>";
+                echo "<td><a href=\"add.php?ord_out_id=".$obj["ord_out_id"].""."\">View</a></td>";
                 echo "<td><a href=\"delete.php?ord_out_id=".$obj["ord_out_id"]."\">Delete</a></td>";
                 echo "</tr>";
             }

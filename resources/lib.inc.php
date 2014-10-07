@@ -66,15 +66,17 @@
         $objs       = array();
         $func       = "read".$obj_type;
         $response = $wsdl->$func(array($obj_id_field => $obj_id));
-        if(gettype($response->return) == "array"){
-            foreach ($response->return as $obj){
-                $obj = get_object_vars($obj);
-                array_push($objs,$obj);
+        if(isset($response->return)){
+            if(gettype($response->return) == "array"){
+                foreach ($response->return as $obj){
+                    $obj = get_object_vars($obj);
+                    array_push($objs,$obj);
+                }
             }
-        }
-        else{
-            if(gettype($response->return) == "object"){
-                array_push($objs,get_object_vars($response->return));
+            else{
+                if(gettype($response->return) == "object"){
+                    array_push($objs,get_object_vars($response->return));
+                }
             }
         }
         return $objs;
@@ -364,3 +366,21 @@ if(!isset($_SESSION["branches"])){
     $_SESSION["branches"] = $branches;
 }
     }
+    function deleteOrderInCascade($ord_in_id){
+        if (isset($ord_in_id) && is_numeric($ord_in_id)){
+            global $wsdl;
+            $response = $wsdl->deleteOrderInCascade(array("ord_in_id"=>$ord_in_id));
+            return $response->return;
+        }
+        
+    }
+    function deleteOrderOutCascade($ord_out_id){
+        if (isset($ord_out_id) && is_numeric($ord_out_id)){
+            global $wsdl;
+            $response = $wsdl->deleteOrderOutCascade(array("ord_out_id"=>$ord_out_id));
+            return $response->return;
+        }
+        
+    }
+    
+    
