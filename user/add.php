@@ -34,6 +34,20 @@ $(document).ready(function(){
                 </select>
             </div>
         </div>
+        
+        <div class="lbl">Branch:
+            <div class="ddl">
+                <select id="user_bra_id">
+                    <option value="">Please choose</option>
+                    <?php
+                        $branches = readObj("Branch", "bra_id", "-1");
+                        foreach($branches as $branch){
+                            echo "<option value=\"".$branch["bra_id"]."\">".$branch["bra_name"]."</option>";
+                        }
+                    ?>
+                </select>
+            </div>
+        </div>
 
         <div class="lbl">Name:
             <input type="text" class="input" id="user_name" /></div>
