@@ -2,6 +2,57 @@
 require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 getCustSession();
 ?>
+<div class="clear"></div>
+<h3>Invoices In</h3>
+<h4>Incompleted Orders</h4>
+<script>
+$(document).ready(function() {
+    $('#example0').dataTable({
+        "iDisplayLength":5
+    });
+});
+</script>
+<table id="example0" class="display cell-border">
+    <thead>
+        <tr>
+            <th>Order Reference</th>
+            <th>Customers</th>
+            <th>Order In Detail</th>
+            <th>Add Invoice</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+            $customers = $_SESSION["customers"];
+            
+            global $wsdl;
+            $objs = $wsdl->getIncompOrderIn()->return;
+            foreach($objs as $obj){
+                echo "<tr>";
+                    echo "<td>".$obj->ord_in_id."</td>";
+                    echo "<td>";
+                    foreach($customers as $customer){
+                        if($customer["cust_id"] == $obj->ord_in_cust_id){
+                            echo $customer["cust_name"];
+                        }
+                    }
+                    echo "</td>";
+                    echo "<td>".$obj->ord_in_date."</td>";
+                echo "<td><a href=\"add.php?ord_in_id=".$obj->ord_in_id.""."\">Add Invoice</a></td>";
+                echo "</tr>";
+            }
+        ?>
+    </tbody>
+    <tfoot>
+         <tr>
+            <th>Order Reference</th>
+            <th>Customers</th>
+            <th>Order In Detail</th>
+            <th>Add Invoice</th>
+        </tr>
+    </tfoot>    
+</table>
+<h4>Invoice In:</h4>
 <script>
 $(document).ready(function() {
     $('#example').dataTable({
@@ -24,7 +75,6 @@ $(document).ready(function() {
 });
 </script>
 <div class="clear"></div>
-<table width="100%"><tr><td><h3>Invoices In</h3></td><td align="right"><input type="button" value="Create" class="myButton" onclick="javascript:window.location.href='add.php'"/></td></tr></table>
 <table id="example" class="display cell-border">
     <thead>
         <tr>

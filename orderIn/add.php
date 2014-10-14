@@ -230,12 +230,11 @@ else{
             <th>Total</th>
             <th>Delete</th>            
         </tfoot>        
-    
+    </table>
     <div align="right" style="font-weight: bold;">
         TOTAL PREVU <input type='text' id='ord_in_total' readonly value='<?=$ord_in_total?> USD'>
         <input type="button" value="Save" onclick= "window.location.href ='show.php'" class="myButton" />
     </div>
-        </table>
     <?php
 }
 ?>
