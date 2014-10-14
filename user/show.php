@@ -15,6 +15,7 @@ $(document).ready(function() {
         <tr>
             <th>ID</th>
             <th>Role</th>
+            <th>Branch</th>
             <th>Name</th>
             <th>Username</th>
             <th>Email</th>
@@ -29,6 +30,7 @@ $(document).ready(function() {
         <?php
             $objs = readObj("User", "user_id", "-1");
             $roles = readObj("Role", "role_id", "-1");
+            $branches = readObj("Branch", "bra_id", "-1");
 
             foreach($objs as $obj){
                 echo "<tr>";
@@ -36,6 +38,11 @@ $(document).ready(function() {
                 foreach ($roles as $role){
                     if($role["role_id"] == $obj["user_role_id"]){
                         echo "<td>".$role["role_name"]."</td>";
+                    }
+                }
+                foreach ($branches as $branch){
+                    if($branch["bra_id"] == $obj["user_bra_id"]){
+                        echo "<td>".$branch["bra_name"]."</td>";
                     }
                 }
                 echo "<td>".$obj["user_name"]."</td>";
@@ -54,6 +61,7 @@ $(document).ready(function() {
         <tr>
             <th>ID</th>
             <th>Role</th>
+            <th>Branch</th>
             <th>Name</th>
             <th>Username</th>
             <th>Email</th>
