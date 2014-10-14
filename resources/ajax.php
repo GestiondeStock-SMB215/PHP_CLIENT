@@ -194,6 +194,7 @@ function editUser(){
     if (isset($_POST['user_name'])) {
         $user_id = mysql_escape_mimic($_POST['user_id']);
         $user_role_id = mysql_escape_mimic($_POST['user_role_id']);
+        $user_bra_id = mysql_escape_mimic($_POST['user_bra_id']);
         $user_name = mysql_escape_mimic($_POST['user_name']);
         $user_username = mysql_escape_mimic($_POST['user_username']);
         $user_password = mysql_escape_mimic($_POST['user_password']);
