@@ -20,10 +20,10 @@ $(document).ready(function(){
         }
     });
     $("#user_username").blur(function () {
-        checkUserNameValidity();
+       // checkUserNameValidity();
     });
     $("#user_email").blur(function () {
-        checkUserEmailValidity();
+       // checkUserEmailValidity();
     });
 });
 </script>
