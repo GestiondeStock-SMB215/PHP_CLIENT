@@ -1,12 +1,12 @@
 <?php
-    require_once $_SERVER["DOCUMENT_ROOT"]."/gss/GSS_PHP_CLIENT/resources/lib.inc.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/resources/lib.inc.php";
     
     $time = getDT();
 
     if(isset($_GET["trans_id"]) && $_GET["trans_id"]!="" && is_numeric($_GET["trans_id"])){
         $trans_id = $_GET["trans_id"];
     }
-    if(checkTrackingIdValidation($trans_id)){
+//    if(checkTrackingIdValidation($trans_id)){
         if(isset($_GET['tracker']) && $_GET['tracker']!=''){
             if($_GET['tracker']=="start"){
                 $fp = fopen("log/log-$trans_id.txt","a+");
@@ -31,8 +31,8 @@
                 echo $_GET["trans_id"].",".$_GET["lat"].",".$_GET["lon"]."<br>";
             }
         }
-    }
-    else{
-        echo "Failed";
-    }
+//    }
+//    else{
+//        echo "Failed";
+//    }
 ?>
