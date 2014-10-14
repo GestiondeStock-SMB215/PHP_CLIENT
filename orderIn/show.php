@@ -5,7 +5,21 @@ getCustSession();
 <script>
 $(document).ready(function() {
     $('#example').dataTable({
-        "iDisplayLength":5  
+        "iDisplayLength":5,
+        "dom": 'T<"clear">lfrtip',
+        "tableTools": {
+        "sSwfPath": "/resources/copy_csv_xls_pdf.swf",
+        "aButtons":  [
+                "copy",
+                "print",
+                
+                {
+                    "sExtends":    "collection",
+                    "sButtonText": "Save As",
+                    "aButtons":    [ "csv", "pdf", { "sExtends": "xls","sButtonText": "Excel","sFileName": "*.xls"}]
+                }
+            ]
+        }
     });
 });
 </script>
@@ -18,7 +32,7 @@ $(document).ready(function() {
             <th>Customers</th>
             <th>Status</th>
             <th>Time Stamp</th>
-            <th>Edit</th>
+            <th>View</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -38,7 +52,7 @@ $(document).ready(function() {
                     echo "</td>";
                     echo "<td>".$obj["ord_in_status"]."</td>";
                     echo "<td>".$obj["ord_in_time_stamp"]."</td>";
-                echo "<td><a href=\"edit.php?ord_in_id=".$obj["ord_in_id"].""."\">Edit</a></td>";
+                echo "<td><a href=\"add.php?ord_in_id=".$obj["ord_in_id"].""."\">View</a></td>";
                 echo "<td><a href=\"delete.php?ord_in_id=".$obj["ord_in_id"]."\">Delete</a></td>";
                 echo "</tr>";
             }
@@ -50,7 +64,7 @@ $(document).ready(function() {
             <th>Customer</th>
             <th>Status</th>
             <th>Time Stamp</th>
-            <th>Edit</th>
+            <th>View</th>
             <th>Delete</th>
         </tr>
     </tfoot>    

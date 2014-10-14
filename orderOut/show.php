@@ -5,7 +5,21 @@ getSupSession();
 <script>
 $(document).ready(function() {
     $('#example').dataTable({
-        "iDisplayLength":5  
+        "iDisplayLength":5,
+        "dom": 'T<"clear">lfrtip',
+        "tableTools": {
+        "sSwfPath": "/resources/copy_csv_xls_pdf.swf",
+        "aButtons":  [
+                "copy",
+                "print",
+                
+                {
+                    "sExtends":    "collection",
+                    "sButtonText": "Save As",
+                    "aButtons":    [ "csv", "pdf", { "sExtends": "xls","sButtonText": "Excel","sFileName": "*.xls"}]
+                }
+            ]
+        }
     });
 });
 </script>
@@ -38,7 +52,7 @@ $(document).ready(function() {
                     echo "</td>";
                     echo "<td>".$obj["ord_out_status"]."</td>";
                     echo "<td>".$obj["ord_out_time_stamp"]."</td>";
-                echo "<td><a href=\"edit.php?ord_out_id=".$obj["ord_out_id"].""."\">Edit</a></td>";
+                echo "<td><a href=\"add.php?ord_out_id=".$obj["ord_out_id"].""."\">View</a></td>";
                 echo "<td><a href=\"delete.php?ord_out_id=".$obj["ord_out_id"]."\">Delete</a></td>";
                 echo "</tr>";
             }

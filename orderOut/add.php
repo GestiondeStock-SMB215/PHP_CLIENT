@@ -115,7 +115,20 @@ else{
             });
             $('#example').dataTable({
                 "iDisplayLength":-1,
-                "dom": '<"top"f>rt<"bottom"><"clear">'
+                "dom": 'T<"top">rt<"bottom"><"clear">',
+                "tableTools": {
+                "sSwfPath": "/resources/copy_csv_xls_pdf.swf",
+                "aButtons":  [
+                        "copy",
+                        "print",
+                
+                {
+                    "sExtends":    "collection",
+                    "sButtonText": "Save As",
+                    "aButtons":    [ "csv", "pdf", { "sExtends": "xls","sButtonText": "Excel","sFileName": "*.xls"}]
+                }
+            ]
+        }
             });
         });        
     </script>
@@ -172,7 +185,6 @@ else{
             <th>Price</th>
             <th>Quantity</th>
             <th>Total</th>
-            <th>Edit</th>
             <th>Delete</th>            
         </thead>
         <tbody>
@@ -205,8 +217,7 @@ else{
                         $ord_out_det_total=($qty * $up);
                         $ord_out_total += $ord_out_det_total;
                         echo "<td>$ord_out_det_total USD</td>";
-                        echo "<td><a href=\"editOrderOutDetail.php?ord_out_det_id=".$od["ord_out_det_id"]."\">Edit</a></td>";
-                        echo "<td><a href=\"DeleteOrderOutDetail.php?ord_out_det_id=".$od["ord_out_det_id"]."\">Delete</a></td>";
+                        echo "<td><a href=\"DeleteOrderOutDetail.php?ord_out_det_id=".$od["ord_out_det_id"]."&ord_out_id=".$od["ord_out_det_ord_out_id"]."\">Delete</a></td>";
                         echo "</tr>";
                     }
                 }
@@ -217,7 +228,6 @@ else{
             <th>Price</th>
             <th>Quantity</th>
             <th>Total</th>
-            <th>Edit</th>
             <th>Delete</th>            
         </tfoot>        
     </table>

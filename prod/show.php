@@ -4,7 +4,21 @@ require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 <script>
 $(document).ready(function() {
     $('#example').dataTable({
-        "iDisplayLength":5  
+        "iDisplayLength":5,
+        "dom": 'T<"clear">lfrtip',
+        "tableTools": {
+        "sSwfPath": "/resources/copy_csv_xls_pdf.swf",
+        "aButtons":  [
+                "copy",
+                "print",
+                
+                {
+                    "sExtends":    "collection",
+                    "sButtonText": "Save As",
+                    "aButtons":    [ "csv", "pdf", { "sExtends": "xls","sButtonText": "Excel","sFileName": "*.xls"}]
+                }
+            ]
+        }
     });
 });
 </script>
