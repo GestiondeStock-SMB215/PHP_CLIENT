@@ -4,6 +4,7 @@
         header("location:show.php");
     }
     $roles = readObj("Role", "role_id", "-1");
+    $branches = readObj("Branch", "bra_id", "-1");
     $user = readObj("User", "user_id", $_GET["user_id"])[0];
 
     
@@ -44,7 +45,22 @@ $(document).ready(function(){
                 </select>
             </div>
         </div>
-
+        <div class="lbl">Branch:
+            <div class="ddl">
+                <select id="user_bra_id">
+                    <?php
+                        foreach($branches as $branch){
+                            if($branch["user_role_id"] == $branch["bra_id"]){
+                                echo "<option selected value=\"".$branch["bra_id"]."\">".$branch["bra_name"]."</option>";
+                            }
+                            else{
+                                echo "<option value=\"".$branch["bra_id"]."\">".$branch["bra_name"]."</option>";
+                            }
+                        }
+                    ?>
+                </select>
+            </div>
+        </div>
         <div class="lbl">Name:
             <input type="text" class="input" id="user_name" value="<?= $user["user_name"] ?>" /></div>
 
