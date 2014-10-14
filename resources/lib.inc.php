@@ -382,5 +382,13 @@ if(!isset($_SESSION["branches"])){
         }
         
     }
+    function deleteTransfertCascade($trans_id){
+        if (isset($trans_id) && is_numeric($trans_id)){
+            global $wsdl;
+            $response = $wsdl->deleteOrderOutCascade(array("trans_id"=>$trans_id));
+            return $response->return;
+        }
+        
+    }
     
     
