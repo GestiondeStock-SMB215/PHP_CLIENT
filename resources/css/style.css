@@ -32,8 +32,8 @@ ul{margin:0;padding:0;list-style:none;}
 .header .innerHead .menu .topMenu{float:left;position: relative;z-index: 555;}
 .header .innerHead .menu .topMenu .title{width:160px;height:24px;cursor: pointer;text-align: center;}
 .header .innerHead .menu .topMenu .title:hover{background-color:#eee;}
-.header .innerHead .menu .topMenu .sub{width:160px;height:auto;background-color:#bbb;display:none;text-align: center;}
-.header .innerHead .menu .topMenu .sub .ttlSub{width:155px;cursor: pointer;height:25px;display: inline-block;}
+.header .innerHead .menu .topMenu .sub{width:180px;height:auto;background-color:#bbb;display:none;text-align: center;}
+.header .innerHead .menu .topMenu .sub .ttlSub{width:180px;cursor: pointer;height:25px;display: inline-block;}
 .header .innerHead .menu .topMenu .sub .ttlSub:hover{width:100%;background-color:#eee;}
 
 .header .pnlLogin{width:132px;position:absolute;top:45px;left:85%;z-index:999999;display:none;}
