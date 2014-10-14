@@ -28,7 +28,7 @@ if(file_exists($fileLoc)){
     echo "No logs for this trans_id";
     //header("location:/error.php?err_id=2");
 }
-    require_once $_SERVER["DOCUMENT_ROOT"]."/gss/GSS_PHP_CLIENT/resources/header.inc.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 ?>
     <style type="text/css">
       #map {
@@ -73,7 +73,7 @@ if(file_exists($fileLoc)){
             path.push(coords[i]);
             draw();
             console.log(i);
-            if(i<coords.length){i++;}else{stopinterval();}
+            if(i<coords.length-1){i++;}else{stopinterval();}
         }
         $(document).ready(function(){
             playinterval();
@@ -93,7 +93,7 @@ if(file_exists($fileLoc)){
 	function draw(){
 		//path.push(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
 		
-		var myOptions = {
+           var myOptions = {
             zoom : 16,
             center : path[0],
             mapTypeId : google.maps.MapTypeId.ROADMAP
