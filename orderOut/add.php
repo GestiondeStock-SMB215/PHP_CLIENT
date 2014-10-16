@@ -135,7 +135,7 @@ else{
     <table align="center" width="100%"><h3>Purchase Order</h3>
         <tr>
             <td width="33%"><b>Reference:</b> <?=$ord_out_id?></td>
-            <td width="33%"><b>Order Date:</b> <?=$order["ord_out_date"]?></td>
+            <td width="33%"><b>Order Date:</b> <?=substr($order["ord_out_date"],0,10)?></td>
             <td width="33%"><b>Supplier:</b> 
             <?php
                 $suppliers = $_SESSION["suppliers"];

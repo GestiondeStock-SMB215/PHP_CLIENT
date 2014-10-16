@@ -165,7 +165,7 @@ else{
     <table align="center" width="100%"><h3>TRANSFERT</h3>
         <tr>
             <td width="25%"><b>Reference:</b> <span id="ref_trans_id"><?=$trans_id?></span></td>
-            <td width="25%"><b>Date:</b> <?=$transfert["trans_send_date"]?></td>
+            <td width="25%"><b>Date:</b> <?= substr($transfert["trans_send_date"],0,10);?></td>
             <td width="25%"><b>FROM:</b>
                 <input type="hidden" value="<?= $transfert["trans_src_bra_id"] ?>" id="trans_src_bra_id"/>
             <?php

@@ -135,7 +135,7 @@ else{
     <table align="center" width="100%"><h3>Sale Order</h3>
         <tr>
             <td width="33%"><b>Reference:</b> <?=$ord_in_id?></td>
-            <td width="33%"><b>Order Date:</b> <?=$order["ord_in_date"]?></td>
+            <td width="33%"><b>Order Date:</b> <?= substr($order["ord_in_date"],0,10);?></td>
             <td width="33%"><b>Customer:</b> 
             <?php
                 $customers = $_SESSION["customers"];
@@ -230,12 +230,12 @@ else{
             <th>Total</th>
             <th>Delete</th>            
         </tfoot>        
-    
+    </table>
     <div align="right" style="font-weight: bold;">
         TOTAL PREVU <input type='text' id='ord_in_total' readonly value='<?=$ord_in_total?> USD'>
         <input type="button" value="Save" onclick= "window.location.href ='show.php'" class="myButton" />
     </div>
-        </table>
+        
     <?php
 }
 ?>
