@@ -43,6 +43,7 @@ function getUserByUsername(){
                     $user["user_last_login"] = $item->user_last_login;
                     $user["user_role_id"] = $item->user_role_id;
                     $user["user_status"] = $item->user_status;
+                    $user["user_bra_id"] = $item->user_bra_id;
                     $user["user_time_stamp"] = $item->user_time_stamp;
                     
                     //TO BE UN-COMMENTED ON PRODUCTION
@@ -166,6 +167,7 @@ function addUser(){
         $user_password = mysql_escape_mimic($_POST['user_password']);
         $user_email = mysql_escape_mimic($_POST['user_email']);
         $user_status = mysql_escape_mimic($_POST['user_status']);
+        $user_bra_id = mysql_escape_mimic($_POST['user_bra_id']);
         $result = array();
         
         $res = aeObj(
@@ -173,11 +175,12 @@ function addUser(){
             array(
                 "user_id" => "-1",
                 "user_role_id"=> $user_role_id,
+                "user_bra_id"=>$user_bra_id,
                 "user_name"=>$user_name, 
                 "user_username"=>$user_username, 
                 "user_password"=>  md5($user_password),
                 "user_email"=>$user_email, 
-                "user_status"=>$user_status
+                "user_status"=>$user_status                
             )
         );     
         
@@ -191,6 +194,7 @@ function editUser(){
     if (isset($_POST['user_name'])) {
         $user_id = mysql_escape_mimic($_POST['user_id']);
         $user_role_id = mysql_escape_mimic($_POST['user_role_id']);
+        $user_bra_id = mysql_escape_mimic($_POST['user_bra_id']);
         $user_name = mysql_escape_mimic($_POST['user_name']);
         $user_username = mysql_escape_mimic($_POST['user_username']);
         $user_password = mysql_escape_mimic($_POST['user_password']);
@@ -208,6 +212,7 @@ function editUser(){
             array(
                 "user_id" => $user_id,
                 "user_role_id"=>$user_role_id, 
+                "user_bra_id"=>$user_bra_id,
                 "user_name"=>$user_name, 
                 "user_username"=>$user_username, 
                 "user_password"=>$user_password,
