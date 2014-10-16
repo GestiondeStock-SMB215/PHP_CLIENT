@@ -86,6 +86,9 @@ if(!isset($_GET["trans_id"])){
         <td><input type="date" id="trans_send_date" name="trans_send_date" required tabindex="1"/></td>
         <td>FROM</td>
         <td>
+            <?php
+                if($_SESSION["user"]["user_role_id"] == '1'){
+            ?>
             <input list="branches" id="srcInput" required autocomplete="off"  tabindex="3"/>
             <datalist id="branches">
                 <?php
@@ -96,6 +99,18 @@ if(!isset($_GET["trans_id"])){
                 ?>
             </datalist>
             <input type="hidden" id="trans_src_bra_id" name="trans_src_bra_id" required readonly style="width:45px;"/>
+            <?php
+                }
+                else{
+                    $branches = $_SESSION["branches"];
+                    foreach($branches as $src){
+                        if($_SESSION["user"]["user_bra_id"] == $src["bra_id"]){
+                            echo "<input type=\"text\" value=\"".$src["bra_name"]."\" readonly />";
+                            echo "<input type=\"hidden\" id=\"trans_src_bra_id\" name=\"trans_src_bra_id\" value =\"".$src["bra_id"]."\"/>";
+                        }
+                    }
+                }
+            ?>
         </td>
         
         <td>TO</td>
