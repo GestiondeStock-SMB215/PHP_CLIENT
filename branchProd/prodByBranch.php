@@ -5,6 +5,11 @@ require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 ?>
 <script>
 $(document).ready(function() {
+    $("#user_bra_id").change(function (){
+        var braId = $("#user_bra_id").val();
+        getProductByBranchName(braId);
+    });
+    
     $('#example').dataTable({
         "iDisplayLength":5,
         "dom": 'T<"clear">lfrtip',

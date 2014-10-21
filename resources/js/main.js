@@ -1078,3 +1078,25 @@ function checkProdQtyByBranch(prod_id, trans_src_bra_id){
 
     });
 }
+
+function getProductByBranchName(pb_bra_id){
+    wantedData = {pb_bra_id:pb_bra_id};
+    $.ajax({
+        type         : "POST",
+        url          : "/resources/ajax.php?func=getProductByBranchName",
+        data         : wantedData,
+        cache        : false,
+        dataType     : "json",
+        beforeSend   : function () {
+            $('#lblMsg').html("");
+            $('#loader').show();
+        },
+        complete: function () {
+            $('#loader').hide();
+        },
+        success: function(result){
+            console.log(result.msg)
+        }			            
+
+    });
+}
