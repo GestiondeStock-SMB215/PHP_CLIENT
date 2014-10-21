@@ -29,7 +29,8 @@ $(document).ready(function() {
 });
 </script>
 <div class="prodBraContainer">
-    <div class="lbl">Branch:
+    <div class="lbl">
+        <div class="lblBR">Branch:</div>
         <div class="ddl">
             <select id="user_bra_id">
                 <?php
