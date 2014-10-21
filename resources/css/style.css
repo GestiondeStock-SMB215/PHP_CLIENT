@@ -101,9 +101,9 @@ ul{margin:0;padding:0;list-style:none;}
 
 /*Product in Branch*/
 .prodBraContainer{}
-.prodBraContainer .lbl{float: left;height:40px;}
+.prodBraContainer .lbl{height:40px;margin-top: 20px;}
 .prodBraContainer .lbl .lblBR{float:left;}
-.prodBraContainer .lbl .ddl{float: right;}
+.prodBraContainer .lbl .ddl{float: left;}
 
 
 /* FOOTER */
