@@ -5,25 +5,22 @@ require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 ?>
 <script>
 $(document).ready(function() {
-     $('#example').dataTable({
-        "iDisplayLength":5  
+    $('#example').dataTable({
+        "iDisplayLength":5,
+        "dom": 'T<"clear">lfrtip',
+        "tableTools": {
+        "sSwfPath": "/resources/copy_csv_xls_pdf.swf",
+        "aButtons":  [
+                "copy",
+                "print",                
+                {
+                    "sExtends":    "collection",
+                    "sButtonText": "Save As",
+                    "aButtons":    [ "csv", "pdf", { "sExtends": "xls","sButtonText": "Excel","sFileName": "*.xls"}]
+                }
+            ]
+        }
     });
-//    $('#example').dataTable({
-//        "iDisplayLength":5,
-//        "dom": 'T<"clear">lfrtip',
-//        "tableTools": {
-//        "sSwfPath": "/resources/copy_csv_xls_pdf.swf",
-//        "aButtons":  [
-//                "copy",
-//                "print",                
-//                {
-//                    "sExtends":    "collection",
-//                    "sButtonText": "Save As",
-//                    "aButtons":    [ "csv", "pdf", { "sExtends": "xls","sButtonText": "Excel","sFileName": "*.xls"}]
-//                }
-//            ]
-//        }
-//    });
 });
 </script>
 <div class="prodBraContainer">
@@ -46,7 +43,7 @@ $(document).ready(function() {
     
     <table width="100%">
         <tr>
-            <td><h3>Product Management</h3></td>       
+            <td><h3>Product In Branch Management</h3></td>       
         </tr>
     </table>
 
@@ -86,11 +83,7 @@ $(document).ready(function() {
             </tr>
         </tfoot>    
     </table>
-    
 </div>
-
-
-
 
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"]."/resources/footer.inc.php";
