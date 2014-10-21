@@ -28,7 +28,14 @@ $(document).ready(function() {
     });
 });
 </script>
-<div class="prodBraContainer">
+<div class="prodBraContainer">   
+    
+    <table width="100%">
+        <tr>
+            <td><h3>Product In Branch Management</h3></td>       
+        </tr>
+    </table>
+    
     <div class="lbl">
         <div class="lblBR">Branch:</div>
         <div class="ddl">
@@ -46,12 +53,6 @@ $(document).ready(function() {
             </select>
         </div>
     </div>
-    
-    <table width="100%">
-        <tr>
-            <td><h3>Product In Branch Management</h3></td>       
-        </tr>
-    </table>
 
     <table id="example" class="display cell-border">
         <thead>
