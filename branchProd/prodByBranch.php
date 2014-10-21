@@ -5,9 +5,9 @@ require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 ?>
 <script>
 $(document).ready(function() {
-    $("#user_bra_id").change(function (){
-        var braId = $("#user_bra_id").val();
-        getProductByBranchName(braId);
+    $("#pb_bra_id").change(function (){
+        var braId = $("#pb_bra_id").val();
+        getProductBranchByBranchId(braId);
     });
     
     $('#example').dataTable({
@@ -39,7 +39,7 @@ $(document).ready(function() {
     <div class="lbl">
         <div class="lblBR">Branch:</div>
         <div class="ddl">
-            <select id="user_bra_id">
+            <select id="pb_bra_id">
                 <?php
                     foreach($branches as $branch){
                         if($branch["prod_cat_id"] == $branch["bra_id"]){

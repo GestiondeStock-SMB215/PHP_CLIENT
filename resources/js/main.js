@@ -1079,11 +1079,11 @@ function checkProdQtyByBranch(prod_id, trans_src_bra_id){
     });
 }
 
-function getProductByBranchName(pb_bra_id){
+function getProductBranchByBranchId(pb_bra_id){
     wantedData = {pb_bra_id:pb_bra_id};
     $.ajax({
         type         : "POST",
-        url          : "/resources/ajax.php?func=getProductByBranchName",
+        url          : "/resources/ajax.php?func=getProductBranchByBranchId",
         data         : wantedData,
         cache        : false,
         dataType     : "json",
