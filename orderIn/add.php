@@ -12,10 +12,11 @@ if(isset($_POST["ord_in_date"])){
         "orderIn", 
         array(
             "ord_in_id"        =>"-1",
-            "ord_in_cust_id"    =>$ord_in_cust_id,
+            "ord_in_bra_id"    => $_SESSION["user"]["user_bra_id"],
+            "ord_in_cust_id"   =>$ord_in_cust_id,
             "ord_in_date"      =>$ord_in_date, 
             "ord_in_del_date"  =>"0000-00-00 00:00:00",
-            "ord_in_status"    =>"0"
+            "ord_in_status"    =>"1"
         )
     );
     header("location:add.php?ord_in_id=$ord_in_id");

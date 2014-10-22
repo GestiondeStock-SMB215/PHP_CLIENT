@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 getCustSession();
+getBranchSession();
 ?>
 <script>
 $(document).ready(function() {
@@ -29,6 +30,7 @@ $(document).ready(function() {
     <thead>
         <tr>
             <th>Reference</th>
+            <th>Branch</th>
             <th>Customers</th>
             <th>Status</th>
             <th>Time Stamp</th>
@@ -38,11 +40,18 @@ $(document).ready(function() {
     </thead>
     <tbody>
         <?php
+            $branches = $_SESSION["branches"];
             $customers = $_SESSION["customers"];
             $objs = readObj("OrderIn", "ord_in_id", "-1");
             foreach($objs as $obj){
                 echo "<tr>";
                     echo "<td>".$obj["ord_in_id"]."</td>";
+                    echo "<td>";
+                    foreach($branches as $branch){
+                        if($branch["bra_id"] == $obj["ord_in_bra_id"]){
+                            echo $branch["bra_name"];
+                        }
+                    }
                     echo "<td>";
                     foreach($customers as $customer){
                         if($customer["cust_id"] == $obj["ord_in_cust_id"]){
@@ -61,6 +70,7 @@ $(document).ready(function() {
     <tfoot>
          <tr>
             <th>Reference</th>
+            <th>Branch</th>
             <th>Customer</th>
             <th>Status</th>
             <th>Time Stamp</th>
