@@ -467,10 +467,10 @@ function tailCustom($filepath, $lines = 1, $adaptive = true) {
         }
         return $objs;
     }
-    function getProductBranchByBranchId($bra_id){
+    function readProdBra($pb_bra_id){
         global $wsdl;
         $objs = array();
-        $response = $wsdl ->getProductBranchByBranchId(array("_id"=>$_GET["bra_id"]));
+        $response = $wsdl ->getProductBranchByBranchId(array("pb_bra_id"=>$_GET["pb_id"]));
         if(gettype($response->return) == "array"){
             foreach ($response->return as $obj){
                 $obj = get_object_vars($obj);

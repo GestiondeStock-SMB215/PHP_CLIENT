@@ -2,12 +2,14 @@
 require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 
     $branches = readObj("Branch", "bra_id", "-1");
+    $prod_bra = readObj("ProdBra", "pb_bra_id", "-1");
 ?>
 <script>
 $(document).ready(function() {
+    var braId;
     $("#pb_bra_id").change(function (){
-        var braId = $("#pb_bra_id").val();
-        getProductBranchByBranchId(braId);
+         braId = $("#pb_bra_id").val();
+        readProdBra(braId);
     });
     
     $('#example').dataTable({
@@ -41,6 +43,7 @@ $(document).ready(function() {
         <div class="ddl">
             <select id="pb_bra_id">
                 <?php
+                if($prod_bra["pb_bra_id"]== $branch["braId"]){
                     foreach($branches as $branch){
                         if($branch["prod_cat_id"] == $branch["bra_id"]){
                             echo "<option selected value=\"".$branch["bra_id"]."\">".$branch["bra_name"]."</option>";
@@ -49,6 +52,7 @@ $(document).ready(function() {
                             echo "<option value=\"".$branch["bra_id"]."\">".$branch["bra_name"]."</option>";
                         }
                     }
+                }
                 ?>
             </select>
         </div>

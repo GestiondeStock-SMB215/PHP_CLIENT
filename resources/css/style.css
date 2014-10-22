@@ -68,9 +68,9 @@ ul{margin:0;padding:0;list-style:none;}
 
 /*Index Page*/
 .mainPage{width:960px;margin: auto;}
-.mainPage .dashboard{width:300px;height:300px;float:left;border-left:3px solid #222;border-bottom:3px solid #222;}
+.mainPage .dashboard{width:500px;height:300px;float:left;}/*border-left:3px solid #222;border-bottom:3px solid #222;}*/
 
-.mainPage .locationMap{width:500px;height:500px;position:relative;float:right;margin-left:20px;}
+.mainPage .locationMap{width:400px;height:500px;position:relative;float:right;margin-left:20px;}
 .mainPage #locationMap{width:inherit;height:485px;position:relative;background:#eeeeee;}
 
 /*OrderIn*/
@@ -118,3 +118,4 @@ ul{margin:0;padding:0;list-style:none;}
     background-color: #bbb;
 }
 
+#report tr td{border-bottom: 1px dashed black;vertical-align: middle;};
