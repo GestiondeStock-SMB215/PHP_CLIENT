@@ -18,25 +18,25 @@ $pb_bra=  FindProdInBra($res);
 
 for($i=0;$i<count($_SESSION['products']);$i++){
     if($res == $_SESSION['products'][$i]["prod_id"]){
-        echo $_SESSION['products'][$i]["prod_name"];
+        //echo $_SESSION['products'][$i]["prod_name"];
         break;
     }
-
 }
 
 ?>
 
 <div class="searchByProduct">
-    <div class="title">Product Search</div>
-    <table>
+    <div style="height:40px;font-size:20px;margin-top:20px;">Product Search  :  <?php echo $_SESSION['products'][$i]["prod_name"];?></div>
+    <div class="clear"></div>
+    <table style="border:solid 1px black;">
         <tr>
-            <th>Product Name</th>
-            <th>Quantity</th>            
+            <th style="padding: 0 10px;border:solid 1px black;">Branch Name</th>
+            <th style="padding: 0 10px;border:solid 1px black;">Quantity</th>            
         </tr>
          <?php
          for($i=0;$i<count($pb_bra);$i++){?>
         <tr>
-            <td>
+            <td style="padding: 0 10px;border:solid 1px black;">
             <?php
             for($j=0;$j<count($_SESSION['branches']);$j++){
             if($pb_bra[$i]['pb_bra_id']== $_SESSION['branches'][$j]["bra_id"]){
@@ -46,7 +46,7 @@ for($i=0;$i<count($_SESSION['products']);$i++){
 }
              ?>
             </td>
-            <td><?php echo $pb_bra[$i]['pb_qty']?></td>
+            <td style="padding: 0 10px;border:solid 1px black;"><?php echo $pb_bra[$i]['pb_qty']?></td>
         </tr>
          <?php } ?>
     </table>
