@@ -156,7 +156,6 @@ function addUser() {
     }
 }
 
-
 function editUser() {
     user_id = $("#user_id").val();
     user_role_id = $("#user_role_id").val();
@@ -350,6 +349,7 @@ function addBranch(){
         $('#lblMsg').html("Please fill in all required fields");
     }
 }
+
 function editBranch(){
     bra_id          = $("#bra_id").val();
     bra_name        = $("#bra_name").val();
@@ -444,6 +444,7 @@ function addCategory(){
         $('#lblMsg').html("Please fill in all required fields");
     }
 }
+
 function editCategory(){
     
     cat_id          = $("#cat_id").val();
@@ -535,6 +536,7 @@ function addCustomer(){
         $('#lblMsg').html("Please fill in all required fields");
     }
 }
+
 function editCustomer(){
     cust_id            = $("#cust_id").val();
     cust_comp          = $("#cust_comp").val();
@@ -587,6 +589,7 @@ function editCustomer(){
         $('#lblMsg').html("Please fill in all required fields");
     }
 }
+
 function addProduct(){
     prod_cat_id       = $("#prod_cat_id").val();
     prod_sku          = $("#prod_sku").val();
@@ -645,6 +648,7 @@ function addProduct(){
         $('#lblMsg').html("Please fill in all required fields");
     }
 }
+
 function editProduct(){
     prod_id           = $("#prod_id").val();
     prod_cat_id       = $("#prod_cat_id").val();
@@ -705,6 +709,7 @@ function editProduct(){
         $('#lblMsg').html("Please fill in all required fields");
     }
 }
+
 function addSupplier(){
     sup_comp          = $("#sup_comp").val();
     sup_name          = $("#sup_name").val();
@@ -757,6 +762,7 @@ function addSupplier(){
         $('#lblMsg').html("Please fill in all required fields");
     }
 }
+
 function editSupplier(){
     sup_id            = $("#sup_id").val();
     sup_comp          = $("#sup_comp").val();
@@ -810,6 +816,7 @@ function editSupplier(){
         $('#lblMsg').html("Please fill in all required fields");
     }
 }
+
 function addOrderOut(){
    
     order_out_sup_id      = $("#order_out_sup_id").val();
@@ -894,6 +901,7 @@ function editOrderOut(){
         $('#lblMsg').html("Please fill in all required fields");
     }
 }
+
 function addShipper(){
     ship_name         = $("#ship_name").val();
     ship_type         = $("#ship_type").val();
@@ -943,6 +951,7 @@ function addShipper(){
         $('#lblMsg').html("Please fill in all required fields");
     }
 }
+
 function editShipper(){
     ship_id           = $("#ship_id").val();
     ship_name         = $("#ship_name").val();
@@ -993,6 +1002,7 @@ function editShipper(){
         $('#lblMsg').html("Please fill in all required fields");
     }
 }
+
 function getDesc(){
     prod_id = $("#prod_id").val();
     
@@ -1022,6 +1032,7 @@ function getDesc(){
         $('#lblMsg').html("Please fill in all required fields");
     }
 }
+
 function getPrice(){
     prod_id = $("#prod_id").val();
     
@@ -1095,8 +1106,52 @@ function readProdBra(pb_bra_id){
             $('#loader').hide();
         },
         success: function(result){
-            console.log(result.msg)
+            console.log(result.msg);
         }			            
 
+    });
+}
+
+function getProdIdBySku(prod_sku){
+    wantedData = {prod_sku:prod_sku};
+    var braId="";
+    $.ajax({
+        type         : "POST",
+        url          : "/resources/ajax.php?func=getProdIdBySku",
+        data         : wantedData,
+        cache        : false,
+        dataType     : "json",
+        beforeSend   : function () {
+            $('#lblMsg').html("");
+            $('#loader').show();
+        },
+        complete: function () {
+            $('#loader').hide();
+            FindProdInBra(braId);
+        },
+        success: function(result){
+            braId = result.msg;
+        }
+    });
+}
+
+function FindProdInBra(bra_Id){
+    wantedData = {bra_Id:bra_Id};
+    $.ajax({
+        type         : "POST",
+        url          : "/resources/ajax.php?func=FindProdInBra",
+        data         : wantedData,
+        cache        : false,
+        dataType     : "json",
+        beforeSend   : function () {
+            $('#lblMsg').html("");
+            $('#loader').show();
+        },
+        complete: function () {
+            $('#loader').hide();
+        },
+        success: function(result){
+            alert(result.msg);
+        }
     });
 }
