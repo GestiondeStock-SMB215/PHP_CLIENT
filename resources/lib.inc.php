@@ -488,10 +488,10 @@ function tailCustom($filepath, $lines = 1, $adaptive = true) {
         return $objs;
     
     }
-    function FindProdInBra(){
+    function FindProdInBra($res){
     global $wsdl;
     $objs = array();
-        $response = $wsdl ->FindProdInBra(array("pb_bra_id"=>$_GET["bra_id"]));
+        $response = $wsdl ->FindProdInBra(array("pb_prod_id"=>$res));
         if(gettype($response->return) == "array"){
             foreach ($response->return as $obj){
                 $obj = get_object_vars($obj);
@@ -504,12 +504,9 @@ function tailCustom($filepath, $lines = 1, $adaptive = true) {
     global $wsdl;
     $objs = array();
         $response = $wsdl ->getProdIdBySku(array("prod_sku"=>$_GET["prod_sku"]));
-        if(gettype($response->return) == "array"){
-            foreach ($response->return as $obj){
-                $obj = get_object_vars($obj);
-                array_push($objs,$obj);
-            }
-        }
+        //print_r($response);
+        return $response->return;
+    }
     function getInvoiceInDetail($inv_in_id){
         global $wsdl;
         $objs = array();
@@ -530,4 +527,5 @@ function tailCustom($filepath, $lines = 1, $adaptive = true) {
         }
         return $objs;
     }
-   }
+        
+   
