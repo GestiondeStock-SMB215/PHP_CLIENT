@@ -7,10 +7,10 @@ require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 <h1>REPORTS</h1>
 <table id="report" cellspacing="10">
     
-            <tr><td nowrap><form action="prod.php" method="GET">By SKU: <input type="text" name="prod_sku"/><input type="submit" value="GO" style="float: right"/></form></td></tr>
+            <tr><td nowrap><form action="prod.php" method="GET">By Item: <input type="text" name="prod_sku"/><input type="submit" value="GO" style="float: right"/></form></td></tr>
             <tr>
                 <td nowrap>
-                    <form action="prod.php" method="GET">
+                    <form action="bra.php" method="GET">
                         By Branch: 
                         <select name="bra_id">
                             <?php
@@ -26,7 +26,7 @@ require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
             <tr>
                 <td>
                     <form action="prodBraQty.php" method="GET">
-                        SKU: <input type="text" name="prod_sku"/>
+                        Item: <input type="text" name="prod_sku"/>
                         in:
                         <select name="bra_id">
                             <?php

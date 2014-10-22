@@ -35,10 +35,10 @@
     <fieldset>
         <legend>Quick Reports</legend>
         <table>
-            <tr><td nowrap><form action="rep/prod.php" method="GET">By SKU: <input type="text" name="prod_sku"/><input type="submit" value="GO" style="float: right"/></form></td></tr>
+            <tr><td nowrap><form action="rep/prod.php" method="GET">By Item: <input type="text" name="prod_sku"/><input type="submit" value="GO" style="float: right"/></form></td></tr>
             <tr>
                 <td nowrap>
-                    <form action="rep/prod.php" method="GET">
+                    <form action="rep/bra.php" method="GET">
                         By Branch: 
                         <select name="bra_id">
                             <?php
@@ -54,7 +54,7 @@
             <tr>
                 <td>
                     <form action="rep/prodBraQty.php" method="GET">
-                        <table><tr><td>SKU: <input type="text" name="prod_sku"/></td><br/>
+                        <table><tr><td>Item: <input type="text" name="prod_sku"/></td><br/>
                         <td>in:
                         <select name="bra_id">
                             <?php

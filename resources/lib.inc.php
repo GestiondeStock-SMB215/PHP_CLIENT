@@ -467,10 +467,31 @@ function tailCustom($filepath, $lines = 1, $adaptive = true) {
         }
         return $objs;
     }
-    function readProdBra($pb_bra_id){
+    function readProdBra(){
         global $wsdl;
         $objs = array();
-        $response = $wsdl ->getProductBranchByBranchId(array("pb_bra_id"=>$_GET["pb_id"]));
+        $response = $wsdl ->readProdBra(array("pb_bra_id"=>$_GET["bra_id"]));
+        //print_r($response);
+        if(array_key_exists("return",$response) && gettype($response->return) == "array"){
+            foreach ($response->return as $obj){
+                $obj = get_object_vars($obj);
+                array_push($objs,$obj);
+            }
+        }else{
+            if(array_key_exists("return",$response) && gettype($response->return) == "object"){
+                if($response->return->prod_id != "-1"){
+                    array_push($objs,get_object_vars($response->return));
+                }
+                
+            }
+        }
+        return $objs;
+    
+    }
+    function FindProdInBra(){
+    global $wsdl;
+    $objs = array();
+        $response = $wsdl ->FindProdInBra(array("pb_bra_id"=>$_GET["bra_id"]));
         if(gettype($response->return) == "array"){
             foreach ($response->return as $obj){
                 $obj = get_object_vars($obj);
@@ -478,5 +499,35 @@ function tailCustom($filepath, $lines = 1, $adaptive = true) {
             }
         }
         return $objs;
-    
     }
+    function getProdIdBySku(){
+    global $wsdl;
+    $objs = array();
+        $response = $wsdl ->getProdIdBySku(array("prod_sku"=>$_GET["prod_sku"]));
+        if(gettype($response->return) == "array"){
+            foreach ($response->return as $obj){
+                $obj = get_object_vars($obj);
+                array_push($objs,$obj);
+            }
+        }
+    function getInvoiceInDetail($inv_in_id){
+        global $wsdl;
+        $objs = array();
+        $response = $wsdl->getInvoiceInDetail(array("inv_in_id"=>$inv_in_id));
+         if(gettype($response->return) == "array"){
+            foreach ($response->return as $obj){
+                $obj = get_object_vars($obj);
+                array_push($objs,$obj);
+            }
+        }
+        else{
+            if(gettype($response->return) == "object"){
+                if($response->return->inv_in_det_id != "-1"){
+                    array_push($objs,get_object_vars($response->return));
+                }
+                
+            }
+        }
+        return $objs;
+    }
+   }

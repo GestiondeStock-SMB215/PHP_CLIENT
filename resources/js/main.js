@@ -1117,7 +1117,7 @@ function getProdIdBySku(prod_sku){
     var braId="";
     $.ajax({
         type         : "POST",
-        url          : "/resources/ajax.php?func=getProdIdBySku",
+        url          : "/resources/lib.inc.php?func=getProdIdBySku",
         data         : wantedData,
         cache        : false,
         dataType     : "json",
@@ -1139,7 +1139,7 @@ function FindProdInBra(bra_Id){
     wantedData = {bra_Id:bra_Id};
     $.ajax({
         type         : "POST",
-        url          : "/resources/ajax.php?func=FindProdInBra",
+        url          : "/resources/lib.inc.php?func=FindProdInBra",
         data         : wantedData,
         cache        : false,
         dataType     : "json",
