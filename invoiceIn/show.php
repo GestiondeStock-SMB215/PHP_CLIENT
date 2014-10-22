@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"]."/resources/header.inc.php";
 getCustSession();
+getBranchSession();
 ?>
 <div class="clear"></div>
 <h3>Invoices In</h3>
@@ -16,6 +17,7 @@ $(document).ready(function() {
     <thead>
         <tr>
             <th>Order Reference</th>
+            <th>Branch</th>
             <th>Customers</th>
             <th>Order In Detail</th>
             <th>Add Invoice</th>
@@ -24,12 +26,19 @@ $(document).ready(function() {
     <tbody>
         <?php
             $customers = $_SESSION["customers"];
-            
+            $branches = $_SESSION["branches"];
             global $wsdl;
             $objs = $wsdl->getIncompOrderIn()->return;
             foreach($objs as $obj){
                 echo "<tr>";
                     echo "<td>".$obj->ord_in_id."</td>";
+                    echo "<td>";
+                    foreach($branches as $branch){
+                        if($branch["bra_id"] == $obj->ord_in_bra_id){
+                            echo $branch["bra_name"];
+                        }
+                    }
+                    echo "</td>";
                     echo "<td>";
                     foreach($customers as $customer){
                         if($customer["cust_id"] == $obj->ord_in_cust_id){
@@ -46,6 +55,7 @@ $(document).ready(function() {
     <tfoot>
          <tr>
             <th>Order Reference</th>
+            <th>Branch</th>
             <th>Customers</th>
             <th>Order In Detail</th>
             <th>Add Invoice</th>

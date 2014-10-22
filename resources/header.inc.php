@@ -5,7 +5,8 @@
 <html>
     <head>
         <title>GSS - Cnam Liban</title>
-        <link rel="icon" type="image/png" href="img/btn/favicon.png" />        
+        <link rel="icon" type="image/png" href="/favicon.png">
+        
         <script src="/resources/js/jquery-1.8.3.min.js"></script>   
         <script src="/resources/js/datatables.js"></script>   
         <script src="/resources/js/tabetools.js"></script>   
