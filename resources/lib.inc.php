@@ -8,17 +8,17 @@
     
     if($curPage == "login.php"){
         if(isset($_SESSION["user"])){
-            //header("location:index.php");
+            header("location:index.php");
         }
     }
     else{
         if($curPage != "resources"){
             if(!isset($_SESSION["user"])){
-                //header("location:login.php");
+                header("location:login.php");
             }
             else{
                 if(!in_array($_SERVER["PHP_SELF"], $_SESSION["pages"])){
-                    //header("location:/index.php");
+                    header("location:/index.php");
                 }
             }
         }
@@ -235,7 +235,7 @@
         return $objs;
     }
     function getSupSession(){
-    if(!isset($_SESSION["suppliers"])){
+    //if(!isset($_SESSION["suppliers"])){
     $suppliers = array();
     $objs = readObj("Supplier", "sup_id", "-1");
     foreach($objs as $obj){
@@ -260,10 +260,11 @@
                 ));
     }
     $_SESSION["suppliers"] = $suppliers;
-}
+    //}
     }
     function getProdSession(){
-if(!isset($_SESSION["products"])){
+        unset($_SESSION["products"]);
+//if(!isset($_SESSION["products"])){
     $products = array();
     $objs = readObj("Product", "prod_id", "-1");
     foreach($objs as $obj){
@@ -288,10 +289,10 @@ if(!isset($_SESSION["products"])){
                     ));
     }
     $_SESSION["products"] = $products;
-}
+//}
     }
     function getCustSession(){
-    if(!isset($_SESSION["customers"])){
+    //if(!isset($_SESSION["customers"])){
     $customers = array();
     $objs = readObj("Customer", "cust_id", "-1");
     foreach($objs as $obj){
@@ -316,7 +317,7 @@ if(!isset($_SESSION["products"])){
                 ));
     }
     $_SESSION["customers"] = $customers;
-}
+//}
     }
     
      function getTransDetailByTransId($trans_det_trans_id){
@@ -342,29 +343,29 @@ if(!isset($_SESSION["products"])){
     }
     
     
-      function getBranchSession(){
-if(!isset($_SESSION["branches"])){
-    $branches = array();
-    $objs = readObj("Branch", "bra_id", "-1");
-    foreach($objs as $obj){
-        array_push(
-                $branches, 
-                array(
-                    "bra_id"=>$obj["bra_id"],
-                    "bra_name"=>$obj["bra_name"],
-                    "bra_cnt_id"=>$obj["bra_cnt_id"],
-                    "bra_city"=>$obj["bra_city"],
-                    "bra_add_str"=>$obj["bra_add_str"],
-                    "bra_add_1"=>$obj["bra_add_1"],
-                    "bra_tel_1"=>$obj["bra_tel_1"],
-                    "bra_tel_2"=>$obj["bra_tel_2"],
-                    "bra_fax"=>$obj["bra_fax"],
-                    "bra_email"=>$obj["bra_email"],
-                    "bra_time_stamp"=>$obj["bra_time_stamp"]
-                    ));
+    function getBranchSession(){
+        if(!isset($_SESSION["branches"])){
+        $branches = array();
+        $objs = readObj("Branch", "bra_id", "-1");
+        foreach($objs as $obj){
+            array_push(
+                    $branches, 
+                    array(
+                        "bra_id"=>$obj["bra_id"],
+                        "bra_name"=>$obj["bra_name"],
+                        "bra_cnt_id"=>$obj["bra_cnt_id"],
+                        "bra_city"=>$obj["bra_city"],
+                        "bra_add_str"=>$obj["bra_add_str"],
+                        "bra_add_1"=>$obj["bra_add_1"],
+                        "bra_tel_1"=>$obj["bra_tel_1"],
+                        "bra_tel_2"=>$obj["bra_tel_2"],
+                        "bra_fax"=>$obj["bra_fax"],
+                        "bra_email"=>$obj["bra_email"],
+                        "bra_time_stamp"=>$obj["bra_time_stamp"]
+                        ));
+        }
+        $_SESSION["branches"] = $branches;
     }
-    $_SESSION["branches"] = $branches;
-}
     }
     function deleteOrderInCascade($ord_in_id){
         if (isset($ord_in_id) && is_numeric($ord_in_id)){
@@ -479,7 +480,7 @@ function tailCustom($filepath, $lines = 1, $adaptive = true) {
             }
         }else{
             if(array_key_exists("return",$response) && gettype($response->return) == "object"){
-                if($response->return->prod_id != "-1"){
+                if($response->return->pb_id != "-1"){
                     array_push($objs,get_object_vars($response->return));
                 }
                 
